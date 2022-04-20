@@ -11,6 +11,7 @@
     <img src="/images/{{good.photo}}" height="100rem", width="100rem"> 
     {% if good.creater.username==current_user.username or current_user.user_type=='admin'%}
     <a href="/goods/edit/{{good.id}}" >EDIT</a>
+    <a href="/goods/delete/{{good.id}}" >DELETE</a>
     {%endif%}
         {{good.name}}<br>
         {{good.price}}

@@ -78,12 +78,13 @@ def create_goods():
     # breakpoint
     # import pdb;pdb.set_trace()
     form=GoodsForm()
-    if request.method == 'POST' and form.validate_on_submit() or current_user.user_type in ['seller', 'admin']:
+    if request.method == 'POST' and form.validate_on_submit() and current_user.user_type in ['seller', 'admin']:
         filename = secure_filename(form.photo.data.filename)
         form.photo.data.save('uploads/'+filename)
         gds = Goods(photo=filename, name=form.name.data, descripton=form.descripton.data, price=form.price.data, creater=current_user)
         db.session.add(gds)
-        db.session.commit()        
+        db.session.commit()    
+        return redirect(url_for('index'))    
     return render_template('creategoods.html', form=form)
 
 @app.route('/images/<filename>')
@@ -94,8 +95,7 @@ def get_file(filename):
 @app.route('/goods/edit/<id>', methods=['GET','POST'])
 def edit_goods(id):
     good = Goods.query.filter_by(id=id).first()
-            # user = User.query.filter_by(username=form.username.data).first()
-    
+            # user = User.query.filter_by(username=form.username.data).first()  
     if good.creater.username != current_user.username and  current_user.user_type !='admin':
         flash('You are not Authorized to perform edit operation')
         return redirect(url_for('index'))
@@ -106,7 +106,6 @@ def edit_goods(id):
         del post_data['csrf_token']
         # import pdb; pdb.set_trace()
         gds = Goods.query.filter_by(id=id).update(post_data)
-        
         db.session.commit() 
         flash('Successfully edited')
         return redirect(url_for('index'))
@@ -115,14 +114,22 @@ def edit_goods(id):
 
 @app.route('/goods/delete/<id>')
 def delete_goods(id):
-
-    good = Goods.query.filter_by(id=id).first()
+    good = Goods.query.filter_by(id=id).delete()
             # user = User.query.filter_by(username=form.username.data).first()
-    if good.creater.username != current_user.username:
-        flash('You are not Authorized to perform delete operation')
-        return redirect(url_for('index'))
-    form=GoodsForm(obj=good)
-    # form.populate_obj(good)
+    # if good.creater.username != current_user.username and  current_user.user_type !='admin':
+    #     flash('You are not Authorized to perform edit operation')
+    #     return redirect(url_for('index'))
+    # form=GoodsForm(obj=good)
+    # if request.method == 'POST':
+    #     post_data={**form.data}
+    #     # del post_data['submit']
+    #     # del post_data['csrf_token']
+    #     # import pdb; pdb.set_trace()
+    #     gds = Goods.query.filter_by(id=id).delete(post_data)
+    db.session.commit() 
+    #     flash('Successfully edited')
+    #     return redirect(url_for('index'))
+    # # form.populate_obj(good)
     return redirect(url_for('index'))
 
 @app.route('/users/edit/<id>')
