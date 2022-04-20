@@ -35,7 +35,6 @@ class Post(db.Model):#construction of db model for the posts
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
-
 class Goods(db.Model):
     # photo = db.Column()
     id = db.Column(db.Integer, primary_key=True)

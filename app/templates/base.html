@@ -24,6 +24,9 @@
             {%if current_user.user_type=='admin'%}
             <a href="{{url_for('get_users')}}">Users</a>
             {%endif%}
+            {%if current_user.user_type=='seller'%}
+            <a href="{{url_for('create_goods')}}">Create Goods</a>
+            {%endif%}
         </div>
         <hr>
         {% with messages = get_flashed_messages() %}

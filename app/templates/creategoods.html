@@ -1,4 +1,6 @@
+{% extends "base.html" %}
 
+{% block content %}
 <form method="POST" enctype="multipart/form-data">
     {%for field in form %}
         <p>
@@ -16,3 +18,4 @@
     </p>
     {% endfor %}
 </form>
+{% endblock %}
