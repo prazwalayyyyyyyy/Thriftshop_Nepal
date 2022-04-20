@@ -1,0 +1,18 @@
+
+<form method="POST" enctype="multipart/form-data">
+    {%for field in form %}
+        <p>
+        {{ field.label() }}
+        {% if field.errors %}
+            <ul>
+                {% for error in field.errors %}
+                    <li>
+                        {{ error }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {%endif%}
+        {{field()}}
+    </p>
+    {% endfor %}
+</form>

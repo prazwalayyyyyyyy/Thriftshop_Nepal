@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hello, Admin {{ current_user.username }}!</h1>
+    <!--{% for post in posts %} post is the variable name randomly used for posts contents
+    <div><p>{{ post.author.username }} is: <b>{{ post.body }}</b></p></div>
+    {% endfor %} -->
+
+    {%for user in users%}
+    <p>
+    
+    {% if current_user.user_type=='admin'%}
+    <a href="/users/edit/{{user.id}}" >EDIT</a>
+    {%endif%}
+        {{user.username}}<br>
+        {{user.email}}
+
+    </p>
+    {%endfor%}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hello, {{ current_user.username }}!</h1>
+    <!--{% for post in posts %} post is the variable name randomly used for posts contents
+    <div><p>{{ post.author.username }} is: <b>{{ post.body }}</b></p></div>
+    {% endfor %} -->
+
+    {%for good in goods%}
+    <p>
+    <img src="/images/{{good.photo}}" height="100rem", width="100rem"> 
+    {% if good.creater.username==current_user.username or current_user.user_type=='admin'%}
+    <a href="/goods/edit/{{good.id}}" >EDIT</a>
+    {%endif%}
+        {{good.name}}<br>
+        {{good.price}}
+        {{good.descripton}}
+        {{good.creater.username}}
+
+    </p>
+    {%endfor%}
+{% endblock %}
