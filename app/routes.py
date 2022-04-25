@@ -15,8 +15,16 @@ from app import db
 from app.forms import RegistrationForm
 
 @app.route('/')
+def frontpage():
+    return render_template('frontpage.html')
+@app.route('/load')
+def frontpage2():
+    return render_template('create_goods')
+@app.route('/load1')
+def frontpage1():
+    return render_template('create_goods')
 @app.route('/index')
-@login_required #doesnt allow users not logged in to view contents and add next redirection to ntercept user's request and reach there after they logged in 
+# @login_required #doesnt allow users not logged in to view contents and add next redirection to ntercept user's request and reach there after they logged in 
 def index():
     posts = [
         {
@@ -35,7 +43,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('create_goods'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -45,7 +53,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('create_goods')
         return redirect(next_page)
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
@@ -53,7 +61,7 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('frontpage'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

@@ -1,65 +1,99 @@
-{% extends "base.html" %}
-
-{% block content %}
+<html><head>
+	<title> Login </title>
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Audiowide&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="frontpage.css">
+	<link rel="stylesheet" type="text/css" href="reg.css">
+	<link rel="stylesheet" type="text/css" href="slider.css">
+	<link rel="stylesheet" type="text/css" href="card.css">
 <style>
-    .myButton {
-    background-color:#599bb3;
-    border-radius:28px;
-    border:1px solid #29668f;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:17px;
-    padding:16px 31px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #3d768a;
-}
-.myButton:hover 
+	f
+		{
+			padding: 70px;
+			font-size: 21px;
+		}
+		.gm
 {
-    background-color:#206873;
-}
-.myButton:active 
-{
-    position:relative;
-    top:1px;
-}
-</style>
-<center>
-    <h1>Hello, {{ current_user.username }}!</h1>
-    <!--{% for post in posts %} post is the variable name randomly used for posts contents
-    <div><p>{{ post.author.username }} is: <b>{{ post.body }}</b></p></div>
-    {% endfor %} -->
-    <table name="items" border="1">
-        <tr>
-            <th>Images</th>
-            <th>Action</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Seller</th>
-        </tr>
-        
-    {%for good in goods%}
+	background-image: linear-gradient(white, #ADD8E6);
 
-    <p>
-        <td>
-    <img src="/images/{{good.photo}}" height="100rem", width="100rem"> </td>
-    <td>{% if good.creater.username==current_user.username or current_user.user_type=='admin'%}
-    <a href="/goods/edit/{{good.id}}" ><button class="myButton" value="edit">Edit</button></a>
-    <a href="/goods/delete/{{good.id}}" ><button class="myButton" value="Delete">Delete</button></a></td>
-    {%endif%}
-    <td>{{good.name}}<br></td>
-    <td>{{good.price}}</td>
-    <td>{{good.descripton}}</td>
-    <td>{{good.creater.username}}</td>
-    </tr>
-    </p>
-    {%endfor%}
-</tr>
-</table>
-</center>
-    <style>	
+}
+	.register
+{
+	background-image:url("wave.png");	
+}
+#menu
+{
+	
+	height:30px;
+	font-size:12px;
+	background-color:#ADD8E6;
+	width:1200px;
+	padding-top:8px;
+	font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+}
+#menu a
+{
+	color:darkslateblue;
+}
+#menu a:hover
+{
+	text-decoration:blink;
+	color:red;
+}
+		
+		.logout
+		{
+			text-decoration: none;
+			color:red;
+			padding: 10px;
+		}
+
+	</style>
+</head>
+<body>
+<div class="main">
+	<g style="padding-bottom:50px;">
+		<table>
+		<tr><td style="padding-left:10px; "><center><font size="+10"> <t1 style="color:red">Thriftshop </t1> </font>
+		<font size="+3"> <t1 style="color:blue"> Nepal </t1></font></center>
+			<td style="padding-top: 25px;">
+                <a href="{{ url_for('frontpage') }}"><input type="button" class="myButton" value="Home"></a>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+       	<td style="padding-top: 40px;">
+        <form>
+        	<a href="{{ url_for('register') }}"><input type="button" class="myButton" value="Register" ></a>
+        </form>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+         <td style="padding-top: 20px; padding-top:40px;">	
+        <form>
+        	<a href="{{url_for('login')}}"><input type="button" class="myButton" value="Login"></a>
+            </form>
+        </div><br>
+			<td style="padding-left: 300px;">
+          <td style="padding-top: 20px;">
+		<form action="search.php" method="post">	
+			<input type="textbox" class="Search1" name="search" > 
+			<td style="padding-left: 1px;">
+			<input type="submit" class="search2" value="Search"></form></g>
+        </tr>
+        </table>
+</div>
+	
+<div class="register">
+	<br>
+		<center><h2 style="color:goldenrod "> REGISTER YOURSELF</h2>
+		<div class="flex-container">
+			<div class="flex-left">	<p><h3 style="color:darkblue"> Got irritate with having a lot of clothes but have nothing to wear, Sell your clothes to get good returns! Register now !!! </h3></p><a href="{{url_for('register')}}"><input type="button" class="myButton" value="Register as Seller" ></a></div>
+		<div class="flex-right"><p><h3 style="color:darkred"> For your fashionable life, we have brought new inventory of the most fashionable clothing line for u! Register now !!!  </h3></p> 
+			<a href="{{url_for('register')}}"> <input type="button" class="myButton" value="Register as Buyer" ></a></div>
+		</center>
+		</div>
+</div></div>
+
+
+
+<<style>	
 	.reuse
 	{
 		background-color:#082060;
@@ -556,4 +590,3 @@
 			<tr><td><center><font color="#1086B9"><h4>Copyright © Thriftshop Nepal 2022<br>All rights are reserved </center></h4></td></tr>
     </table></center>
 </div>
-{% endblock %}
