@@ -1,0 +1,30 @@
+input[type=text],input[type=password],input[type=textarea] {
+    padding:15px;
+   margin:10px 0; 
+   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    display:block;
+   width:25%;
+    font-family:inherit;
+    font-size: inherit;
+
+}
+input[type=number] {
+      padding:15px;
+      margin:10px 0; 
+      box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+      display:block;
+      width:25%;
+      font-family:inherit;
+      font-size: inherit;
+
+}
+
+input[type=submit],input[type=reset] {
+   background-color:#666;
+     border: none;
+  color: white;
+  padding: 18px 36px;
+  text-decoration:none;
+  margin: 5px 4px;
+  cursor: pointer; 
+}
