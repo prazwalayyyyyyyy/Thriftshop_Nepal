@@ -8,4 +8,4 @@ services:
       FLASK_DEBUG: 1
     ports:
       - 5000:5000
-    volumes: ['./app:/app']
+    volumes: ['./app:/app', './app.db:/app.db']
