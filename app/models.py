@@ -11,11 +11,13 @@ from flask_login import UserMixin #includes generic implementations appropriate 
 class User(UserMixin, db.Model):#constructon of db model for user login 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
+    firstname = db.Column(db.String(64))
+    lastname = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     # posts = db.relationship('Post', backref='author', lazy='dynamic')
-    user_type=db.Column(db.String(58), default='buyer')
     goods = db.relationship('Goods', backref='creater', lazy='dynamic')
+    user_type=db.Column(db.String(58), default='buyer')
         
     def __repr__(self):
         return '<User {}>'.format(self.username)    
@@ -43,6 +45,7 @@ class Goods(db.Model):
     name = db.Column(db.String(50))
     descripton = db.Column(db.String(500))
     seller = db.Column(db.Integer, db.ForeignKey('user.id'))
+    verifycheck = db.Column(db.Boolean, nullable=False, default=False)
 
 #flasklogin keeps track of logged user by storing identifier unique in flask's user session. each time logged user nagicates page, flasklogin retrieve ID of user from session and load in memory
 #FLASK-login dont know about the db. so need app's help in loading user.so app will configure user loader function that can be called to load user given ID

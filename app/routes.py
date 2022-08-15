@@ -8,23 +8,30 @@ from app.forms import EditUserForm, GoodsForm, LoginForm
 from flask_login import current_user, login_required, login_user
 from app.models import Goods, User
 from flask_login import logout_user
-from flask import request #for next page after login
+from flask import request  # for next page after login
 from werkzeug.utils import secure_filename
-from werkzeug.urls import url_parse #next page after login
+from werkzeug.urls import url_parse  # next page after login
 from app import db
 from app.forms import RegistrationForm
 
+
 @app.route('/')
 def frontpage():
-    return render_template('frontpage.html')
+    return render_template('index.html')
+
+
 @app.route('/load')
 def frontpage2():
     return render_template('create_goods')
+
+
 @app.route('/load1')
 def frontpage1():
     return render_template('create_goods')
+
+
 @app.route('/index')
-# @login_required #doesnt allow users not logged in to view contents and add next redirection to ntercept user's request and reach there after they logged in 
+# @login_required #doesnt allow users not logged in to view contents and add next redirection to ntercept user's request and reach there after they logged in
 def index():
     posts = [
         {
@@ -34,11 +41,12 @@ def index():
         {
             'author': {'username': 'faf'},
             'body': 'OHOO curls'
-        }   
+        }
     ]
-    goods=Goods.query.all()
+    goods = Goods.query.all()
     # import pdb; pdb.set_trace()
     return render_template('index.html', title='Home', posts=posts, goods=goods)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -58,10 +66,12 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('frontpage'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -69,7 +79,8 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, firstname=form.firstname.data,
+                    lastname=form.lastname.data, user_type=form.user_type.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -78,52 +89,52 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-
-
 @app.route('/goods/create', methods=['POST', 'GET'])
 @login_required
 def create_goods():
-    # breakpoint
-    # import pdb;pdb.set_trace()
-    form=GoodsForm()
+    form = GoodsForm()
     if request.method == 'POST' and form.validate_on_submit() and current_user.user_type in ['seller', 'admin']:
         filename = secure_filename(form.photo.data.filename)
         form.photo.data.save('uploads/'+filename)
-        gds = Goods(photo=filename, name=form.name.data, descripton=form.descripton.data, price=form.price.data, creater=current_user)
+        gds = Goods(photo=filename, name=form.name.data,
+                    descripton=form.descripton.data, price=form.price.data, creater=current_user)
         db.session.add(gds)
-        db.session.commit()    
-        return redirect(url_for('index'))    
+        db.session.commit()
+        return redirect(url_for('index'))
     return render_template('creategoods.html', form=form)
+
 
 @app.route('/images/<filename>')
 def get_file(filename):
-    filename=f'../uploads/{filename}'
+    filename = f'../uploads/{filename}'
     return send_file(filename, mimetype='image/gif')
 
-@app.route('/goods/edit/<id>', methods=['GET','POST'])
+
+@app.route('/goods/edit/<id>', methods=['GET', 'POST'])
 def edit_goods(id):
     good = Goods.query.filter_by(id=id).first()
-            # user = User.query.filter_by(username=form.username.data).first()  
-    if good.creater.username != current_user.username and  current_user.user_type !='admin':
+    # user = User.query.filter_by(username=form.username.data).first()
+    if good.creater.username != current_user.username and current_user.user_type != 'admin':
         flash('You are not Authorized to perform edit operation')
         return redirect(url_for('index'))
-    form=GoodsForm(obj=good)
+    form = GoodsForm(obj=good)
     if request.method == 'POST':
-        post_data={**form.data}
+        post_data = {**form.data}
         del post_data['submit']
         del post_data['csrf_token']
-        # import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         gds = Goods.query.filter_by(id=id).update(post_data)
-        db.session.commit() 
+        db.session.commit()
         flash('Successfully edited')
         return redirect(url_for('index'))
     # form.populate_obj(good)
     return render_template('editgoods.html', form=form)
 
+
 @app.route('/goods/delete/<id>')
 def delete_goods(id):
     good = Goods.query.filter_by(id=id).delete()
-            # user = User.query.filter_by(username=form.username.data).first()
+    # user = User.query.filter_by(username=form.username.data).first()
     # if good.creater.username != current_user.username and  current_user.user_type !='admin':
     #     flash('You are not Authorized to perform edit operation')
     #     return redirect(url_for('index'))
@@ -134,24 +145,38 @@ def delete_goods(id):
     #     # del post_data['csrf_token']
     #     # import pdb; pdb.set_trace()
     #     gds = Goods.query.filter_by(id=id).delete(post_data)
-    db.session.commit() 
+    db.session.commit()
     #     flash('Successfully edited')
     #     return redirect(url_for('index'))
     # # form.populate_obj(good)
     return redirect(url_for('index'))
 
+
 @app.route('/users/edit/<id>')
 def edit_users(id):
     user = User.query.filter_by(id=id).first()
-            # user = User.query.filter_by(username=form.username.data).first()
+    # user = User.query.filter_by(username=form.username.data).first()
     if current_user.user_type != 'admin':
         flash('You are not Authorized to perform edit operation')
         return redirect(url_for('index'))
-    form=EditUserForm(obj=user)
+    form = EditUserForm(obj=user)
     # form.populate_obj(good)
     return render_template('editusers.html', form=form)
 
-@app.route('/users')
-def get_users():
-    user = User.query.all()
-    return render_template('users.html', users=user)
+
+@app.route('/users/<username>')
+def get_users(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    good = [
+        {'seller': user, 'body': 'Test good #1'},
+        {'seller': user, 'body': 'Test good #2'}
+    ]
+    return render_template('user.html', users=user, goods=good)
+
+
+@app.route('/admin/goodsverify', methods=['GET', 'POST'])
+def verify_goods():
+    goods = Goods.query.all()
+    return render_template('verify_goods.html', goods=goods)
+
+#

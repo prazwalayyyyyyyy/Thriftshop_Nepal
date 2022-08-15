@@ -1,0 +1,11 @@
+version: '3.5'
+services:
+  thriftweb:
+    build: .
+    image: thriftweb
+    container_name: thrift-web
+    environment:
+      FLASK_DEBUG: 1
+    ports:
+      - 5000:5000
+    volumes: ['./app:/app']

@@ -1,0 +1,5 @@
+id,username,firstname,lastname,email,password,user_type
+1,susan,susan,susan,susan@example.com,changeme,admin
+2,test,test,test,test@test.com,changeme,seller
+3,test1,test1,test1,test1@test.com,changeme,seller
+4,test2,test2,test2,test2@test.com,changeme,buyer

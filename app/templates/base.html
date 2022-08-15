@@ -1,329 +1,85 @@
-<!DOCTYPE html>
-<html>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="frontpage.css">
-	<link rel="stylesheet" type="text/css" href="reg.css">
-	<link rel="stylesheet" type="text/css" href="slider.css">
-	<link rel="stylesheet" type="text/css" href="card.css">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        {% if title %}
-        <title>{{ title }} - Thriftshop_Nepal</title>
-        {% else %}
-        
-        <title>Welcome to Thriftshop_Nepal</title>
-        
-        {% endif %}
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <div class="main">
-            <g style="padding-bottom:50px;">
-                <table>
-                <tr><td style="padding-left:10px; "><center><font size="+10"> <t1 style="color:red">Thriftshop </t1> </font>
-                <font size="+3"> <t1 style="color:blue"> Nepal </t1></font></center>
-                </td>
-                <td style="padding-top: 25px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ url_for('frontpage') }}"><input type="button" class="myButton" value="Home"></a>&nbsp;&nbsp;&nbsp;
-                <!-- </div>&nbsp;&nbsp;&nbsp;&nbsp; -->
-                </td>
-                <td style="padding-top: 40px;">
-                <form>
-                    {% if current_user.is_anonymous %} 
-                    <a href="{{ url_for('register') }}"><input type="button" class="myButton" value="Register" ></a>&nbsp;&nbsp;&nbsp;
-                    {% endif %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+    <title>Thriftshop</title>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img class="logo" src="/static/img/l1.png" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    {% if current_user.is_anonymous %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#Register" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Register
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/register">As Seller</a></li>
+                            <li><a class="dropdown-item" href="/register">As Buyer</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/login" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/login">As Seller</a></li>
+                            <li><a class="dropdown-item" href="/login">As Buyer</a></li>
+                        </ul>
+                    </li>
+                    {%else%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    {%endif%}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Team</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
-                </td>
-                <!-- </div>&nbsp;&nbsp;&nbsp;&nbsp; -->
-                <td style="padding-top: 20px; padding-top:40px;">	
-                <form>
-                    {% if current_user.is_anonymous %} 
-                    <a href="{{ url_for('login') }}"><input type="button" class="myButton" value="Login" ></a>
-                    {% else %}
-                    <a href="{{ url_for('logout') }}"><input type="button" class="myButton" value="Logout" ></a>
-                    {% endif %}
-                    </form>
-                </td>  
-                </tr>
-                </table>
             </div>
-            {% if current_user.user_type=='seller' %}
-            <div id="menu"> 
-            <center>
-            <f><a href="{{ url_for('create_goods') }}" style="text-decoration:none">Post Free Ad</a></f>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <f><a href="{{ url_for('frontpage2') }}" style="text-decoration:none"> My Details </a></f>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <f><a href="{{ url_for('index') }}" style="text-decoration:none"> My Products </a></f>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <f><a href="{{ url_for('frontpage1') }}" style="text-decoration:none">Order</a></f>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </center>
-            </div>
-            {%endif%}
         </div>
-        <div class="formbody">
-        
-            <!-- Thriftshop Nepal:
-            <a href="{{ url_for('frontpage') }}">Home</a>
-            {% if current_user.is_anonymous %} 
-            <a href="{{ url_for('login') }}">Login</a>
-            {% else %}
-            <a href="{{ url_for('logout') }}">Logout</a>
-            {% endif %}
-            {%if current_user.user_type=='admin'%}
-              <a href="{{url_for('get_users')}}">Users</a>
-            {%endif%} 
-            {%if current_user.user_type=='seller'%}
-                <a href="{{url_for('create_goods')}}">Create Goods</a>
-            {%endif%}     -->
-        <hr>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-        </div>
-    </body>
+    </nav><!-- //NAVBAR -->
+    {% for message in get_flashed_messages() %}
+    <h2>{{ message }}</h2>
+    {% endfor %}
+    {% block main %}
+    {% endblock %}
+
+</body>
+
 </html>
-<style>
-    .formbody{
-        padding-top:40px;
-    }
-    .myButton {
-    background-color:#599bb3;
-    border-radius:28px;
-    border:1px solid #29668f;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:17px;
-    padding:16px 31px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #3d768a;
-}
-.myButton:hover 
-{
-    background-color:#206873;
-}
-.myButton:active 
-{
-    position:relative;
-    top:1px;
-}
-      #blackout4 {
-        background: rgba(102, 102, 102, 0.5);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-      }
-      #box {
-        width: 300px;
-        height: 100px;
-        text-align: center;
-        padding: 15px;
-        border: 3px solid #0000cc;
-        border-radius: 10px;
-        color: #0000cc;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        background: #fff;
-      }
-      #blackout4:target {display: block;}
-      .close {
-        display: inline-block;
-        border: 1px solid #0000cc;
-        color: #0000cc;
-        padding: 0 12px;
-        margin: 10px;
-        text-decoration: none;
-        background: #f2f2f2;
-        font-size: 14pt;
-        cursor:pointer;
-      }
-      .close:hover {background: #e6e6ff;}
-
-      .main
-{	
-       background-color:lightblue;
-		height:120px;
-}
-
-/*.a
-{		
-        width:inherit;
-        height:59px;
-        
-}*/
-/*.b
-{
-        background-color:#85D2BC;
-        color:#41414;
-}*/
-
-	
-
-.drop1
-{
-    background-color: white;
-    color:black;
-    padding-top:20px;
-    padding-bottom:20px;
-    padding-left:20px;
-    padding-right:35px;
-    border:none;
-    text-align:center;
-    
-}
-
-.dropdown
-{
-    position: relative;
-    display: inline-block;
-}
-.cont
-{	
-    display:none;
-    position:absolute;
-    background-color:transparent;
-    
-
-}
-.cont a
-{
-      background-color:#599bb3;
-    border-radius:28px;
-    border:1px solid #29668f;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:17px;
-    padding:16px 31px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #3d768a;
-}.cont a:hover
-{ 	
-     background-color:#206873;
-}
-.dropdown:hover .cont
-{
-    display:block;
-}
-.dropdown:hover .drop
-{
-    background-color:grey;
-}
-.drop1 a
-{	
-    text-decoration:none;
-    display:block;
-}
-.drop1:hover 
-
-{
-    background-color:black;
-}
-
-
-
-
-.Search1  
-{
-     border-radius:28px;
-     font-size:17px;
-    padding:5px 15px;
-	background-color:antiquewhite;
-    text-decoration:none;
-    text-shadow:0px 1px 0px;
-}
-
-.Search1:hover 
-{
-    background-color:white;
-}
-.Search1:active 
-{
-    position:relative;
-    top:1px;
-}
-.Search2 
-{
-     border-radius:28px;
-     font-size:17px;
-    padding-top:50px;
-	background-color:antiquewhite;
-    text-decoration:none;
-    text-shadow:0px 1px 0px white;
-}
-
-.Search2:hover 
-{
-    background-color:#599BB3;
-}
-.Search2:active 
-{
-    position:relative;
-    top:1px;
-}
-
-.flex-container{
-	display:flex;
-	flex-direction: row;
-}
-.flex-left {
-    width: 50%;
-    height: 25vh;
-	padding:50px;
-}
-
-.flex-right {
-    width: 50%;
-	padding:50px;
-}
-.product
-{
-	background-color: #ADD8E6;
-	height:370px;
-}
-
-.box
-{
-	text-align:#006;
-	text-decoration: none;
-}
-
-#menu
-{
-	
-	height:40px;
-	font-size:16px;
-	background-color:grey;
-	width:1300px;
-	padding-left:30px;
-	padding-top:8px;
-	font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
-	background-image: linear-gradient(red,lightred);
-}
-#menu a
-{
-	color:white;
-}
-#menu a:hover
-{
-	text-decoration:blink;
-	color:red;
-}
-</style>

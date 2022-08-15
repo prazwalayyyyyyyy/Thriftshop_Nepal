@@ -1,592 +1,482 @@
-<html><head>
-	<title> Login </title>
-    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Audiowide&display=swap" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="frontpage.css">
-	<link rel="stylesheet" type="text/css" href="reg.css">
-	<link rel="stylesheet" type="text/css" href="slider.css">
-	<link rel="stylesheet" type="text/css" href="card.css">
-<style>
-	f
-		{
-			padding: 70px;
-			font-size: 21px;
-		}
-		.gm
-{
-	background-image: linear-gradient(white, #ADD8E6);
+<!doctype html>
+<html lang="en">
 
-}
-	.register
-{
-	background-image:url("wave.png");	
-}
-#menu
-{
-	
-	height:30px;
-	font-size:12px;
-	background-color:#ADD8E6;
-	width:1200px;
-	padding-top:8px;
-	font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
-}
-#menu a
-{
-	color:darkslateblue;
-}
-#menu a:hover
-{
-	text-decoration:blink;
-	color:red;
-}
-		
-		.logout
-		{
-			text-decoration: none;
-			color:red;
-			padding: 10px;
-		}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	</style>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <title>Thriftshop</title>
 </head>
-<body>
-<div class="main">
-	<g style="padding-bottom:50px;">
-		<table>
-		<tr><td style="padding-left:10px; "><center><font size="+10"> <t1 style="color:red">Thriftshop </t1> </font>
-		<font size="+3"> <t1 style="color:blue"> Nepal </t1></font></center>
-			<td style="padding-top: 25px;">
-                <a href="{{ url_for('frontpage') }}"><input type="button" class="myButton" value="Home"></a>
-        </div>&nbsp;&nbsp;&nbsp;&nbsp;
-       	<td style="padding-top: 40px;">
-        <form>
-        	<a href="{{ url_for('register') }}"><input type="button" class="myButton" value="Register" ></a>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img class="logo" src="/static/img/l1.png" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#About">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#Register" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Register
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#Register">As Seller</a></li>
+                            <li><a class="dropdown-item" href="#Register">As Buyer</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#Login" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#Login">As Seller</a></li>
+                            <li><a class="dropdown-item" href="#Login">As Buyer</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Team</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav><!-- //NAVBAR -->
+
+    <!-- HERO -->
+    <div class="hero vh-100 d-flex align-items-center" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mx-auto text-center">
+                    <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
+                    <p class="text-white my-3"> welcome everyone, This is our Online Thrift Shope site, where you can
+                        get the vareity of clothes in reasonable price. Thank you!</p>
+
+                </div>
+            </div>
+        </div>
+    </div><!-- //HERO -->
+
+    <!-- Registration -->
+    <section id="Register">
+        <div class="container">
+            <h6 class="text-primary">Register Form</h6>
+            <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center">
+                <div class="logo">
+                    <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
+                </div>
+            </div>
+        </div>
+
+        <form class="rounded bg-white shadow p-5">
+            <h3 class="text-dark fw-bolder fs-4 mb-2">Create an Account</h3>
+            <div class="fw-normal text-muted mb-3">
+                Already have an account?<a href="#Login" class="text-primary fw-bold text-decoration-none">Sign in
+                    here</a>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingFirstname" placeholder="enter firstname">
+                <label fpr="floatingFirstname">First Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingLastname" placeholder="enter lastname">
+                <label fpr="floatingLastname">Last Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingUsername" placeholder="Enter Username">
+                <label fpr="floatingFirstname">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingEmail" placeholder="enter Email address">
+                <label fpr="floatingEmail">Email Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="Password" class="form-control" id="floatingPassword" placeholder="enter Password">
+                <label fpr="floatingPassword">Password</label>
+                <span class="password-info mt-2">use more than 8 characters with a mix of letters, number and
+                    symobls.</span>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingCpassword" placeholder="enter firstname">
+                <label fpr="floatingCpassword">Confirm Password</label>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">User Type</label>
+                <select class="form-select" id="inputGroupSelect01">
+                    <option selected>choose</option>
+                    <option value="1">As Buyer</option>
+                    <option value="2">AS seller</option>
+                </select>
+            </div>
+            <div class="captcha">
+                <label class="captcha-input">Enter Captcha</label>
+                <div class="preview"></div>
+                <div class="captcha-form">
+                    <input type="text" id="captcha-form" placeholder="Enter captcha text">
+                    <button class="captcha-refresh">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label ms-2" for="gridCheck">
+                    I Agree <a href="">Terms and conditions</a>.
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Continue</button>
         </form>
-        </div>&nbsp;&nbsp;&nbsp;&nbsp;
-         <td style="padding-top: 20px; padding-top:40px;">	
-        <form>
-        	<a href="{{url_for('login')}}"><input type="button" class="myButton" value="Login"></a>
+        </div>
+        </div>
+    </section><!-- registration -->
+    <!-----login -->
+    <section id="Login">
+        <div class="container">
+            <h6 class="text-primary">login here</h6>
+            <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center">
+                <div class="logo">
+                    <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
+                </div>
+            </div>
+        </div>
+
+        <form class="rounded bg-white shadow p-5">
+            <h3 class="text-dark fw-bolder fs-4 mb-2">Have an account</h3>
+            <div class="text-center text-muted text-uppercase mb-2">or</div>
+            <a href="#" class="btn btn-light login_with w-100 mb-4">
+                <img src="/static/img/goggle-icon.png" class="/static/img-fluid me-3">login in with google</a>
+            </a>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingUsername" placeholder="Enter Username">
+                <label fpr="floatingFirstname">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingEmail" placeholder="enter Email address">
+                <label fpr="floatingEmail">Email Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="Password" class="form-control" id="floatingPassword" placeholder="enter Password">
+                <label fpr="floatingPassword">Password</label>
+            </div>
+            <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Login</button>
+        </form>
+        </div>
+        </div>
+    </section>
+
+
+    <!-- about us -->
+    <section class="row w-100 py-0 bg-light" id="About">
+        <div class="col-lg-6 col-img"></div>
+        <div class="col-lg-6 py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <h6 class="text-primary">About Us</h6>
+                        <h1>Thrift Shop Nepal</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque
+                            fuga
+                            in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+
+                        <div class="feature d-flex mt-5">
+                            <div class="iconbox me-3">
+                                <i class='bx bxs-comment-edit'></i>
+                            </div>
+                            <div>
+                                <h5>Product</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                            </div>
+                        </div>
+                        <div class="feature d-flex">
+                            <div class="iconbox me-3">
+                                <i class='bx bxs-user-circle'></i>
+                            </div>
+                            <div>
+                                <h5>Seller</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                            </div>
+                        </div>
+                        <div class="feature d-flex">
+                            <div class="iconbox me-3">
+                                <i class='bx bxs-user-circle'></i>
+                            </div>
+                            <div>
+                                <h5>Buyer</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- About us -->
+
+
+    <!-- TEAM -->
+    <section id="team">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h6 class="text-primary">TEAM</h6>
+                    <h1>Meet Our Crew Members</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
+                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+                </div>
+            </div>
+            <div class="row text-center g-4">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="/static/img/me.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Nirajan Thapa</h5>
+                        <p>Web Developer</p>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/profile.php?id=100055312209773"><i
+                                    class='bx bxl-facebook'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="/static/img/aaju.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Aaju Chandra Shrestha</h5>
+                        <p>Web Developer</p>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/kaluaaju01"><i class='bx bxl-facebook'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="/static/img/aliz.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Aliz Acharya</h5>
+                        <p>Web Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class='bx bxl-facebook'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="/static/img/ishwor.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Ishwor Dhakal</h5>
+                        <p>Web Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class='bx bxl-facebook'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- TEAM -->
+
+    <!-- BLOG -->
+    <section id="blog" class="bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h6 class="text-primary">BLOG</h6>
+                    <h1>Latest News From The Blog</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
+                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="blog-post card-effect">
+                        <img src="/static/img/blog1.jpg" alt="">
+                        <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
+                        <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="blog-post card-effect">
+                        <img src="/static/img/blog2.jpg" alt="">
+                        <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
+                        <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="blog-post card-effect">
+                        <img src="/static/img/blog3.jpg" alt="">
+                        <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
+                        <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- BLOG -->
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h6 class="text-primary">CONTACT</h6>
+                    <h1>Get In Touch</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
+                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+                </div>
+            </div>
+
+            <form action="" class="row g-3 justify-content-center">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Full Name">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Enter E-mail">
+                </div>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" placeholder="Enter Subject">
+                </div>
+                <div class="col-md-10">
+                    <textarea name="" id="" cols="30" rows="5" class="form-control"
+                        placeholder="Enter Message"></textarea>
+                </div>
+                <div class="col-md-10 d-grid">
+                    <button class="btn btn-primary">Contact</button>
+                </div>
             </form>
-        </div><br>
-			<td style="padding-left: 300px;">
-          <td style="padding-top: 20px;">
-		<form action="search.php" method="post">	
-			<input type="textbox" class="Search1" name="search" > 
-			<td style="padding-left: 1px;">
-			<input type="submit" class="search2" value="Search"></form></g>
-        </tr>
-        </table>
-</div>
-	
-<div class="register">
-	<br>
-		<center><h2 style="color:goldenrod "> REGISTER YOURSELF</h2>
-		<div class="flex-container">
-			<div class="flex-left">	<p><h3 style="color:darkblue"> Got irritate with having a lot of clothes but have nothing to wear, Sell your clothes to get good returns! Register now !!! </h3></p><a href="{{url_for('register')}}"><input type="button" class="myButton" value="Register as Seller" ></a></div>
-		<div class="flex-right"><p><h3 style="color:darkred"> For your fashionable life, we have brought new inventory of the most fashionable clothing line for u! Register now !!!  </h3></p> 
-			<a href="{{url_for('register')}}"> <input type="button" class="myButton" value="Register as Buyer" ></a></div>
-		</center>
-		</div>
-</div></div>
+
+        </div>
+    </section><!-- CONTACT -->
+
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-4">
+                        <img class="logo" src="/static/img/l1.png" alt="">
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 class="text-white">Brand</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#About">About</a></li>
+                            <li><a href="#Register">Register</a></li>
+                            <li><a href="#Login">Login</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 class="text-white">More</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">FAQ's</a></li>
+                            <li><a href="#">Privacy & Policy</a></li>
+                            <li><a href="#">Warranty</a></li>
+                            <li><a href="#">Shipment</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="text-white">Contact</h5>
+                        <ul class="list-unstyled">
+                            <li>Address: kathmandu</li>
+                            <li>Email: Thrift.shop@example.com</li>
+                            <li>Phone: 9812345678</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">© 2022 copyright all right reserved | Designed with <i
+                                class="bx bx-heart text-danger"></i> by<a
+                                href="https://www.youtube.com/channel/UCYMEEnLzGGGIpQQ3Nu_sBsQ"
+                                class="text-white">Thriftshop</a></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="social-icons">
+                            <a href="#"><i class='bx bxl-facebook'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        (function () {
+            const fonts = ["cursive", "sans-serif", "serif", "monospace"];
+            let captchavalue = "";
+            function generatecaptcha() {
+                let value = btoa(math.random() * 1000000000);
+                value = value.substr(0, 5 + math.random() *);
+                captchavalue = value;
+            }
+            function setcaptcha() {
+                captchavalue.split("").map((char) => {
+                    const rotate = math.trunc(math.random() * 30);
+                    const font = math.trunc(math.random() * fonts.length);
+                    return '<span style= "transform:rotate(${rotate}deg);
+                    font - family:${ fonts[foot] }
+                    "
+
+                        > ${ char }</span > ';
+                }).join("");
+                document.querySelector(".captcha .preview").innerHTML = html;
+            }
+            function initcaptcha() {
+                document.querySelector(".captcha .captcha-refresh").addEventListener("click", function () {
+                    generatecaptcha();
+                    setcaptcha();
+
+                });
+                generatecaptcha();
+                setcaptcha();
+
+            }
+            initcaptcha();
+            document.querySelector(".login-form #login-btn").addEventListener("click", function () {
+                let inputcaptchavalue = document.querySelector(".login-form .captcha-form .captcha-input").value;
+                if (inputcaptchavalue === captchavalue) {
+                    swal("", "logging In!", "success");
+                }
+                else {
+                    swal("invalid captcha");
+                }
+            });
+        })();
+    </script>
 
 
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+</body>
 
-<<style>	
-	.reuse
-	{
-		background-color:#082060;
-	}
-	.bottom
-{
-	background-color: black;
-	height:250px;
-}
-</style>
-<div class="reuse">
-	<center><img src="/static/images/msg.jpeg" height="210px" width="50%" style="padding: 10px"></center>
-</div>
-<div class="product">
-	<table align="center">
-	<tr><td style="padding:30px;">
-		<div class="carda">
- 	 <img src="/static/images/sa1.jpg" alt="Daura Suruwal" style="width:300px; height: 100px;">
- 	 <h1>Daura Suruwal</h1>
- 	 <p class="price">Rs. 30000</p>
-  	<p>second hand</p>
- 	 <p><a href="buyer.php"><button>Add to Cart</button></p>
-		</div>
-	<td style="padding: 30px;">
-		<div class="carda">
-  	<img src="/static/images/ip1.jpg" alt="Lehenga" style="width:300px; height: 100px;">
-  	<h1>Lehenga</h1>
-  	<p class="price">Rs. 23000</p>
-  	<p>second hand</p>
- 	 <p><a href="buyer.php"><button>Add to Cart</button></p>
-		</div>
-	<td style="padding: 30px;">
-		<div class="carda">
- 	 <img src="/static/images/ip2.jpg" alt="Boots" style="width:300px; height: 100px;">
-  	<h1>Boots</h1>
-  	<p class="price">Rs. 138000</p>
-  	<p>second hand</p>
-  	<p><a href="buyer.php"><button>Add to Cart</button></p>
-		</div>
-	</table>
-</div>
-	<br><br>
-<div class="gm">
-	<center><h1>Group Members</h1></center>
-	<table align="center">
-	<tr><td style="padding: 30px;">
-	<div class="card1">
-  <img src="/static/images/kamal.jpg" alt="Kamal" style="width:250px; height: 300px;">
-  <h1>Nirajan Thapa</h1>
-  <p class="title">Roll no. 29</p>
-  <p>Acme Engineering College</p>
-  <p>
-	 
-	  <style>
-      #blackout1 {
-        background: rgba(102, 102, 102, 0.5);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-      }
-      #box {
-        width: 300px;
-        height: 100px;
-        text-align: center;
-        padding: 15px;
-        border: 3px solid #0000cc;
-        border-radius: 10px;
-        color: #0000cc;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        background: #fff;
-      }
-      #blackout1:target {display: block;}
-      .close {
-        display: inline-block;
-        border: 1px solid #0000cc;
-        color: #0000cc;
-        padding: 0 12px;
-        margin: 10px;
-        text-decoration: none;
-        background: #f2f2f2;
-        font-size: 14pt;
-        cursor:pointer;
-      }
-      .close:hover {background: #e6e6ff;}
-    </style>
-  </head>
- 
-  <body>
-   
-    <div id="blackout1">
-      <div id="box">
-        <p>Contact<br>
-			  Nirajan Thapa<br>
-			  98*******<br>
-			  nnirajanthapa.com</p><br>
-        <a href="#" class="close">Close window</a>
-      </div>
-    </div>
-     
-    <a href="#blackout1"><button class="button">Contact</button></a>
-	  
-		</div>
-	<td style="padding: 30px;">	
-	<div class="card1">
-  <img src="/static/images/aaju.jpg" alt="Aaju" style="width:250px; height: 300px;">
-	<h1>Aaju .C. Shrestha</h1>
-  <p class="title">Roll no. 1</p>
-  <p>Acme Engineering College</p>
-  <style>
-      #blackout2 {
-        background: rgba(102, 102, 102, 0.5);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-      }
-      #box {
-        width: 300px;
-        height: 100px;
-        text-align: center;
-        padding: 15px;
-        border: 3px solid #0000cc;
-        border-radius: 10px;
-        color: #0000cc;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        background: #fff;
-      }
-      #blackout2:target {display: block;}
-      .close {
-        display: inline-block;
-        border: 1px solid #0000cc;
-        color: #0000cc;
-        padding: 0 12px;
-        margin: 10px;
-        text-decoration: none;
-        background: #f2f2f2;
-        font-size: 14pt;
-        cursor:pointer;
-      }
-      .close:hover {background: #e6e6ff;}
-    </style>
-  </head>
- 
-  <body>
-   
-    <div id="blackout2">
-      <div id="box">
-        <p>Contact<br>
-			  Aaju Chandra Shrestha<br>
-			  9860477635<br>
-			  kaluaaju@gmail.com</p><br>
-        <a href="#" class="close">Close window</a>
-      </div>
-    </div>
-     
-    <a href="#blackout2"><button class="button">Contact</button></a>
-</div>
-<td style="padding: 30px;">
-	<div class="card1">
-  <img src="/static/images/ishwor.jpg" alt="Ishwor" style="width:250px; height: 300px;">
-  <h1>Ishwor Dhakal</h1>
-  <p class="title">Roll no. 13</p>
-  <p>Acme Engineering College</p>
-  <style>
-      #blackout3 {
-        background: rgba(102, 102, 102, 0.5);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-      }
-      #box {
-        width: 300px;
-        height: 100px;
-        text-align: center;
-        padding: 15px;
-        border: 3px solid #0000cc;
-        border-radius: 10px;
-        color: #0000cc;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        background: #fff;
-      }
-      #blackout3:target {display: block;}
-      .close {
-        display: inline-block;
-        border: 1px solid #0000cc;
-        color: #0000cc;
-        padding: 0 12px;
-        margin: 10px;
-        text-decoration: none;
-        background: #f2f2f2;
-        font-size: 14pt;
-        cursor:pointer;
-      }
-      .close:hover {background: #e6e6ff;}
-    </style>
-  </head>
- 
-  <body>
-   
-    <div id="blackout3">
-      <div id="box">
-        <p>Contact<br>
-			  Ishwor Dhakal<br>
-			  98*******<br>
-			  ishwordhakal@gmail.com</p><br>
-        <a href="#" class="close">Close window</a>
-      </div>
-    </div>
-     
-    <a href="#blackout3"><button class="button">Contact</button></a>
-</div>
-<td style="padding: 30px;">
-	<div class="card1">
-  <img src="/static/images/pandit.jpg" alt="dipak" style="width:250px; height: 300px;">
-  <h1>Aliz Aacharya</h1>
-  <p class="title">Roll no. 04</p>	
-  <p>Acme Engineering College</p>
-  <style>
-      .myButton {
-    background-color:#599bb3;
-    border-radius:28px;
-    border:1px solid #29668f;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:17px;
-    padding:16px 31px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #3d768a;
-}
-.myButton:hover 
-{
-    background-color:#206873;
-}
-.myButton:active 
-{
-    position:relative;
-    top:1px;
-}
-      #blackout4 {
-        background: rgba(102, 102, 102, 0.5);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-      }
-      #box {
-        width: 300px;
-        height: 100px;
-        text-align: center;
-        padding: 15px;
-        border: 3px solid #0000cc;
-        border-radius: 10px;
-        color: #0000cc;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        background: #fff;
-      }
-      #blackout4:target {display: block;}
-      .close {
-        display: inline-block;
-        border: 1px solid #0000cc;
-        color: #0000cc;
-        padding: 0 12px;
-        margin: 10px;
-        text-decoration: none;
-        background: #f2f2f2;
-        font-size: 14pt;
-        cursor:pointer;
-      }
-      .close:hover {background: #e6e6ff;}
-
-    </style>
-  </head>
- 
-  <body>
-   
-    <div id="blackout3">
-      <div id="box">
-        <p>Contact<br>
-			  Aliz Aacharya<br>
-			  98*******<br>
-			  alizaacharya@gmail.com</p><br>
-        <a href="#" class="close">Close window</a>
-      </div>
-    </div>
-
-
-
-<style>
-      .main
-{	
-       background-color:lightblue;
-		height:120px;
-}
-
-/*.a
-{		
-        width:inherit;
-        height:59px;
-        
-}*/
-/*.b
-{
-        background-color:#85D2BC;
-        color:#41414;
-}*/
-
-	
-
-.drop1
-{
-    background-color: white;
-    color:black;
-    padding-top:20px;
-    padding-bottom:20px;
-    padding-left:20px;
-    padding-right:35px;
-    border:none;
-    text-align:center;
-    
-}
-
-.dropdown
-{
-    position: relative;
-    display: inline-block;
-}
-.cont
-{	
-    display:none;
-    position:absolute;
-    background-color:transparent;
-    
-
-}
-.cont a
-{
-      background-color:#599bb3;
-    border-radius:28px;
-    border:1px solid #29668f;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:17px;
-    padding:16px 31px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #3d768a;
-}.cont a:hover
-{ 	
-     background-color:#206873;
-}
-.dropdown:hover .cont
-{
-    display:block;
-}
-.dropdown:hover .drop
-{
-    background-color:grey;
-}
-.drop1 a
-{	
-    text-decoration:none;
-    display:block;
-}
-.drop1:hover 
-
-{
-    background-color:black;
-}
-
-
-
-
-.Search1  
-{
-     border-radius:28px;
-     font-size:17px;
-    padding:5px 15px;
-	background-color:antiquewhite;
-    text-decoration:none;
-    text-shadow:0px 1px 0px;
-}
-
-.Search1:hover 
-{
-    background-color:white;
-}
-.Search1:active 
-{
-    position:relative;
-    top:1px;
-}
-.Search2 
-{
-     border-radius:28px;
-     font-size:17px;
-    padding-top:50px;
-	background-color:antiquewhite;
-    text-decoration:none;
-    text-shadow:0px 1px 0px white;
-}
-
-.Search2:hover 
-{
-    background-color:#599BB3;
-}
-.Search2:active 
-{
-    position:relative;
-    top:1px;
-}
-
-.flex-container{
-	display:flex;
-	flex-direction: row;
-}
-.flex-left {
-    width: 50%;
-    height: 25vh;
-	padding:50px;
-}
-
-.flex-right {
-    width: 50%;
-	padding:50px;
-}
-.product
-{
-	background-color: #ADD8E6;
-	height:370px;
-}
-
-.box
-{
-	text-align:#006;
-	text-decoration: none;
-}
-
-</style>
-</head>
- 
-  <body>
-   
-    <div id="blackout4">
-      <div id="box">
-        <p>Contact<br>
-			  Nirajan Thapa<br>
-			  9851275855<br>
-			  </p><br>
-        <a href="#" class="close">Close window</a>
-      </div>
-    </div>
-     
-    <a href="#blackout4"><button class="button">Contact</button></a>
-</div>
-</table>
-<div class="bottom">
-	<center><table style="padding-top:10px;">
-		<th><font color="#FF0004"><center><h1>Thriftshop Nepal</h1></font></th>
-    		<tr><td>
-				<font color="#B9A9A9">	<center><h3>Designed by:<br> Aaju Chandra Shrestha &nbsp; &nbsp; &nbsp; Aliz Acharya  &nbsp; &nbsp; &nbsp; Ishwor Dhakal   &nbsp; &nbsp; &nbsp;Nirajan Thapa <br> </h3></center></font></td></tr>
-			<tr><td><center><font color="#1086B9"><h4>Copyright © Thriftshop Nepal 2022<br>All rights are reserved </center></h4></td></tr>
-    </table></center>
-</div>
+</html>
