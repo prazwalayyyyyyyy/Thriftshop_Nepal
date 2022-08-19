@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Username: {{ users.username }}</h1>
+    <hr>
+    {% for good in goods %}
+    <p>
+    {{ good.seller.username }} has: <b>{{ good.body }}</b>
+    </p>
+    {% endfor %}
+{% endblock %}

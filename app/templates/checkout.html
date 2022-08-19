@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+    <!--payment gateway-->
+    <div class="gateway">
+        <div class="payment">
+            <div class="left">
+                <h3>Payment Address</h3>
+                <form>
+                    fullname
+                    <input type="text" class="" placeholder="Enter fullname" required>
+                    Email
+                    <input type="email" class="" placeholder="Enter Email" required>
+                    Address
+                    <input type="text" class="" placeholder="Enter Address" required>
+                    City
+                    <input type="text" class="" placeholder="Enter City" required>
+                    <div id="address">
+                        <label>
+                            Province
+                            <select>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                            </select>
+                        </label>
+                        <label>
+                            Zip Code
+                            <input type="number" name="" placeholder="Zip Code">
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="right">
+                <h3>Payment method</h3>
+                <form>
+                    Accepted Card
+                   <img src="img/visacard.png">
+                   
+                    Card Number
+                    <input type="email" class="" placeholder="Enter Card Number" required>
+                    Expiry date
+                    <input type="date" class="" placeholder="Enter date" required>
+                    CVV
+                    <input type="text" class="" placeholder="Enter CVV" required>
+                    
+                </form>
+            </div>
+        </div>
+        </div>
+    <!---payment gateway end-->
+
+
+{% endblock %}

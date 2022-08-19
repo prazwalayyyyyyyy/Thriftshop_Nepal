@@ -1,4 +1,5 @@
 import email
+from unicodedata import category
 from app import login #for session
 from email.policy import default
 from enum import unique
@@ -41,11 +42,14 @@ class Goods(db.Model):
     # photo = db.Column()
     id = db.Column(db.Integer, primary_key=True)
     photo = db.Column(db.String(140))
-    price = db.Column(db.Integer)
+    buy_price = db.Column(db.Integer)
+    sell_price = db.Column(db.Integer)
     name = db.Column(db.String(50))
-    descripton = db.Column(db.String(500))
+    category = db.Column(db.String())
+    condition = db.Column(db.String())
     seller = db.Column(db.Integer, db.ForeignKey('user.id'))
     verifycheck = db.Column(db.Boolean, nullable=False, default=False)
+    profit = db.Column(db.Integer)
 
 #flasklogin keeps track of logged user by storing identifier unique in flask's user session. each time logged user nagicates page, flasklogin retrieve ID of user from session and load in memory
 #FLASK-login dont know about the db. so need app's help in loading user.so app will configure user loader function that can be called to load user given ID

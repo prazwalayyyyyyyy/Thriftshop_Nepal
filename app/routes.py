@@ -1,5 +1,7 @@
 from crypt import methods
 from fileinput import filename
+# from msilib.schema import Condition
+from unicodedata import category
 # from turtle import pos
 from flask import jsonify, render_template, flash, redirect, send_file, url_for
 from importlib_metadata import method_cache
@@ -51,7 +53,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('create_goods'))
+        return redirect(url_for('additem'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -89,19 +91,23 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route('/goods/create', methods=['POST', 'GET'])
+@app.route('/additem', methods=['POST', 'GET'])
 @login_required
 def create_goods():
+    # return ""
     form = GoodsForm()
+    
     if request.method == 'POST' and form.validate_on_submit() and current_user.user_type in ['seller', 'admin']:
+        # import pdb; pdb.set_trace()c
         filename = secure_filename(form.photo.data.filename)
         form.photo.data.save('uploads/'+filename)
-        gds = Goods(photo=filename, name=form.name.data,
-                    descripton=form.descripton.data, price=form.price.data, creater=current_user)
+        
+        gds = Goods(photo=filename, name=form.name.data, seller=current_user.id, buy_price=form.buy_price.data, condition=form.condition.data, category=form.category.data)
         db.session.add(gds)
+        # import pdb; pdb.set_trace()
         db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('creategoods.html', form=form)
+        return redirect(url_for('pending_items'))
+    return render_template('additem.html', form=form)
 
 
 @app.route('/images/<filename>')
@@ -109,6 +115,38 @@ def get_file(filename):
     filename = f'../uploads/{filename}'
     return send_file(filename, mimetype='image/gif')
 
+@app.route('/pendingitem', methods=['POST', 'GET'])
+@login_required
+def pending_items():
+    # good = Goods.query.filter_by(id=id).first()
+    # if good.creater.username != current_user.username and current_user.user_type != 'admin':
+    #     flash('You are not Authorized to perform edit operation')
+    #     return redirect(url_for('index'))
+    # form = GoodsForm(obj=good)
+    # if request.method == 'POST':
+    #     post_data = {**form.data}
+    #     del post_data['submit']
+    #     del post_data['csrf_token']
+    #     #import pdb; pdb.set_trace()
+    #     gds = Goods.query.filter_by(id=id).update(post_data)
+    #     db.session.commit()
+    #     flash('Successfully edited')
+    #     return redirect(url_for('index'))
+    # # form.populate_obj(good)
+    goods = Goods.query.filter_by(seller=current_user.id, verifycheck=False)
+    # import pdb; pdb.set_trace()
+    return render_template('pendingitem.html', goods=goods.all())#form=form
+
+@app.route('/approveditem', methods=['POST', 'GET'])
+@login_required
+def approved_items():
+    goods = Goods.query.filter_by(seller=current_user.id, verifycheck=True)
+    return render_template('approveditem.html', goods=goods.all())#form=form
+
+@app.route('/paymentdetail', methods=['POST', 'GET'])
+@login_required
+def payment_details():
+    return render_template('paymentdetail.html')#form=form
 
 @app.route('/goods/edit/<id>', methods=['GET', 'POST'])
 def edit_goods(id):

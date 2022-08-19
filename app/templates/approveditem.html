@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<!----Approved Items-->
+<div class="table">
+    <div class="table_header">
+        <p>Approved Items</p>
+            
+    </div>
+    <div class="table_section">
+        <center>
+            <table>
+                <thead>
+                    <tr>
+                        <th>SNO.</th>
+                        <th>Product image</th>
+                        <th>Product name</th>
+                        <th> Procuct Price</th>
+                        <th> Procuct Category</th>
+                        <th>Product Conditon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for good in goods %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td><img src="/images/{{good.photo}}"></td>
+                        <td> {{good.name}}</td>
+                        <td>{{good.buy_price}}</td>
+                        <td>{{good.category}}</td>
+                        <td>{{good.condition}}</td>
+                        <td><a href="goods/edit/{{good.id}}">EDIT</a> | <a href="goods/delete/{{good.id}}">Delete</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </center>
+    </div>
+</div>
+
+{% endblock %}

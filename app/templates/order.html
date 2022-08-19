@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/boxicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/scripts.js"></script>
+    <title>Thrift Shop buyer</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .table{
+            width:100%;
+            table-layout: fixed;
+            min-width:1000px;
+            border-collapse:collapse
+        }
+        .table_header{
+            display:flex;
+            justify-content: center;
+            align-items:center;
+            padding:20px;
+            background-color:rgba(240,240,249);
+        }
+        .table_header p{
+            font-size:20px;
+            font-weight:bold;
+            margin-right: 400px;
+        }
+        .table_header form {
+            margin-left: 250px;
+        }
+        .table_header form input{
+            padding:10px 20px;
+            margin:0 10px;
+            outline:none;
+            border:2px solid #029;
+        }
+        thead th{
+            width: 1000px;
+            position:sticky;
+            padding:10px 60px;
+            top:0;
+            background-color:rgb(215, 231, 212);
+            color:#8493a5;
+            font-size:15px;
+           
+            
+        }
+        tbody td{
+            border-bottom: 1px solid #fff;
+            padding:10px 20px;
+            word-break: break-all;
+            text-align:center;
+        }
+        tbody td img{
+            height:50px;
+            width:50px;
+        }
+        .table_section{
+            height: 1000px;
+            overflow: auto;
+           
+        }
+        .table_section table{
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    
+    </style>
+</head>
+
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img class="logo" src="img/l1.png" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#product" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Product
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#men">Men's wear</a></li>
+                          <li><a class="dropdown-item" href="#women">Women's wear</a></li>
+
+                        </ul>
+                      </li>
+                      <li class="nav-item">
+                        <h4><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></h4>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Team</a>
+                    </li>
+                </ul>
+                <div class="action">
+                    <div class="profile" onclick="menuToggle();">
+                        <img src="img/me.jpg">
+                    </div>
+                    <div class="menu">
+                        <h3>Username <br><span>Buyer</span></h3>
+                        <ul>
+                            <li><img src="img/profile-user.png"><a href="profile.html">My profile</a></li>
+                             <li class="nav-item dropdown"><img src="img/settings.png"><a class="nav-link dropdown-toggle" href="#setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                setting
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="Reset_password.html"><img src="img/reload.png">Reset password</a></li>
+                                </ul>
+
+                            </li>
+                            <li><img src="img/logout.png"></i><a href="logout.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav><!-- //NAVBAR -->
+<!----Order-->
+<div class="table">
+    <div class="table_header">
+        <p>Ordered Product</p>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" name="order_search-btn" type="submit">Search</button>
+              </form>
+    </div>
+    <div class="table_section">
+        <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>SNO.</th>
+                    <th>Product_image</th>
+                    <th>Product_name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><img src="img/lehenga.jpeg"></td>
+                    <td> Lehenga</td>
+                    <td>1</td>
+                    <td>$30</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><img src="img/lehenga.jpeg"></td>
+                    <td> Lehenga</td>
+                    <td>1</td>
+                    <td>$30</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><img src="img/lehenga.jpeg"></td>
+                    <td> Lehenga</td>
+                    <td>1</td>
+                    <td>$30</td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    </div>
+</div>
+
+<!----Order end-->
+<!-- TEAM -->
+<section id="team">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8 mx-auto text-center">
+                <h6 class="text-primary">TEAM</h6>
+                <h1>Meet Our Crew Members</h1>
+                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
+                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+            </div>
+        </div>
+        <div class="row text-center g-4">
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="img/me.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Nirajan Thapa</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=100055312209773"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="img/aaju.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Aaju Chandra Shrestha</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="ttps://www.facebook.com/kaluaaju01"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="img/aliz.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Aliz Acharya</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/piqueprajwal03"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="img/ishwor.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Ishwor Dhakal</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/ishworrr"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- TEAM -->
+
+
+      
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-4">
+                        <img class="logo" src="img/l1.png" alt="">
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 class="text-white">Brand</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#product">product</a></li>
+                            <li><a href="#team"></a></li>
+                         
+                        </ul>
+                    </div>
+                    <div class="col-lg-2">
+                        <h5 class="text-white">More</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">FAQ's</a></li>
+                            <li><a href="#">Privacy & Policy</a></li>
+                            <li><a href="#">Warranty</a></li>
+                            <li><a href="#">Shipment</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="text-white">Contact</h5>
+                        <ul class="list-unstyled">
+                            <li>Address: kathmandu</li>
+                            <li>Email: Thriftshop.nepal7@gmail.com</li>
+                            <li>Phone: 9812345678</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">© 2020 copyright all right reserved | Designed with <i
+                            class="bx bx-heart text-danger"></i> by<a
+                               
+                                class="text-white">Thrift Shop Nepal</a></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="social-icons">
+                            <a href="#"><i class='bx bxl-facebook'></i></a>
+                            <a href="#"><i class='bx bxl-twitter'></i></a>
+                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        function menuToggle(){
+            const toggleMenu = document.querySelector('.menu');
+            toggleMenu.classList.toggle('active')
+        }
+    </script>
+
+</body>
+</html>

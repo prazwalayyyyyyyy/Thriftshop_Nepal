@@ -66,12 +66,70 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Team</a>
                     </li>
+
+                    <!--- seller navigation bar-->
+                    {% if current_user.user_type == 'seller' %}
+                    <a class="nav-link" href="/additem">Add item</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pendingitem">Pending Item</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/approveditem">Approved Item</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/paymentdetail">Payment detail</a>
+                    </li>
+                    {%endif%}
+
+                    <!--- buyer navigation bar-->
+                    {% if current_user.user_type == 'buyer' %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#product" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Product
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#men">Men's wear</a></li>
+                            <li><a class="dropdown-item" href="#women">Women's wear</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <h4><a href="cart.html"><i class="fa fa-shopping-cart">Cart</i></a></h4>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Order</a>
+                    </li>
+                    {%endif%}
+
+
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
+
+                <div class="menu"></div>
+                {% if current_user.is_authenticated %}
+                <h3>{{current_user.username}} <br></h3>
+                <ul>
+                    <li><img src="img/profile-user.png"><a href="profile.html">My profile</a></li>
+                    <li class="nav-item dropdown"><img src="img/settings.png"><a class="nav-link dropdown-toggle"
+                            href="#setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            setting
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Reset_password.html"><img src="img/reload.png">Reset
+                                    password</a></li>
+                        </ul>
+
+                    </li>
+                    <li><img src="img/logout.png"></i><a href="/logout">Logout</a></li>
+                </ul>
+                {%endif%}
             </div>
+        </div>
         </div>
     </nav><!-- //NAVBAR -->
     {% for message in get_flashed_messages() %}
@@ -79,6 +137,64 @@
     {% endfor %}
     {% block main %}
     {% endblock %}
+
+    <<!----footer-->>
+        <footer>
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row gy-4">
+                        <div class="col-lg-4">
+                            <img class="logo" src="img/l1.png" alt="">
+                        </div>
+                        <div class="col-lg-2">
+                            <h5 class="text-white">Brand</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#">About</a></li>
+                                <li><a href="#product">product</a></li>
+                                <li><a href="#team"></a></li>
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-2">
+                            <h5 class="text-white">More</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#">FAQ's</a></li>
+                                <li><a href="#">Privacy & Policy</a></li>
+                                <li><a href="#">Warranty</a></li>
+                                <li><a href="#">Shipment</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4">
+                            <h5 class="text-white">Contact</h5>
+                            <ul class="list-unstyled">
+                                <li>Address: kathmandu</li>
+                                <li>Email: Thriftshop.nepal7@gmail.com</li>
+                                <li>Phone: 9812345678</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom py-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-0">© 2020 copyright all right reserved | Designed with <i
+                                    class="bx bx-heart text-danger"></i> by<a class="text-white">Thrift Shop Nepal</a>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="social-icons">
+                                <a href="#"><i class='bx bxl-facebook'></i></a>
+                                <a href="#"><i class='bx bxl-twitter'></i></a>
+                                <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
 
 </body>
 
