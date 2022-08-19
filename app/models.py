@@ -29,19 +29,10 @@ class User(UserMixin, db.Model):#constructon of db model for user login
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-        
-class Post(db.Model):#construction of db model for the posts
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<Post {}>'.format(self.body)
 
 class Goods(db.Model):
     # photo = db.Column()
-    id = db.Column(db.Integer, primary_key=True)
+    gid = db.Column(db.Integer, primary_key=True)
     photo = db.Column(db.String(140))
     buy_price = db.Column(db.Integer)
     sell_price = db.Column(db.Integer)
@@ -54,13 +45,14 @@ class Goods(db.Model):
     soldstatus = db.Column(db.Boolean, default=False)
 
 class Cart(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    good_id = db.Column(db.Integer, db.ForeignKey('goods.id'))
+    cid = db.Column(db.Integer, primary_key=True)
+    good_id = db.Column(db.Integer, db.ForeignKey('goods.gid'))
     buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    checkout_status = db.Column(db.Boolean, default=False, nullable=False)
 
 
 class Orders(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    oid = db.Column(db.Integer, primary_key=True)
     # good_id = db.Column(db.Integer, db.ForeignKey('goods.id'))
     buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     totalbuyprice = db.Column(db.Integer)

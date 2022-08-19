@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="modal-body-add">
                                             {#{{form.populate_obj(good) }}#}
-                                            <form class="rounded bg-white shadow p-5" action="/goods/edit/{{good.id}}"
+                                            <form class="rounded bg-white shadow p-5" action="/goods/edit/{{good.gid}}"
                                                 method="POST" enctype="multipart/form-data" f;>
                                                 {{ form.hidden_tag() }}
                                                 Product Image
@@ -92,7 +92,7 @@
 
                                     </div>
                                 </div>
-                            </div> <a class="btn btn-danger" href="goods/delete/{{good.id}}">Delete</a>
+                            </div> <a class="btn btn-danger" href="goods/delete/{{good.gid}}">Delete</a>
                         </td>
                     </tr>
                     

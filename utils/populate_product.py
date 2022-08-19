@@ -19,6 +19,6 @@ to_db = [(i,  "photo.png",f"product_name-{i}", random.choices([2,3,6])[0],
               10,
               False) for i in range(10001,10030)]
 cur.executemany(
-    "INSERT INTO goods (id, photo, name, seller, verifycheck, category, condition, buy_price, sell_price, profit,soldstatus) VALUES (?,?,?,?, ?,?,?,?,?,?,?);", to_db)
+    "INSERT INTO goods (gid, photo, name, seller, verifycheck, category, condition, buy_price, sell_price, profit,soldstatus) VALUES (?,?,?,?, ?,?,?,?,?,?,?);", to_db)
 con.commit()
 con.close()

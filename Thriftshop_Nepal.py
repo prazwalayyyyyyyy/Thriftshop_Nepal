@@ -1,7 +1,7 @@
 from app import app, db
 #shell work done. we had to run imports everytime. using flask shell premports the application instances lke app which else should have been imported repeatedly using from app import db everytime we had to carry out the test.
 #here we create the shell context that adds the database insatance and models to the shell session
-from app.models import Goods, User, Post
+from app.models import Goods, User
 
 #same shell work in this block
 @app.shell_context_processor #registers function as shell context function.

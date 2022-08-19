@@ -46,8 +46,8 @@
         <td>
     <img src="/images/{{good.photo}}" height="100rem", width="100rem"> </td>
     <td>{% if good.creater.username==current_user.username or current_user.user_type=='admin'%}
-    <a href="/goods/edit/{{good.id}}" ><button class="myButton" value="edit">Edit</button></a>
-    <a href="/goods/delete/{{good.id}}" ><button class="myButton" value="Delete">Delete</button></a></td>
+    <a href="/goods/edit/{{good.gid}}" ><button class="myButton" value="edit">Edit</button></a>
+    <a href="/goods/delete/{{good.gid}}" ><button class="myButton" value="Delete">Delete</button></a></td>
     {%endif%}
     <td>{{good.name}}<br></td>
     <td>{{good.price}}</td>
