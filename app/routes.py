@@ -3,7 +3,7 @@ from fileinput import filename
 # from msilib.schema import Condition
 from unicodedata import category
 # from turtle import pos
-from flask import jsonify, render_template, flash, redirect, send_file, url_for
+from flask import jsonify, render_template, flash, redirect, send_file, url_for, session
 from importlib_metadata import method_cache
 from app import app
 from app.forms import EditUserForm, GoodsForm, LoginForm
@@ -133,9 +133,11 @@ def pending_items():
     #     flash('Successfully edited')
     #     return redirect(url_for('index'))
     # # form.populate_obj(good)
+    session['redirect_to'] = 'pending_items'
     goods = Goods.query.filter_by(seller=current_user.id, verifycheck=False)
+    form = GoodsForm()
     # import pdb; pdb.set_trace()
-    return render_template('pendingitem.html', goods=goods.all())#form=form
+    return render_template('pendingitem.html', goods=goods.all(), form=form)#form=form
 
 @app.route('/approveditem', methods=['POST', 'GET'])
 @login_required
@@ -160,11 +162,16 @@ def edit_goods(id):
         post_data = {**form.data}
         del post_data['submit']
         del post_data['csrf_token']
+        # import pdb; pdb.set_trace()
+        if request.files and  not isinstance(form.photo.data, str):
+            filename = secure_filename(form.photo.data.filename)
+            form.photo.data.save('uploads/'+filename)
+            post_data.update(photo=filename)
         #import pdb; pdb.set_trace()
         gds = Goods.query.filter_by(id=id).update(post_data)
         db.session.commit()
         flash('Successfully edited')
-        return redirect(url_for('index'))
+        return redirect(url_for(session.get('redirect_to', 'index')))
     # form.populate_obj(good)
     return render_template('editgoods.html', form=form)
 
