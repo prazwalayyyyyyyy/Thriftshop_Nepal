@@ -46,10 +46,10 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # carts = Cart.query.filter_by(buyer_id = current_user.id)
-    # session['cart_count'] = len(carts.all())
+    # 
     if current_user.is_authenticated:
-        
+        carts = Cart.query.filter_by(buyer_id = current_user.id)
+        session['cart_count'] = len(carts.all())
         redirect_maps = {"seller": "create_goods",
                              "admin": "pending_items", "buyer": "index"}
         next_page = url_for(redirect_maps.get(current_user.user_type)) 
@@ -66,6 +66,8 @@ def login():
             redirect_maps = {"seller": "create_goods",
                              "admin": "pending_items", "buyer": "index"}
             next_page = url_for(redirect_maps.get(current_user.user_type)) 
+        carts = Cart.query.filter_by(buyer_id = current_user.id)
+        session['cart_count'] = len(carts.all())
         return redirect(next_page)
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
