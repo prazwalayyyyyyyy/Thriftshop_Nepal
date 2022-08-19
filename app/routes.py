@@ -33,6 +33,13 @@ def frontpage1():
     return render_template('create_goods')
 
 
+@app.before_request
+def calculate_cart():
+    if current_user.is_authenticated:
+        carts = Cart.query.filter_by(
+            buyer_id=current_user.id, checkout_status=False)
+        session['cart_count'] = len(carts.all())
+
 @app.route('/index')
 # @login_required #doesnt allow users not logged in to view contents and add next redirection to ntercept user's request and reach there after they logged in
 def index():
@@ -41,17 +48,16 @@ def index():
 
     male_goods = Goods.query.filter_by(category="Male", soldstatus=False)
     female_goods = Goods.query.filter_by(category="Female", soldstatus=False)
-
-    return render_template('products.html', title='Home', male_goods=male_goods.all(), female_goods=female_goods.all())
+    cart_goods = db.session.query(Goods).join(Cart).filter(Goods.gid == Cart.good_id, Cart.checkout_status ==
+                                                      False, Goods.soldstatus == False, Cart.buyer_id == current_user.id).all()
+    cart_goods = [good.gid for good in cart_goods]
+    return render_template('products.html', title='Home', male_goods=male_goods.all(), female_goods=female_goods.all(), cart_goods = cart_goods)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     #
     if current_user.is_authenticated:
-        carts = Cart.query.filter_by(
-            buyer_id=current_user.id, checkout_status=False)
-        session['cart_count'] = len(carts.all())
         redirect_maps = {"seller": "create_goods",
                          "admin": "pending_items", "buyer": "index"}
         next_page = url_for(redirect_maps.get(current_user.user_type))
@@ -183,18 +189,17 @@ def cart(action="s", good_id=0):
         if action == "add":
             good_id = request.form.get("good_id")
             buyer_id = current_user.id
-            cart_item = Cart(buyer_id=buyer_id, good_id=good_id)
-            db.session.add(cart_item)
-            db.session.commit()
-            carts = Cart.query.filter_by(buyer_id=current_user.id, checkout_status= False)
-            session['cart_count'] = len(carts.all())
+            if not Cart.query.filter_by(
+            buyer_id=current_user.id,  good_id=good_id, checkout_status=False).first():
+                cart_item = Cart(buyer_id=buyer_id, good_id=good_id)
+                db.session.add(cart_item)
+                db.session.commit()
+            
     if action == "delete":
         Cart.query.filter_by(buyer_id=current_user.id,
-                             good_id=good_id).delete()
+                             good_id=good_id,checkout_status= False).delete()
         db.session.commit()
-    carts = Cart.query.filter_by(
-        buyer_id=current_user.id, checkout_status=False)
-    session['cart_count'] = len(carts.all())
+    
     goods = db.session.query(Goods).join(Cart).filter(
         Goods.gid == Cart.good_id, Goods.soldstatus == False, Cart.buyer_id == current_user.id, Cart.checkout_status== False)
 

@@ -19,7 +19,7 @@
             <div class="col-lg-4 col-sm-6">
                 
                 <div class="card" style="width: 18rem;">
-                    <img src="images/{{good.photo}}" class="card-img-top" alt="...">
+                    <img src="/images/{{good.photo}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{good.name}}</h5>
                         <h6 class="card-price">{{good.sell_price}}</h6>
@@ -27,7 +27,11 @@
                     </div>
                     <div class="card-bodylink">
                         <span></span>
-                        <button type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
+                        {% if good.gid in cart_goods%}
+                        <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>
+                        {%else%}
+                        <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
+                        {%endif%}
 
                     </div>
                 </div>
@@ -57,7 +61,11 @@
                     </div>
                     <div class="card-bodylink">
                         <span></span>
-                        <button type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
+                        {% if good.gid in cart_goods%}
+                        <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>
+                        {%else%}
+                        <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
+                        {%endif%}
 
                     </div>
                 </div>
