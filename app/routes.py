@@ -100,14 +100,13 @@ def create_goods():
     form = GoodsForm()
 
     if request.method == 'POST' and form.validate_on_submit() and current_user.user_type in ['seller', 'admin']:
-        # import pdb; pdb.set_trace()c
         filename = secure_filename(form.photo.data.filename)
         form.photo.data.save('uploads/'+filename)
 
         gds = Goods(photo=filename, name=form.name.data, seller=current_user.id,
                     buy_price=form.buy_price.data, condition=form.condition.data, category=form.category.data)
         db.session.add(gds)
-        # import pdb; pdb.set_trace()
+        
         db.session.commit()
         return redirect(url_for('pending_items'))
     if current_user.user_type in ['buyer']:
@@ -125,26 +124,10 @@ def get_file(filename):
 @app.route('/pendingitem', methods=['POST', 'GET'])
 @login_required
 def pending_items():
-    # good = Goods.query.filter_by(id=id).first()
-    # if good.creater.username != current_user.username and current_user.user_type != 'admin':
-    #     flash('You are not Authorized to perform edit operation')
-    #     return redirect(url_for('index'))
-    # form = GoodsForm(obj=good)
-    # if request.method == 'POST':
-    #     post_data = {**form.data}
-    #     del post_data['submit']
-    #     del post_data['csrf_token']
-    #     #import pdb; pdb.set_trace()
-    #     gds = Goods.query.filter_by(id=id).update(post_data)
-    #     db.session.commit()
-    #     flash('Successfully edited')
-    #     return redirect(url_for('index'))
-    # # form.populate_obj(good)
     session['redirect_to'] = 'pending_items'
     goods = Goods.query.filter_by(seller=current_user.id, verifycheck=False)
     form = GoodsForm()
-    # import pdb; pdb.set_trace()
-    # form=form
+    
     return render_template('pendingitem.html', goods=goods.all(), form=form)
 
 
@@ -162,6 +145,7 @@ def payment_details():
 
 
 @app.route('/goods/edit/<id>', methods=['GET', 'POST'])
+@login_required
 def edit_goods(id):
     good = Goods.query.filter_by(id=id).first()
     # user = User.query.filter_by(username=form.username.data).first()
@@ -186,30 +170,11 @@ def edit_goods(id):
     # form.populate_obj(good)
     return render_template('editgoods.html', form=form)
 
-# @app.route('/cart/<goods.id>', methods=['POST', 'GET'])
-# @login_required
-# def cart(goods.id):
-#     product = goods.query.filter(goods.id == good_id)
-#     cart_item = cart(product=product)
-#     db.session.add(cart_item)
-    
-#     return render_template('cart.html', product=products)
 
-        # if user_logged_in():
-        #     productId = int(request.args.get('productId'))
-
-        #     # Using Flask-SQLAlchmy SubQuery
-        #     # extractAndPersistKartDetailsUsingSubquery(productId)
-
-        #     # Using Flask-SQLAlchmy normal query
-        #     extractAndPersistKartDetailsUsingkwargs(productId)
-        #     flash('Item successfully added to cart !!', 'success')
-        #     return redirect(url_for('root'))
-        # else:
-        #     return redirect(url_for('loginForm'))
 @app.route("/cart/<action>/<good_id>", methods=["GET", "POST"])
 @app.route("/cart/", methods=["GET", "POST"])
 @app.route("/cart/<action>", methods=["GET", "POST"])
+@login_required
 def cart(action="s",good_id=0):
     if request.method == "POST":
         if action == "add":
@@ -232,27 +197,17 @@ def cart(action="s",good_id=0):
    
 
 @app.route('/goods/delete/<id>')
+@login_required
 def delete_goods(id):
     good = Goods.query.filter_by(id=id).delete()
-    # user = User.query.filter_by(username=form.username.data).first()
-    # if good.creater.username != current_user.username and  current_user.user_type !='admin':
-    #     flash('You are not Authorized to perform edit operation')
-    #     return redirect(url_for('index'))
-    # form=GoodsForm(obj=good)
-    # if request.method == 'POST':
-    #     post_data={**form.data}
-    #     # del post_data['submit']
-    #     # del post_data['csrf_token']
-    #     # import pdb; pdb.set_trace()
-    #     gds = Goods.query.filter_by(id=id).delete(post_data)
+    
     db.session.commit()
-    #     flash('Successfully edited')
-    #     return redirect(url_for('index'))
-    # # form.populate_obj(good)
+
     return redirect(url_for('index'))
 
 
 @app.route('/users/edit/<id>')
+@login_required
 def edit_users(id):
     user = User.query.filter_by(id=id).first()
     # user = User.query.filter_by(username=form.username.data).first()
@@ -275,6 +230,7 @@ def get_users(username):
 
 
 @app.route('/admin/goodsverify', methods=['GET', 'POST'])
+@login_required
 def verify_goods():
     goods = Goods.query.all()
     return render_template('verify_goods.html', goods=goods)
