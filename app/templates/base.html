@@ -1,20 +1,197 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/bootstrap.bundle.min.js"></script>
-
-    <title>Thriftshop</title>
-</head>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/boxicons.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script src="/static/js/scripts.js"></script>
+        <style>
+            .nav-item h4 {
+                margin-top:10px;
+                position: relative;
+                cursor:pointer;
+            }
+            .nav-item h4:before{
+                content:attr(data-count);
+                position:absolute;
+                color:white;
+                right:1px;
+                font-size: 15px;
+                text-align:center;
+                top:-12px;
+                width:20px;
+                height:20px;
+                background:red;
+                border-radius: 50%;
+                opacity:0;
+            }
+    
+            .nav-item h4.zero:before{
+                opacity:1;
+            }
+            .card-bodylink button{
+                background:red;
+                border:none;
+                outline:none;
+                font-weight: bold;
+                color:#fafafa;
+                cursor: pointer;
+            }
+            .card-bodylink span{
+                position:absolute;
+                top:14px;
+                left:13;
+                width:300px;
+                height:186px;
+                display:none;
+            }
+            .card-bodylink span img{
+                width:100%;
+                height: 100px;
+            }
+            section div:nth-child(1)>span.active{
+                animation: first 0.5s ease-in;
+                z-index: 2;
+                display:block;
+            }
+            section div:nth-child(2)>span.active{
+                animation: second 0.5s ease-in;
+                z-index: 2;
+                display:block;
+            }
+            section div:nth-child(3)>span.active{
+                animation: thrid 0.5s ease-in;
+                z-index: 2;
+                display:block;
+            }
+            section div:nth-child(4)>span.active{
+                animation: fourth 0.5s ease-in;
+                z-index: 2;
+                display:block;
+            }
+            section div:nth-child(5)>span.active{
+                animation: fifth 0.5s ease-in;
+                z-index: 2;
+                display:block;
+            }
+            section div:nth-child(6)>span.active{
+                animation: sixth 0.5s ease-in;
+                z-index: 2;
+                display:block;
+            }
+            @keyframes first{
+                to{
+                    width:30px;
+                    height:20px;
+                    left:1290px;
+                    top: -70px;
+                }
+            }
+                @keyframes seconf{
+                to{
+                    width:30px;
+                    height:20px;
+                    left:1290px;
+                    top: -70px;
+                }
+            }
+            @keyframes third{
+                to{
+                    width:30px;
+                    height:20px;
+                    left:1290px;
+                    top: -70px;
+                }
+            }
+            @keyframes fourth{
+                to{
+                    width:30px;
+                    height:20px;
+                    left:1290px;
+                    top: -70px;
+                }
+            }
+            @keyframes fifth{
+                to{
+                    width:30px;
+                    height:20px;
+                    left:1290px;
+                    top: -70px;
+                }
+            }
+            @keyframes sixth{
+                to{
+                    width:30px;
+                    height:20px;
+                    left:1290px;
+                    top: -70px;
+                }
+            }
+            .select{
+                width:60%;
+                height: 580px;
+                background:#222;
+                position:absolute;
+                top:-1000px;
+                left:20%;
+                transition:0.5s;
+                overflow-y:auto;
+                margin:auto;
+            }
+            .select .display{
+                top:10px;
+            }
+            .select div{
+                width:100%;
+                height:200px;
+                display:flex;
+                padding:5px;
+                border:1px solid white;
+                position:relative;
+                margin:5px auto;
+            }
+            .select div img{
+                width:300px;
+                height:100%;
+            }
+            .select div h5{
+                padding:0;
+            }
+            .select div h6{
+                padding:0;
+            }
+            .select div p{
+                padding:0;
+    
+            }
+            .select div h6,
+            .select div button{
+                position:absolute;
+                left:45%;
+                top:50%;
+                color:white;
+            }
+            .select div button{
+                left:60%;
+                top:55%;
+            }
+                .select div span{    
+                display:none;
+    
+    
+            }
+    
+        </style>
+        <title>Thrift Shop buyer</title>
+    </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
@@ -90,13 +267,13 @@
                             Product
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#men">Men's wear</a></li>
-                            <li><a class="dropdown-item" href="#women">Women's wear</a></li>
+                            <li><a class="dropdown-item" href="/index">Men's wear</a></li>
+                            <li><a class="dropdown-item" href="/index">Women's wear</a></li>
 
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <h4><a href="cart.html"><i class="fa fa-shopping-cart">Cart</i></a></h4>
+                        <h4 {%if session.get("cart_count") %} data-count="{{session['cart_count']}}" {%endif%}><a href="/cart"><i class="fa fa-shopping-cart"></i></a></h4>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="order.html">Order</a>
@@ -113,27 +290,30 @@
                 <div class="menu"></div>
                 {% if current_user.is_authenticated %}
                 <h3>{{current_user.username}} <br></h3>
-                <ul>
-                    <li><img src="img/profile-user.png"><a href="profile.html">My profile</a></li>
-                    <li class="nav-item dropdown"><img src="img/settings.png"><a class="nav-link dropdown-toggle"
-                            href="#setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            setting
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="Reset_password.html"><img src="img/reload.png">Reset
-                                    password</a></li>
-                        </ul>
+                    <ul>
+                        <li><img src="//img/profile-user.png"><a href="profile.html">My profile</a></li>
+                        <li class="nav-item dropdown"><img src="//img/settings.png"><a class="nav-link dropdown-toggle"
+                                href="#setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                setting
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="Reset_password.html"><img src="/static/img/reload.png">Reset
+                                        password</a></li>
+                            </ul>
 
-                    </li>
-                    <li><img src="img/logout.png"></i><a href="/logout">Logout</a></li>
-                </ul>
+                        </li>
+                        <li><img src="//img/logout.png"></i><a href="/logout">Logout</a></li>
+                    </ul>
+
+                    
+                    
                 {%endif%}
             </div>
         </div>
         </div>
     </nav><!-- //NAVBAR -->
     {% for message in get_flashed_messages() %}
-    <h2>{{ message }}</h2>
+    <h2 style="color:red">{{ message }}</h2>
     {% endfor %}
     {% block main %}
     {% endblock %}
@@ -144,7 +324,7 @@
                 <div class="container">
                     <div class="row gy-4">
                         <div class="col-lg-4">
-                            <img class="logo" src="img/l1.png" alt="">
+                            <img class="logo" src="/static/img/l1.png" alt="">
                         </div>
                         <div class="col-lg-2">
                             <h5 class="text-white">Brand</h5>
@@ -197,5 +377,99 @@
 
 
 </body>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function menuToggle(){
+            const toggleMenu = document.querySelector('.menu');
+            toggleMenu.classList.toggle('active')
+        }
+    </script>
+    <script type="text/javascript">
+        add_to_cart = (event) => {
+            let nameOfFunction = this[event.target.name];
+            let arg1 = event.target.getAttribute('data-arg');
+            // We can add more arguments as needed...
+            window[nameOfFunction](arg1)
+            // Hope the function is in the window.
+            // Else the respective object need to be used
+            console.log(arg1)
+          }
+        
+    </script>
+    <script type="text/javascript">
+        var noti = document.querySelector('h4');
+        var select = document.querySelector('.select');
+        var button = document.getElementsByTagName('button');
+        var add = Number(noti.getAttribute('data-count')|| 0);
+        if(add>0){
+            noti.classList.add('zero');
+        }
+            
+        for(but of button)
+        {
+            but.addEventListener('click', (e)=>{
+                var add = Number(noti.getAttribute('data-count')|| 0);
 
+                noti.setAttribute('data-count', add + 1);
+                noti.classList.add('zero');
+                //copy and paste//
+                var parent = e.target.parentNode;
+                var clone = parent.cloneNode(true);
+                select.appendChild(clone);
+                clone.lastElementChild.innerText = "Buy-now";
+                if(clone){
+                    noti.onclick =()=>{
+                        select.classList.toggle('display');
+                    }
+                }
+
+                //img//
+                var image = e.target.parentNode.querySelector('img');
+                var span = e.target.parentNode.querySelector('span');
+                //var $_image = image.cloneNode(false);
+                //span.appendChild(s_image);
+                span.classList.add('active');
+                setTimeout(() => {
+                    //span.removeChild(s_image);
+                    span.classList.remove('active');
+                    
+                }, 500);
+                var data = event.target.getAttribute('data-arg');
+                fetch("/cart/add", {
+                    "headers": {
+                      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                      "accept-language": "en-US,en;q=0.9",
+                      "cache-control": "max-age=0",
+                      "content-type": "application/x-www-form-urlencoded",
+                      "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
+                      "sec-ch-ua-mobile": "?0",
+                      "sec-ch-ua-platform": "\"Linux\"",
+                      "sec-fetch-dest": "document",
+                      "sec-fetch-mode": "navigate",
+                      "sec-fetch-site": "same-origin",
+                      "sec-fetch-user": "?1",
+                      "upgrade-insecure-requests": "1"
+                    },
+                    "body": "good_id="+data,
+                    "method": "POST",
+                    "mode": "cors",
+                    "credentials": "include"
+                  });
+            })
+        }
+    
+        
+    </script>
+    <script type="text/javascript">
+        add_to_cart = (event) => {
+            let nameOfFunction = this[event.target.name];
+            let arg1 = event.target.getAttribute('data-arg');
+            // We can add more arguments as needed...
+            window[nameOfFunction](arg1)
+            // Hope the function is in the window.
+            // Else the respective object need to be used
+            console.log(arg1)
+          }
+        
+    </script>
 </html>

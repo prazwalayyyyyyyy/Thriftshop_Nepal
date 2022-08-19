@@ -1,4 +1,5 @@
 import email
+from signal import default_int_handler
 from unicodedata import category
 from app import login #for session
 from email.policy import default
@@ -50,6 +51,21 @@ class Goods(db.Model):
     seller = db.Column(db.Integer, db.ForeignKey('user.id'))
     verifycheck = db.Column(db.Boolean, nullable=False, default=False)
     profit = db.Column(db.Integer)
+    soldstatus = db.Column(db.Boolean, default=False)
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    good_id = db.Column(db.Integer, db.ForeignKey('goods.id'))
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+class Orders(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    # good_id = db.Column(db.Integer, db.ForeignKey('goods.id'))
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    totalbuyprice = db.Column(db.Integer)
+    totalsellprice = db.Column(db.Integer)
+    payment_status = db.Column(db.Boolean, default=False)
 
 #flasklogin keeps track of logged user by storing identifier unique in flask's user session. each time logged user nagicates page, flasklogin retrieve ID of user from session and load in memory
 #FLASK-login dont know about the db. so need app's help in loading user.so app will configure user loader function that can be called to load user given ID

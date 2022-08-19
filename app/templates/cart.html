@@ -8,42 +8,23 @@
     <h1>shopping-cart</h1>
     <div class="pro">
         <div class="shop">
+            {% for good in goods %}
             <div class="box">
-                <img src="img/lehenga.jpeg" alt="">
+                <img src="images/{{good.photo}}" alt="">
                 <div class="content">
-                    <h3>Women Lehenga</h3>
-                    <h4>Price:$40</h4>
+                    <h3>{{good.name}}</h3>
+                    <h4>Price:{{good.sell_price}}</h4>
+                    <h4>Category:{{good.category}}</h4>
+                    <h4>Condition:{{good.condition}}</h4>
                     <p class="unit">Quantity:<input value="1"></p>
                     <p class="btn-area">
                         <i class="fa fa-trash"></i>
-                        <span class="btn2">Remove</span>
+                        <span class="btn2"><a href='/cart/delete/{{good.id}}'>REMOVE</a></span>
                     </p>
                 </div>
             </div>
-            <div class="box">
-                <img src="img/skirt.jpg" alt="">
-                <div class="content">
-                    <h3>Women Skirt</h3>
-                    <h4>Price:$10</h4>
-                    <p class="unit">Quantity:<input value="1"></p>
-                    <p class="btn-area">
-                        <i class="fa fa-trash"></i>
-                        <span class="btn2">Remove</span>
-                    </p>
-                </div>
-            </div>
-            <div class="box">
-                <img src="img/men_jean_pant1.jpg" alt="">
-                <div class="content">
-                    <h3>men jeans pant </h3>
-                    <h4>Price:$10</h4>
-                    <p class="unit">Quantity:<input value="0"></p>
-                    <p class="btn-area">
-                        <i class="fa fa-trash"></i>
-                        <span class="btn2">Remove</span>
-                    </p>
-                </div>
-            </div>
+           
+            {%endfor%}
         </div>
         <div class="right-bar">
             <p><span>Subtotal</span><span>$40</span></p>

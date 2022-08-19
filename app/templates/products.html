@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+
+<!-- men's product -->
+<div>
+    <center>
+        <h1>Products</h1>
+    </center>
+</div>
+<section id="men">
+    <div class="container-fluid">
+        <center>
+            <h1>Men's Wear</h1>
+        </center>
+        <div class="row">
+            {%for good in male_goods %}
+            <div class="col-lg-4 col-sm-6">
+                
+                <div class="card" style="width: 18rem;">
+                    <img src="images/{{good.photo}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{good.name}}</h5>
+                        <h6 class="card-price">{{good.sell_price}}</h6>
+                        <p class="card-details">Condition: {{good.condition}}</p>
+                    </div>
+                    <div class="card-bodylink">
+                        <span></span>
+                        <button type="submit" onClick="add_to_cart" data-arg={{good.id}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
+
+                    </div>
+                </div>
+                
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</section>
+
+</section><!-- women's product -->
+<section id="women">
+    <div class="container-fluid">
+        <center>
+            <h1>Women's Wear</h1>
+        </center>
+        <div class="row ">
+            {% for good in female_goods %}
+            <div class="col-lg-4 col-sm-6">
+                
+                <div class="card" style="width: 18rem;">
+                    <img src="images/{{good.photo}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{good.name}}</h5>
+                        <h6 class="card-price">{{good.sell_price}}</h6>
+                        <p class="card-details">Condition: {{good.condition}}</p>
+                    </div>
+                    <div class="card-bodylink">
+                        <span></span>
+                        <button type="submit" onClick="add_to_cart" data-arg={{good.id}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
+
+                    </div>
+                </div>
+                
+            </div>
+        {%endfor%}
+    </div>
+</section><!-- women's product -->
+<div class="select">
+
+</div>
+
+
+
+
+
+
+{%endblock%}
