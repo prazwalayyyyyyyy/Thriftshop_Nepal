@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<!----ordered Items-->
+<div class="table">
+    <div class="table_header">
+        <p>{{action}} Items</p>
+            
+    </div>
+    <div class="table_section">
+        <center>
+            <table>
+                <thead>
+                    <tr>
+                        <th>SNO.</th>
+                        <th>Order buyer_id</th>
+                        <th>Order buyprice</th>
+                        <th>Order sellprice</th>
+                        
+                        <th>Profit</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for order in orders %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{order.buyer_id}}</td>
+                        <td> {{order.totalbuyprice}}</td>
+                        <td>{{order.totalsellprice}}</td>
+                        <td>{{order.totalsellprice - order.totalbuyprice}}</td>
+                       
+                        <td>{%if not order.payment_status%}<a href='/admin/orders/approve/{{order.oid}}' class="btn btn-primary">Approve</a> {%endif%}
+                            <a class="btn btn-danger" href="/admin/cancel/order/{{order.oid}}">Cancel</a></td>
+
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </center>
+    </div>
+</div>
+
+{% endblock %}
