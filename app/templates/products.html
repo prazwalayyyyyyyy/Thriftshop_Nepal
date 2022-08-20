@@ -30,7 +30,7 @@
                         {% if good.gid in cart_goods%}
                         <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>
                         {%elif not current_user.is_authenticated or current_user.user_type not in ['buyer'] %}
-                        <a  href="{{url_for('login', not_allowed=True)}}"ata-arg={{good.gid}} name="cart_disabled" class="btn btn-danger">Add to Cart</a>
+                        <a  href="{{url_for('login', not_allowed=True)}}" data-arg={{good.gid}} name="cart_disabled" class="btn btn-danger">Add to Cart</a>
                         
                         {%else%}
                         <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
