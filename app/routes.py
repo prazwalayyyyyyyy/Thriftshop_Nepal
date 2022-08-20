@@ -3,22 +3,27 @@ from fileinput import filename
 from functools import reduce
 # from msilib.schema import Condition
 from unicodedata import category
-# from turtle import pos
-from flask import jsonify, render_template, flash, redirect, send_file, url_for, session
-from importlib_metadata import method_cache
-from app import app
-from app.forms import EditUserForm, GoodsForm, LoginForm
-from flask_login import current_user, login_required, login_user
-from app.models import Cart, Goods, Orders, User
-from flask_login import logout_user
-from flask import request  # for next page after login
-from werkzeug.utils import secure_filename
-from werkzeug.urls import url_parse  # next page after login
-from app import db
-from app.forms import RegistrationForm
 
+# from turtle import pos
+from flask import request  # for next page after login
+from flask import (Blueprint, current_app, flash, jsonify, redirect,
+                   render_template, send_file, session, url_for)
+from flask_login import current_user, login_required, login_user, logout_user
+from importlib_metadata import method_cache
+from werkzeug.urls import url_parse  # next page after login
+from werkzeug.utils import secure_filename
+
+from app import app, db
+# from app.admin import admin_permission_required
+from app.forms import EditUserForm, GoodsForm, LoginForm, RegistrationForm
+from app.models import Cart, Goods, Orders, User
+
+admin = app
+redirect_maps = {"seller": "create_goods",
+                             "admin": "admin_pending_approvals", "buyer": "index"}
 
 @app.route('/')
+# @admin_permission_required
 def frontpage():
     return render_template('index.html')
 
@@ -39,6 +44,11 @@ def calculate_cart():
         carts = Cart.query.filter_by(
             buyer_id=current_user.id, checkout_status=False)
         session['cart_count'] = len(carts.all())
+    if '/admin' in request.path:
+        if current_user.user_type != "admin":
+            flash("Not Authorized")
+            return redirect( url_for(redirect_maps.get(current_user.user_type)))
+        # return redirect(url_for('index'))
 
 @app.route('/index')
 # @login_required #doesnt allow users not logged in to view contents and add next redirection to ntercept user's request and reach there after they logged in
@@ -48,9 +58,15 @@ def index():
 
     male_goods = Goods.query.filter_by(category="Male", soldstatus=False)
     female_goods = Goods.query.filter_by(category="Female", soldstatus=False)
-    cart_goods = db.session.query(Goods).join(Cart).filter(Goods.gid == Cart.good_id, Cart.checkout_status ==
+    if  current_user.is_authenticated:
+        cart_goods = db.session.query(Goods).join(Cart).filter(Goods.gid == Cart.good_id, Cart.checkout_status ==
                                                       False, Goods.soldstatus == False, Cart.buyer_id == current_user.id).all()
-    cart_goods = [good.gid for good in cart_goods]
+        cart_goods = [good.gid for good in cart_goods]
+    else:
+        cart_goods=[]
+    if current_user.user_type == "admin":
+        
+        return redirect( url_for(redirect_maps.get(current_user.user_type)))
     return render_template('products.html', title='Home', male_goods=male_goods.all(), female_goods=female_goods.all(), cart_goods = cart_goods)
 
 
@@ -59,7 +75,7 @@ def login():
     #
     if current_user.is_authenticated:
         redirect_maps = {"seller": "create_goods",
-                         "admin": "pending_items", "buyer": "index"}
+                         "admin": "admin_pending_approvals", "buyer": "index"}
         next_page = url_for(redirect_maps.get(current_user.user_type))
         return redirect(next_page)
     form = LoginForm()
@@ -72,7 +88,7 @@ def login():
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             redirect_maps = {"seller": "create_goods",
-                             "admin": "pending_items", "buyer": "index"}
+                             "admin": "admin_pending_approvals", "buyer": "index"}
             next_page = url_for(redirect_maps.get(current_user.user_type))
         carts = Cart.query.filter_by(
             buyer_id=current_user.id, checkout_status=False)
@@ -85,7 +101,7 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('frontpage'))
+    return redirect(url_for('index'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -185,6 +201,11 @@ def edit_goods(id):
 @app.route("/cart/<action>", methods=["GET", "POST"])
 @login_required
 def cart(action="s", good_id=0):
+    if not current_user.is_authenticated:
+        return redirect(url_for('login')),302
+    if current_user.user_type in ['admin','seller']:
+        flash("User not registered as buyer")
+        return redirect(url_for('index'))
     if request.method == "POST":
         if action == "add":
             good_id = request.form.get("good_id")
@@ -271,4 +292,60 @@ def verify_goods():
     goods = Goods.query.all()
     return render_template('verify_goods.html', goods=goods)
 
-#
+
+
+
+
+
+
+
+@admin.before_request
+def ensure_admin():
+    if not current_user.is_authenticated :
+        flash("Not Authorized")
+        return current_app.login_manager.unauthorized()
+    elif not current_user.user_type in ['admin']:
+        flash("Not Authorized")
+        return current_app.login_manager.unauthorized()
+
+@admin.route('/')
+def admin_index():
+    return "Hello"
+
+
+@admin.route('/admin/goods/delete/<id>')
+def admin_delete_goods(id):
+    good = Goods.query.filter_by(gid=id).delete()
+
+    db.session.commit()
+    return redirect(url_for('index'))
+
+@admin.route('/admin/goods/approve/<id>')
+def admin_approve(id):
+    good = Goods.query.filter_by(gid=id).first()
+    buyprice = good.buy_price
+    # import pdb;pdb.set_trace()
+    price_condition={"New":0.07, "Used Many times":0.03, "Good":0.05}
+    good.sell_price = buyprice + price_condition.get(good.condition,0.05)*buyprice
+    good.verifycheck=True
+    db.session.add(good)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
+@admin.route('/admin/goods/<action>')
+@admin.route('/admin/goods/')
+
+def admin_pending_approvals(action="pending"):
+    if action == "pending":
+        goods = Goods.query.filter_by(soldstatus=False, verifycheck=False).all()
+    elif action=="approved":
+        goods = Goods.query.filter_by(soldstatus=False, verifycheck=True).all()
+    elif action=="sold":
+        goods = Goods.query.filter_by(soldstatus=True).all()
+    # buyprice = good.buy_price
+    # price_condition={"New":0.07, "Used Many times":0.03, "Good":0.05}
+    # good.sell_price = buyprice + price_condition.get(good.condition,0.05)*buyprice
+    # db.session.add(good)
+    # db.session.commit()
+    return render_template("admin_approveitems.html", goods=goods, action=action)
