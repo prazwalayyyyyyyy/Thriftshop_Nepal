@@ -128,6 +128,7 @@ def create_goods():
     # return ""
     form = GoodsForm()
 
+
     if request.method == 'POST' and form.validate_on_submit() and current_user.user_type in ['seller', 'admin']:
         filename = secure_filename(form.photo.data.filename)
         form.photo.data.save('uploads/'+filename)
@@ -135,13 +136,14 @@ def create_goods():
         gds = Goods(photo=filename, name=form.name.data, seller=current_user.id,
                     buy_price=form.buy_price.data, condition=form.condition.data, category=form.category.data)
         db.session.add(gds)
-
         db.session.commit()
         return redirect(url_for('pending_items'))
     if current_user.user_type in ['buyer']:
         flash('You are not Authorized to perform this operation')
         return redirect(url_for('.index'))
-    return render_template('additem.html', form=form)
+
+    goods = Goods.query.filter_by(seller=current_user.id)
+    return render_template('additem.html',goods=goods.all(), form=form)
 
 
 @app.route('/images/<filename>')
@@ -171,11 +173,17 @@ def approved_items():
 def payment_details():
     return render_template('paymentdetail.html')  # form=form
 
+@app.route('/goods/editModal/<id>', methods=['GET', 'POST'])
+@login_required
+def edit_goods_modal(id):
+    good = Goods.query.filter_by(gid=id).first()
+    return render_template('editItemModal.html', good=good)
 
 @app.route('/goods/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_goods(id):
     good = Goods.query.filter_by(gid=id).first()
+#     return render_template('editItemModal.html', good=good)
     # user = User.query.filter_by(username=form.username.data).first()
     if good.creater.username != current_user.username and current_user.user_type != 'admin':
         flash('You are not Authorized to perform edit operation')
@@ -189,7 +197,7 @@ def edit_goods(id):
             filename = secure_filename(form.photo.data.filename)
             form.photo.data.save('uploads/'+filename)
             post_data.update(photo=filename)
-        gds = Goods.query.filter_by(id=id).update(post_data)
+        gds = Goods.query.filter_by(gid=id).update(post_data)
         db.session.commit()
         flash('Successfully edited')
         return redirect(url_for(session.get('redirect_to', 'index')))
@@ -276,14 +284,10 @@ def edit_users(id):
     return render_template('editusers.html', form=form)
 
 
-@app.route('/users/<username>')
-def get_users(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    good = [
-        {'seller': user, 'body': 'Test good #1'},
-        {'seller': user, 'body': 'Test good #2'}
-    ]
-    return render_template('user.html', users=user, goods=good)
+@app.route('/user/<username>')
+def get_user(username):
+    users = User.query.filter_by(id=current_user.id).first()
+    return render_template('user.html', users=users)
 
 
 def admin_permission_required(func):

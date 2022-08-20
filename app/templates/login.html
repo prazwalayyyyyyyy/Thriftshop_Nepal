@@ -4,22 +4,23 @@
 
 <!-----login -->
 <section id="Login">
-  <div class="container">
-    <h6 class="text-primary">login here</h6>
-    <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center">
-      <div class="logo">
-        <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
-      </div>
-    </div>
-  </div>
 
   <form class="rounded bg-white shadow p-5" method="POST">
+    <div class="container mt-5 mb-3 ps-3">
+      <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center register_padding  mb-3">
+        <div class="logo">
+          <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
+        </div>
+      </div>
+      <h3 class="text-success register_padding">Login</h3>
+    </div>
     {{ form.hidden_tag() }}
-    <h3 class="text-dark fw-bolder fs-4 mb-2">Have an account</h3>
-    <div class="text-center text-muted text-uppercase mb-2">or</div>
-    <a href="#" class="btn btn-light login_with w-100 mb-4">
-      <img src="/static/img/goggle-icon.png" class="/static/img-fluid me-3">login in with google</a>
-    </a>
+    <h3 class="text-secondary fw-bolder fs-4 mb-4 register_padding font-size-head">Have an account ? Login here</h3>
+<!--    <div class="text-center text-muted text-uppercase mb-2">or</div>-->
+<!--    <a href="#" class="btn btn-light login_with w-100 mb-4">-->
+<!--      <img src="/static/img/goggle-icon.png" class="/static/img-fluid me-3">login in with google</a>-->
+<!--    </a>-->
+    <div class="container d-flex justify-content-center">
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
       <label fpr="floatingFirstname">{{ form.username.label }}</label>
@@ -28,6 +29,7 @@
       {% endfor %}
     </div>
     </div>
+    <div class="container d-flex justify-content-center">
     <div class="form-floating mb-3">
       <input type="Password" class="form-control" id="password" name="password" placeholder="enter Password">
       <label fpr="floatingPassword">{{ form.password.label }}</label>
@@ -35,7 +37,10 @@
       <span style="color: red;">[{{ error }}]</span>
       {% endfor %}
     </div>
-    <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Login</button>
+    </div>
+    <div class="col-md-12 d-flex justify-content-center m-5">
+    <button type="submit" class="btn btn-outline-danger">Log in</button>
+    </div>
   </form>
   </div>
   </div>

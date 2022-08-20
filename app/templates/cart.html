@@ -3,10 +3,14 @@
 {% block main %}
 
 <!--cart item-->
-
-<div class="wrapper">
-    <h1>shopping-cart</h1>
-    <div class="pro">
+<style>
+    .cartButton{
+        border-radius: 10px;
+    }
+</style>
+<div class="wrapper text-center mt-5">
+    <h1 class="text-info">Shopping Cart</h1>
+    <div class="pro mt-5">
         <div class="shop">
             {% for good in goods %}
             <div class="box">
@@ -26,7 +30,8 @@
            
             {%endfor%}
         </div>
-        <div class="right-bar">
+        <div class="right-bar m-5">
+            <hr>
             <p><span>Subtotal</span><span>$40</span></p>
             <hr>
             <p><span>Tax(5%)</span><span>$6</span></p>
@@ -37,8 +42,9 @@
             <hr>
             <p><span>Total</span><span>$57</span></p>
 
-
-            <a href="/checkout"><i class="fa fa-shopping-cart"></i>Checkout</a>
+            <div class="container mt-5 ">
+            <a href="/checkout"><button class="btn btn-outline-success cartButton"><i class="fa fa-shopping-cart"></i>Checkout</button></a>
+            </div>
         </div>
     </div>
 </div>

@@ -44,6 +44,25 @@ img {
 .logo {
     width: 160px;
 }
+input{
+    width: 150% !important;
+}
+input[type = password]{
+    width: 150% !important;
+}
+input[type = select]{
+    width: 10% !important;
+}
+
+.register_padding{
+    padding-left: 80px;
+}
+.font-size-head{
+    font-size: medium !important;
+}
+.font-size-mid{
+    font-size: small !important;
+}
 
 .navbar .nav-link {
     font-size: 14px;
@@ -55,9 +74,9 @@ img {
 }
 
 .btn {
-    padding: 14px 18px;
+    padding: 8px 8px;
     border-width: 2px;
-    border-radius: 0;
+    border-radius: 10px;
 }
 
 .hero {
