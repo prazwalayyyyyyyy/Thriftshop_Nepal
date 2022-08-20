@@ -189,7 +189,7 @@ def edit_goods(id):
             filename = secure_filename(form.photo.data.filename)
             form.photo.data.save('uploads/'+filename)
             post_data.update(photo=filename)
-        gds = Goods.query.filter_by(id=id).update(post_data)
+        gds = Goods.query.filter_by(gid=id).update(post_data)
         db.session.commit()
         flash('Successfully edited')
         return redirect(url_for(session.get('redirect_to', 'index')))

@@ -33,11 +33,11 @@
                         <td>{{good.category}}</td>
                         <td>{{good.condition}}</td>
                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#additem">
+                                data-bs-target="#additem-{{good.gid}}">
                                 Edit Item
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade" id="additem" tabindex="-1" aria-labelledby="additemLabel"
+                            <div class="modal fade" id="additem-{{good.gid}}" tabindex="-1" aria-labelledby="additemLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
