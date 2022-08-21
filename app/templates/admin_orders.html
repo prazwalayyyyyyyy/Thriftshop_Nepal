@@ -14,6 +14,9 @@
                 <th>Buying Price</th>
                 <th>Selling Price</th>
                 <th>Profit</th>
+                {%if  action != "approved"%}
+                <th>Actions</th>
+                {%endif%}
             </tr>
             </thead>
             <tbody>
@@ -24,6 +27,11 @@
                 <td> {{order.totalbuyprice | round(2, 'floor')}}</td>
                 <td>{{order.totalsellprice  | round(2, 'floor')}}</td>
                 <td>{{order.totalsellprice | round(2, 'floor') - order.totalbuyprice| round(2, 'floor')}}</td>
+                {%if not order.payment_status%}
+                <td><a href='/admin/orders/approve/{{order.oid}}' class="btn btn-primary">Approve</a>
+                    <a class="btn btn-danger" href="/admin/cancel/orders/{{order.oid}}">Cancel</a></td>
+                
+                {%endif%}
 
             </tr>
             {%endfor%}
