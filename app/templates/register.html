@@ -2,100 +2,138 @@
 
 {% block main %}
 
-<section id="Register">
-  <div class="container">
-    <h6 class="text-primary">Register Form</h6>
-    <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center">
-      <div class="logo">
-        <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
-      </div>
+<section id="Register" class="hero " xmlns="http://www.w3.org/1999/html">
+    <div class=" d-flex align-items-center form-width" id="home">
+        <div class="container">
+                <form method="POST" class="rounded hero  form-width p-5">
+                    <div class="container mt-5">
+                        <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center register_padding  mb-3">
+                            <div class="logo">
+                                <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
+                            </div>
+                        </div>
+                        <h3 class="text-danger register_padding">Register Form</h3>
+                    </div>
+                    {{ form.hidden_tag() }}
+                    <h3 class="text-secondary fw-bolder fs-4 mb-2 register_padding font-size-head">Create an Account</h3>
+                    <div class="fw-normal text-muted mb-3 register_padding">
+                        Already have an account?&nbsp;<a href="/login" class="text-warning fw-bold text-decoration-none">Sign in
+                        here</a>
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingFirstname" name="firstname"
+                                   placeholder="enter firstname">
+                            <label for="floatingFirstname">{{ form.firstname.label }}</label>
+                            {% for error in form.firstname.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingLastname" name="lastname"
+                                   placeholder="enter lastname">
+                            <label for="floatingLastname">{{ form.lastname.label }}</label>
+                            {% for error in form.lastname.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
+                            <label for="floatingFirstname">{{ form.username.label }}</label>
+                            {% for error in form.username.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <div class="form-floating mb-3">
+                            <input name="email" id="email" type="email" class="form-control" placeholder="enter Email address">
+                            <label for="floatingEmail">{{ form.email.label }}</label>
+                            {% for error in form.email.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!--      <div class="container d-flex justify-content-center">-->
+                    <!--            <div class="form-floating mb-3">-->
+                    <!--                <input type="Password" name="password" id="password" class="form-control" placeholder="enter Password">-->
+                    <!--                <label for="floatingPassword">{{ form.password.label }}</label>-->
+                    <!--                <span class="password-info mt-2">use more than 8 characters with a mix of letters, number and symbols.</span>-->
+                    <!--                {% for error in form.password.errors %}-->
+                    <!--                <span style="color: red;">[{{ error }}]</span>-->
+                    <!--                {% endfor %}-->
+                    <!--            </div>-->
+                    <!--      </div>-->
+                    <div class="container d-flex justify-content-center">
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="enter Password">
+                            <label for="floatingPassword">{{ form.password.label }}</label>
+                            {% for error in form.password.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password2" name="password2"
+                                   placeholder="enter Password">
+                            <label for="floatingPassword">{{ form.password2.label }}</label>
+                            {% for error in form.password2.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <center>
+                        <div class="col-md-3 ps-5 ms-5">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupSelect01">{{ form.user_type.label }}</label>
+                                <select class="form-select" id="user_type" name="user_type">
+                                    <option selected>choose</option>
+                                    <option value="buyer">As Buyer</option>
+                                    <option value="seller">AS seller</option>
+                                </select>
+                                {% for error in form.user_type.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </center>
+                    {#
+                    <div class="captcha">
+                        <label class="captcha-input">Enter Captcha</label>
+                        <div class="preview"></div>
+                        <div class="captcha-form">
+                            <input type="text" id="captcha-form" placeholder="Enter captcha text">
+                            <button class="captcha-refresh">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    #}
+                    <!--        <div class="row">-->
+                    <!--            <div class="col-md-6">-->
+                    <!--                <p><label for="gridCheck"> I Agree <a href="">Terms and conditions</a></label>-->
+                    <!--                <input class="form-check" type="checkbox" id="gridCheck">-->
+                    <!--                </p>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <div class="col-md-12 d-flex justify-content-center m-5">
+                        <p>
+                            <button type="submit" class="btn btn-outline-success ">Register</button>
+                        </p>
+                        {#
+                        <button type="submit" class="btn btn-outline-success submit_btn w-100 my-4">{{ form.submit() }}</button>
+                        #}
+                    </div>
+                </form>
+        </div>
     </div>
-  </div>
 
-  <form method="POST" class="rounded bg-white shadow p-5">
-    {{ form.hidden_tag() }}
-    <h3 class="text-dark fw-bolder fs-4 mb-2">Create an Account</h3>
-    <div class="fw-normal text-muted mb-3">
-      Already have an account?<a href="#Login" class="text-primary fw-bold text-decoration-none">Sign in here</a>
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="enter firstname">
-      <label fpr="floatingFirstname">{{ form.firstname.label }}</label>
-
-      {% for error in form.firstname.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="lastname" name="lastname" placeholder="enter lastname">
-      <label fpr="floatingLastname">{{ form.lastname.label }}</label>
-      {% for error in form.lastname.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
-      <label fpr="floatingFirstname">{{ form.username.label }}</label>
-      {% for error in form.username.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </div>
-    <div class="form-floating mb-3">
-      <input name="email" id="email" type="email" class="form-control" placeholder="enter Email address">
-      <label fpr="floatingEmail">{{ form.email.label }}</label>
-      {% for error in form.email.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </div>
-    <div class="form-floating mb-3">
-      <input type="Password" name="password" id="password" class="form-control" placeholder="enter Password">
-      <label fpr="floatingPassword">{{ form.password.label }}</label>
-      <span class="password-info mt-2">use more than 8 characters with a mix of letters, number and symobls.</span>
-      {% for error in form.password.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-
-    </div>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="password2" name="password2" placeholder="enter firstname">
-      <label fpr="floatingCpassword">{{ form.password2.label }}</label>
-      {% for error in form.password2.errors %}
-      <span style="color: red;">{{ error }}</span>
-      {% endfor %}
-    </div>
-    <div class="input-group mb-3">
-      <label class="input-group-text" for="inputGroupSelect01">{{ form.user_type.label }}</label>
-      <select class="form-select" id="user_typer" name="user_type">
-        <option selected>choose</option>
-        <option value="buyer">As Buyer</option>
-        <option value="seller">AS seller</option>
-      </select>
-      {% for error in form.user_type.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </div>
-    {# <div class="captcha">
-      <label class="captcha-input">Enter Captcha</label>
-      <div class="preview"></div>
-      <div class="captcha-form">
-        <input type="text" id="captcha-form" placeholder="Enter captcha text">
-        <button class="captcha-refresh">
-          <i class="fa fa-refresh" aria-hidden="true"></i>
-        </button>
-      </div>
-    </div> #}
-    <div class="form-check d-flex align-items-center">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label ms-2" for="gridCheck">
-        I Agree <a href="">Terms and conditions</a>.
-      </label>
-    </div>
-    <p>{{ form.submit() }}</p>
-    {# <button type="submit" class="btn btn-primary submit_btn w-100 my-4">{{ form.submit() }}</button> #}
-  </form>
-  </div>
-  </div>
 </section><!-- registration -->
+
 
 {% endblock %}

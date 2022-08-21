@@ -1,475 +1,769 @@
 <!doctype html>
 <html lang="en">
 
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/css/boxicons.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-        <link rel="stylesheet" href="/static/css/style.css">
-        <script src="/static/js/scripts.js"></script>
-        <style>
-            .nav-item h4 {
-                margin-top:10px;
-                position: relative;
-                cursor:pointer;
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/scripts.js"></script>
+    <style>
+        .action {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+        }
+
+        .action .profile {
+            position: relative;
+            margin-top: 40px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .action .profile img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .action .menu {
+            position: absolute;
+            top: 80px;
+            right: -10px;
+            padding: 10px 20px;
+            background: peachpuff;
+            width: 200px;
+            box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            transition: 0.5;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .action .menu.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .action .menu ::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: 18px;
+            width: 20px;
+            height: 20px;
+            background: peachpuff;
+            transform: rotate(45deg);
+        }
+
+        .action .menu h3 {
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            padding: 20px 0;
+            font-weight: 500;
+            color: #555;
+            line-height: 1.2em;
+        }
+
+        .action .menu h3 span {
+            font-size: 14px;
+            color: black;
+            font-weight: 400;
+        }
+
+        .action .menu ul li {
+            list-style: none;
+            padding: 10px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            direction: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action .menu ul li img {
+            max-width: 20px;
+            margin-right: 10px;
+            opacity: 0.5;
+            transition: 0.5;
+        }
+
+        .action .menu ul li:hover img {
+            opacity: 1;
+        }
+
+        .action .menu ul li a {
+            display: inline-block;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: 0.5;
+        }
+
+        .action .menu ul li:hover a {
+            color: #ff5d94;
+        }
+
+        .nav-item h4 {
+            margin-top: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-item h4:before {
+            content: attr(data-count);
+            position: absolute;
+            color: white;
+            right: 1px;
+            font-size: 15px;
+            text-align: center;
+            top: -12px;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .nav-item h4.zero:before {
+            opacity: 1;
+        }
+
+        .card-bodylink button {
+            background: red;
+            border: none;
+            outline: none;
+            font-weight: bold;
+            color: #fafafa;
+            cursor: pointer;
+        }
+
+        .card-bodylink span {
+            position: absolute;
+            top: 14px;
+            left: 13;
+            width: 300px;
+            height: 186px;
+            display: none;
+        }
+
+        .card-bodylink span img {
+            width: 100%;
+            height: 100px;
+        }
+
+        section div:nth-child(1) > span.active {
+            animation: first 0.5s ease-in;
+            z-index: 2;
+            display: block;
+        }
+
+        section div:nth-child(2) > span.active {
+            animation: second 0.5s ease-in;
+            z-index: 2;
+            display: block;
+        }
+
+        section div:nth-child(3) > span.active {
+            animation: thrid 0.5s ease-in;
+            z-index: 2;
+            display: block;
+        }
+
+        section div:nth-child(4) > span.active {
+            animation: fourth 0.5s ease-in;
+            z-index: 2;
+            display: block;
+        }
+
+        section div:nth-child(5) > span.active {
+            animation: fifth 0.5s ease-in;
+            z-index: 2;
+            display: block;
+        }
+
+        section div:nth-child(6) > span.active {
+            animation: sixth 0.5s ease-in;
+            z-index: 2;
+            display: block;
+        }
+
+        @keyframes first {
+            to {
+                width: 30px;
+                height: 20px;
+                left: 1290px;
+                top: -70px;
             }
-            .nav-item h4:before{
-                content:attr(data-count);
-                position:absolute;
-                color:white;
-                right:1px;
-                font-size: 15px;
-                text-align:center;
-                top:-12px;
-                width:20px;
-                height:20px;
-                background:red;
-                border-radius: 50%;
-                opacity:0;
+        }
+
+        @keyframes seconf {
+            to {
+                width: 30px;
+                height: 20px;
+                left: 1290px;
+                top: -70px;
             }
-    
-            .nav-item h4.zero:before{
-                opacity:1;
+        }
+
+        @keyframes third {
+            to {
+                width: 30px;
+                height: 20px;
+                left: 1290px;
+                top: -70px;
             }
-            .card-bodylink button{
-                background:red;
-                border:none;
-                outline:none;
-                font-weight: bold;
-                color:#fafafa;
-                cursor: pointer;
+        }
+
+        @keyframes fourth {
+            to {
+                width: 30px;
+                height: 20px;
+                left: 1290px;
+                top: -70px;
             }
-            .card-bodylink span{
-                position:absolute;
-                top:14px;
-                left:13;
-                width:300px;
-                height:186px;
-                display:none;
+        }
+
+        @keyframes fifth {
+            to {
+                width: 30px;
+                height: 20px;
+                left: 1290px;
+                top: -70px;
             }
-            .card-bodylink span img{
-                width:100%;
-                height: 100px;
+        }
+
+        @keyframes sixth {
+            to {
+                width: 30px;
+                height: 20px;
+                left: 1290px;
+                top: -70px;
             }
-            section div:nth-child(1)>span.active{
-                animation: first 0.5s ease-in;
-                z-index: 2;
-                display:block;
-            }
-            section div:nth-child(2)>span.active{
-                animation: second 0.5s ease-in;
-                z-index: 2;
-                display:block;
-            }
-            section div:nth-child(3)>span.active{
-                animation: thrid 0.5s ease-in;
-                z-index: 2;
-                display:block;
-            }
-            section div:nth-child(4)>span.active{
-                animation: fourth 0.5s ease-in;
-                z-index: 2;
-                display:block;
-            }
-            section div:nth-child(5)>span.active{
-                animation: fifth 0.5s ease-in;
-                z-index: 2;
-                display:block;
-            }
-            section div:nth-child(6)>span.active{
-                animation: sixth 0.5s ease-in;
-                z-index: 2;
-                display:block;
-            }
-            @keyframes first{
-                to{
-                    width:30px;
-                    height:20px;
-                    left:1290px;
-                    top: -70px;
-                }
-            }
-                @keyframes seconf{
-                to{
-                    width:30px;
-                    height:20px;
-                    left:1290px;
-                    top: -70px;
-                }
-            }
-            @keyframes third{
-                to{
-                    width:30px;
-                    height:20px;
-                    left:1290px;
-                    top: -70px;
-                }
-            }
-            @keyframes fourth{
-                to{
-                    width:30px;
-                    height:20px;
-                    left:1290px;
-                    top: -70px;
-                }
-            }
-            @keyframes fifth{
-                to{
-                    width:30px;
-                    height:20px;
-                    left:1290px;
-                    top: -70px;
-                }
-            }
-            @keyframes sixth{
-                to{
-                    width:30px;
-                    height:20px;
-                    left:1290px;
-                    top: -70px;
-                }
-            }
-            .select{
-                width:60%;
-                height: 580px;
-                background:#222;
-                position:absolute;
-                top:-1000px;
-                left:20%;
-                transition:0.5s;
-                overflow-y:auto;
-                margin:auto;
-            }
-            .select .display{
-                top:10px;
-            }
-            .select div{
-                width:100%;
-                height:200px;
-                display:flex;
-                padding:5px;
-                border:1px solid white;
-                position:relative;
-                margin:5px auto;
-            }
-            .select div img{
-                width:300px;
-                height:100%;
-            }
-            .select div h5{
-                padding:0;
-            }
-            .select div h6{
-                padding:0;
-            }
-            .select div p{
-                padding:0;
-    
-            }
-            .select div h6,
-            .select div button{
-                position:absolute;
-                left:45%;
-                top:50%;
-                color:white;
-            }
-            .select div button{
-                left:60%;
-                top:55%;
-            }
-                .select div span{    
-                display:none;
-    
-    
-            }
-    
-        </style>
-        <title>Thrift Shop buyer</title>
-    </head>
+        }
+
+        .select {
+            width: 60%;
+            height: 580px;
+            background: #222;
+            position: absolute;
+            top: -1000px;
+            left: 20%;
+            transition: 0.5s;
+            overflow-y: auto;
+            margin: auto;
+        }
+
+        .select .display {
+            top: 10px;
+        }
+
+        .select div {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            padding: 5px;
+            border: 1px solid white;
+            position: relative;
+            margin: 5px auto;
+        }
+
+        .select div img {
+            width: 300px;
+            height: 100%;
+        }
+
+        .select div h5 {
+            padding: 0;
+        }
+
+        .select div h6 {
+            padding: 0;
+        }
+
+        .select div p {
+            padding: 0;
+
+        }
+
+        .select div h6,
+        .select div button {
+            position: absolute;
+            left: 45%;
+            top: 50%;
+            color: white;
+        }
+
+        .select div button {
+            left: 60%;
+            top: 55%;
+        }
+
+        .select div span {
+            display: none;
+
+
+        }
+        .nav_fontsize{
+            font-size: large !important;
+
+        }
+
+    </style>
+    <title>Thrift Shop buyer</title>
+</head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img class="logo" src="/static/img/l1.png" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img class="logo" src="/static/img/l1.png" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about">About</a>
-                    </li>
-                    {% if current_user.is_anonymous %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#Register" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Register
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/register">As Seller</a></li>
-                            <li><a class="dropdown-item" href="/register">As Buyer</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/login" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Login
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/login">As Seller</a></li>
-                            <li><a class="dropdown-item" href="/login">As Buyer</a></li>
-                        </ul>
-                    </li>
-                    {%else%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                    {%endif%}
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/index">Home</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="#About">About</a>
+                </li>
+                {% if current_user.is_anonymous %}
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/login">Login</a>
+                </li>
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#Register" role="button" data-bs-toggle="dropdown"-->
+<!--                       aria-expanded="false">-->
+<!--                        Register-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/register">As Seller</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/register">As Buyer</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="/login" role="button" data-bs-toggle="dropdown"-->
+<!--                       aria-expanded="false">-->
+<!--                        Login-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/login">As Seller</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/login">As Buyer</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+                {%else%}
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/logout">Logout</a>
+                </li>
+                {%endif%}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Team</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="#team">Team</a>
+                </li>
+                <!--- seller navigation bar-->
+                {% if current_user.user_type == 'seller' %}
+                <a class="nav-link nav_fontsize" href="/additem">Add </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/pendingitem">Pending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/approveditem">Approved</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/paymentdetail">Payment</a>
+                </li>
+                {%endif%}
 
-                    <!--- seller navigation bar-->
-                    {% if current_user.user_type == 'seller' %}
-                    <a class="nav-link" href="/additem">Add item</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pendingitem">Pending Item</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/approveditem">Approved Item</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/paymentdetail">Payment detail</a>
-                    </li>
-                    {%endif%}
+                <!--- buyer navigation bar-->
+                {% if current_user.user_type == 'buyer' %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav_fontsize dropdown-toggle" href="#product" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Product
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/index#men">Men's wear</a></li>
+                        <li><a class="dropdown-item" href="/index#women">Women's wear</a></li>
 
-                    <!--- buyer navigation bar-->
-                    {% if current_user.user_type == 'buyer' %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#product" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Product
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/index#men">Men's wear</a></li>
-                            <li><a class="dropdown-item" href="/index#women">Women's wear</a></li>
-
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <h4 {%if session.get("cart_count") %} data-count="{{session['cart_count']}}" {%endif%}><a href="/cart"><i class="fa fa-shopping-cart"></i></a></h4>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="order.html">Order</a>
-                    </li>
-                    {%endif%}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <h4 {%if session.get("cart_count") %} data-count="{{session['cart_count']}}" {%endif%}><a
+                        href="/cart"><i class="fa fa-shopping-cart"></i></a></h4>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="order">Order</a>
+                </li>
+                {%endif%}
 
 
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-
-                <div class="menu"></div>
-                {% if current_user.is_authenticated %}
-                <h3>{{current_user.username}} <br></h3>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            {% if current_user.is_authenticated %}
+            <div class="action">
+                <div class="profile" onclick="menuToggle()">
+                    <img src="img/me.jpg">
+                </div>
+                <div class="menu">
+                    {% if current_user.is_authenticated %}
+                    <h3>{{current_user.username}} <br></h3>
                     <ul>
-                        <li><img src="//img/profile-user.png"><a href="profile.html">My profile</a></li>
+                        <li><img src="//img/profile-user.png"><a href="/user/{{current_user.id}}">My profile</a></li>
                         <li class="nav-item dropdown"><img src="//img/settings.png"><a class="nav-link dropdown-toggle"
-                                href="#setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                setting
-                            </a>
+                                                                                       href="#setting" role="button"
+                                                                                       data-bs-toggle="dropdown"
+                                                                                       aria-expanded="false">
+                            setting
+                        </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="Reset_password.html"><img src="/static/img/reload.png">Reset
-                                        password</a></li>
+                                <li><a class="dropdown-item" href="Reset_password.html"><img
+                                        src="/static/img/reload.png">Reset
+                                    password</a></li>
                             </ul>
 
                         </li>
                         <li><img src="//img/logout.png"></i><a href="/logout">Logout</a></li>
                     </ul>
 
-                    
-                    
-                {%endif%}
+
+                    {%endif%}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</nav><!-- //NAVBAR -->
+{% for message in get_flashed_messages() %}
+<script>
+    alert("{{message}}");
+</script>
+<!--<h2 style="color:red">{{ message }}</h2>-->
+{% endfor %}
+{% block main %}
+{% endblock %}
+<!-- about us -->
+<section class="row w-100 py-0 bg-light" id="About">
+    <div class="col-lg-6 col-img"></div>
+    <div class="col-lg-6 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <h6 class="text-primary">About Us</h6>
+                    <h1>Thrift Shop Nepal</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque
+                        fuga
+                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+
+                    <div class="feature d-flex mt-5">
+                        <div class="iconbox me-3">
+                            <i class='bx bxs-comment-edit'></i>
+                        </div>
+                        <div>
+                            <h5>Product</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                        </div>
+                    </div>
+                    <div class="feature d-flex">
+                        <div class="iconbox me-3">
+                            <i class='bx bxs-user-circle'></i>
+                        </div>
+                        <div>
+                            <h5>Seller</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                        </div>
+                    </div>
+                    <div class="feature d-flex">
+                        <div class="iconbox me-3">
+                            <i class='bx bxs-user-circle'></i>
+                        </div>
+                        <div>
+                            <h5>Buyer</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+    </div>
+</section><!-- About us -->
+
+
+<!-- TEAM -->
+<section id="team">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8 mx-auto text-center">
+                <h6 class="text-primary">TEAM</h6>
+                <h1>Meet Our Crew Members</h1>
+                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
+                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+            </div>
         </div>
-    </nav><!-- //NAVBAR -->
-    {% for message in get_flashed_messages() %}
-    <h2 style="color:red">{{ message }}</h2>
-    {% endfor %}
-    {% block main %}
-    {% endblock %}
-
-    <<!----footer-->>
-        <footer>
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row gy-4">
-                        <div class="col-lg-4">
-                            <img class="logo" src="/static/img/l1.png" alt="">
-                        </div>
-                        <div class="col-lg-2">
-                            <h5 class="text-white">Brand</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#product">product</a></li>
-                                <li><a href="#team"></a></li>
-
-                            </ul>
-                        </div>
-                        <div class="col-lg-2">
-                            <h5 class="text-white">More</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="#">FAQ's</a></li>
-                                <li><a href="#">Privacy & Policy</a></li>
-                                <li><a href="#">Warranty</a></li>
-                                <li><a href="#">Shipment</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4">
-                            <h5 class="text-white">Contact</h5>
-                            <ul class="list-unstyled">
-                                <li>Address: kathmandu</li>
-                                <li>Email: Thriftshop.nepal7@gmail.com</li>
-                                <li>Phone: 9812345678</li>
-                            </ul>
-                        </div>
+        <div class="row text-center g-4">
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="static/img/me.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Nirajan Thapa</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=100055312209773"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom py-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="mb-0">© 2020 copyright all right reserved | Designed with <i
-                                    class="bx bx-heart text-danger"></i> by<a class="text-white">Thrift Shop Nepal</a>
-                            </p>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="social-icons">
-                                <a href="#"><i class='bx bxl-facebook'></i></a>
-                                <a href="#"><i class='bx bxl-twitter'></i></a>
-                                <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                            </div>
-                        </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="static/img/aaju.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Aaju Chandra Shrestha</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/kaluaaju01"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
                     </div>
                 </div>
             </div>
-        </footer>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="static/img/aliz.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Aliz Acharya</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="static/img/ishwor.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Ishwor Dhakal</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- TEAM -->
+
+<!-- CONTACT -->
+<!--<section id="contact">-->
+<!--    <div class="container">-->
+<!--        <div class="row mb-5">-->
+<!--            <div class="col-md-8 mx-auto text-center">-->
+<!--                <h6 class="text-primary">CONTACT</h6>-->
+<!--                <h1>Get In Touch</h1>-->
+<!--                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga-->
+<!--                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <form action="" class="row g-3 justify-content-center">-->
+<!--            <div class="col-md-5">-->
+<!--                <input type="text" class="form-control" placeholder="Full Name">-->
+<!--            </div>-->
+<!--            <div class="col-md-5">-->
+<!--                <input type="text" class="form-control" placeholder="Enter E-mail">-->
+<!--            </div>-->
+<!--            <div class="col-md-10">-->
+<!--                <input type="text" class="form-control" placeholder="Enter Subject">-->
+<!--            </div>-->
+<!--            <div class="col-md-10">-->
+<!--                    <textarea name="" id="" cols="30" rows="5" class="form-control"-->
+<!--                              placeholder="Enter Message"></textarea>-->
+<!--            </div>-->
+<!--            <div class="col-md-10 d-grid">-->
+<!--                <button class="btn btn-primary">Contact</button>-->
+<!--            </div>-->
+<!--        </form>-->
+
+<!--    </div>-->
+<!--</section>&lt;!&ndash; CONTACT &ndash;&gt;-->
+<!----footer-->
+<footer>
+    <div class="footer-top">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <img class="logo" src="/static/img/l1.png" alt="">
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="text-white">Brand</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#product">product</a></li>
+                        <li><a href="#team"></a></li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="text-white">More</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">Privacy & Policy</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Shipment</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li>Address: kathmandu</li>
+                        <li>Email: Thriftshop.nepal7@gmail.com</li>
+                        <li>Phone: 9812345678</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2022 copyright all right reserved | Designed with <i
+                            class="bx bx-heart text-danger"></i> by<a class="text-white">Thrift Shop Nepal</a>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 
 </body>
 <script src="/static/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function menuToggle(){
-            const toggleMenu = document.querySelector('.menu');
-            toggleMenu.classList.toggle('active')
-        }
-    </script>
-    <script type="text/javascript">
-        add_to_cart = (event) => {
-            let nameOfFunction = this[event.target.name];
-            let arg1 = event.target.getAttribute('data-arg');
-            // We can add more arguments as needed...
-            window[nameOfFunction](arg1)
-            // Hope the function is in the window.
-            // Else the respective object need to be used
-            console.log(arg1)
-          }
-        
-    </script>
-    <script type="text/javascript">
-        var noti = document.querySelector('h4');
-        var select = document.querySelector('.select');
-        var button = document.getElementsByTagName('button');
-        var add = Number(noti.getAttribute('data-count')|| 0);
-        if(add>0){
+<script>
+    function menuToggle() {
+        const toggleMenu = document.querySelector('.menu');
+        toggleMenu.classList.toggle('active')
+    }
+</script>
+<script type="text/javascript">
+    add_to_cart = (event) => {
+        let nameOfFunction = this[event.target.name];
+        let arg1 = event.target.getAttribute('data-arg');
+        // We can add more arguments as needed...
+        window[nameOfFunction](arg1)
+        // Hope the function is in the window.
+        // Else the respective object need to be used
+        console.log(arg1)
+    }
+
+</script>
+<script type="text/javascript">
+    var noti = document.querySelector('h4');
+    var select = document.querySelector('.select');
+    var button = document.getElementsByTagName('button');
+    var add = Number(noti.getAttribute('data-count') || 0);
+    if (add > 0) {
+        noti.classList.add('zero');
+    }
+
+    for (but of button) {
+        but.addEventListener('click', (e) => {
+            var add = Number(noti.getAttribute('data-count') || 0);
+
+            noti.setAttribute('data-count', add + 1);
             noti.classList.add('zero');
-        }
-            
-        for(but of button)
-        {
-            but.addEventListener('click', (e)=>{
-                var add = Number(noti.getAttribute('data-count')|| 0);
-
-                noti.setAttribute('data-count', add + 1);
-                noti.classList.add('zero');
-                //copy and paste//
-                var parent = e.target.parentNode;
-                var clone = parent.cloneNode(true);
-                select.appendChild(clone);
-                clone.lastElementChild.innerText = "Buy-now";
-                if(clone){
-                    noti.onclick =()=>{
-                        select.classList.toggle('display');
-                    }
+            //copy and paste//
+            var parent = e.target.parentNode;
+            var clone = parent.cloneNode(true);
+            select.appendChild(clone);
+            clone.lastElementChild.innerText = "Buy-now";
+            if (clone) {
+                noti.onclick = () => {
+                    select.classList.toggle('display');
                 }
+            }
 
-                //img//
-                var image = e.target.parentNode.querySelector('img');
-                var span = e.target.parentNode.querySelector('span');
-                //var $_image = image.cloneNode(false);
-                //span.appendChild(s_image);
-                span.classList.add('active');
-                setTimeout(() => {
-                    //span.removeChild(s_image);
-                    span.classList.remove('active');
-                    
-                }, 500);
-                var data = event.target.getAttribute('data-arg');
-                fetch("/cart/add", {
-                    "headers": {
-                      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                      "accept-language": "en-US,en;q=0.9",
-                      "cache-control": "max-age=0",
-                      "content-type": "application/x-www-form-urlencoded",
-                      "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
-                      "sec-ch-ua-mobile": "?0",
-                      "sec-ch-ua-platform": "\"Linux\"",
-                      "sec-fetch-dest": "document",
-                      "sec-fetch-mode": "navigate",
-                      "sec-fetch-site": "same-origin",
-                      "sec-fetch-user": "?1",
-                      "upgrade-insecure-requests": "1"
-                    },
-                    "body": "good_id="+data,
-                    "method": "POST",
-                    "mode": "cors",
-                    "credentials": "include"
-                  });
-            })
-        }
-    
-        
-    </script>
-    <script type="text/javascript">
-        add_to_cart = (event) => {
-            let nameOfFunction = this[event.target.name];
-            let arg1 = event.target.getAttribute('data-arg');
-            // We can add more arguments as needed...
-            window[nameOfFunction](arg1)
-            // Hope the function is in the window.
-            // Else the respective object need to be used
-            console.log(arg1)
-          }
-        
-    </script>
+            //img//
+            var image = e.target.parentNode.querySelector('img');
+            var span = e.target.parentNode.querySelector('span');
+            //var $_image = image.cloneNode(false);
+            //span.appendChild(s_image);
+            span.classList.add('active');
+            setTimeout(() => {
+                //span.removeChild(s_image);
+                span.classList.remove('active');
+
+            }, 500);
+            var data = event.target.getAttribute('data-arg');
+            fetch("/cart/add", {
+                "headers": {
+                    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                    "accept-language": "en-US,en;q=0.9",
+                    "cache-control": "max-age=0",
+                    "content-type": "application/x-www-form-urlencoded",
+                    "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": "\"Linux\"",
+                    "sec-fetch-dest": "document",
+                    "sec-fetch-mode": "navigate",
+                    "sec-fetch-site": "same-origin",
+                    "sec-fetch-user": "?1",
+                    "upgrade-insecure-requests": "1"
+                },
+                "body": "good_id=" + data,
+                "method": "POST",
+                "mode": "cors",
+                "credentials": "include"
+            });
+        })
+    }
+
+
+</script>
+<script type="text/javascript">
+    add_to_cart = (event) => {
+        let nameOfFunction = this[event.target.name];
+        let arg1 = event.target.getAttribute('data-arg');
+        // We can add more arguments as needed...
+        window[nameOfFunction](arg1)
+        // Hope the function is in the window.
+        // Else the respective object need to be used
+        console.log(arg1)
+    }
+
+</script>
 </html>
