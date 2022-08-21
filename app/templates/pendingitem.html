@@ -16,7 +16,7 @@
             </div>
             <div class="card-bodylink">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#edititem-{{good.gid}}">
+                    data-bs-target="#edititem-{{good.gid}}">
                     Edit Item
                 </button>
                 <a class="btn btn-danger" href="goods/delete/{{good.gid}}">Delete</a>
@@ -34,35 +34,31 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="edititem-{{good.gid}}" tabindex="-1" aria-labelledby="additemLabel"
-         aria-hidden="true">
+    <div class="modal fade" id="edititem-{{good.gid}}" tabindex="-1" aria-labelledby="additemLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="additemLabel">Edit Items</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body-add">
                     {#{{form.populate_obj(good) }}#}
-                    <form class="rounded bg-white shadow p-5" action="/goods/edit/{{good.gid}}"
-                          method="POST" enctype="multipart/form-data" f;>
+                    <form class="rounded bg-white shadow p-5" action="/goods/edit/{{good.gid}}" method="POST"
+                        enctype="multipart/form-data" f;>
                         {{ form.hidden_tag() }}
                         Product Image
-                        <input type="file" class="form-control"
-                               name="photo" class="photo">
+                        <input type="file" class="form-control" name="photo" class="photo">
                         {% for error in form.photo.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="name"
-                                   value={{good.name}} id="name" placeholder="Enter Product name">
+                            <input type="text" class="form-control" name="name" value={{good.name}} id="name"
+                                placeholder="Enter Product name">
                             <label for="floatingproduct_name">{{ form.name.label }}</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="buy_price"
-                                   value={{good.buy_price}} id="buy_price"
-                                   placeholder="Enter Product Price">
+                            <input type="text" class="form-control" name="buy_price" value={{good.buy_price}}
+                                id="buy_price" placeholder="Enter Product Price">
                             <label for="floatingproduct_price">{{ form.buy_price.label
                                 }}</label>
                         </div>
@@ -70,8 +66,8 @@
                             <label>{{form.label}}</label>
                             <select id="category" name="category" required="">
                                 <option value="Male">Male</option>
-                                <option value="Female" {% if good.category=="Female" %} selected
-                                        {%endif%}>Female</option>
+                                <option value="Female" {% if good.category == "Female" %} selected {%endif%}>Female
+                                </option>
                             </select>
                         </div>
                         <div class="form-floating mb-3">
@@ -79,10 +75,8 @@
                             {{form.condition}}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Close</button>
-                            <button type="submit" name="submit"
-                                    class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
                 </div>
