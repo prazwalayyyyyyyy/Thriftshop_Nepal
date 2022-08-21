@@ -317,6 +317,10 @@
 
 
         }
+        .nav_fontsize{
+            font-size: large !important;
+
+        }
 
     </style>
     <title>Thrift Shop buyer</title>
@@ -337,18 +341,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/index">Home</a>
+                    <a class="nav-link nav_fontsize" href="/index">Home</a>
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#About">About</a>
+                    <a class="nav-link nav_fontsize" href="#About">About</a>
                 </li>
                 {% if current_user.is_anonymous %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link nav_fontsize" href="/register">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link nav_fontsize" href="/login">Login</a>
                 </li>
 <!--                <li class="nav-item dropdown">-->
 <!--                    <a class="nav-link dropdown-toggle" href="#Register" role="button" data-bs-toggle="dropdown"-->
@@ -372,32 +376,32 @@
 <!--                </li>-->
                 {%else%}
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link nav_fontsize" href="/logout">Logout</a>
                 </li>
                 {%endif%}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#team">Team</a>
+                    <a class="nav-link nav_fontsize" href="#team">Team</a>
                 </li>
                 <!--- seller navigation bar-->
                 {% if current_user.user_type == 'seller' %}
-                <a class="nav-link" href="/additem">Add item</a>
+                <a class="nav-link nav_fontsize" href="/additem">Add </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pendingitem">Pending Item</a>
+                    <a class="nav-link nav_fontsize" href="/pendingitem">Pending</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/approveditem">Approved Item</a>
+                    <a class="nav-link nav_fontsize" href="/approveditem">Approved</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/paymentdetail">Payment detail</a>
+                    <a class="nav-link nav_fontsize" href="/paymentdetail">Payment</a>
                 </li>
                 {%endif%}
 
                 <!--- buyer navigation bar-->
                 {% if current_user.user_type == 'buyer' %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#product" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link nav_fontsize dropdown-toggle" href="#product" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         Product
                     </a>
@@ -412,7 +416,7 @@
                         href="/cart"><i class="fa fa-shopping-cart"></i></a></h4>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="order">Order</a>
+                    <a class="nav-link nav_fontsize" href="order">Order</a>
                 </li>
                 {%endif%}
 
@@ -526,7 +530,7 @@
         <div class="row text-center g-4">
             <div class="col-lg-3 col-sm-6">
                 <div class="team-member card-effect">
-                    <img src="img/me.jpg" alt="">
+                    <img src="static/img/me.jpg" alt="">
                     <h5 class="mb-0 mt-4">Nirajan Thapa</h5>
                     <p>Web Developer</p>
                     <div class="social-icons">
@@ -538,7 +542,7 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="team-member card-effect">
-                    <img src="img/aaju.jpg" alt="">
+                    <img src="static/img/aaju.jpg" alt="">
                     <h5 class="mb-0 mt-4">Aaju Chandra Shrestha</h5>
                     <p>Web Developer</p>
                     <div class="social-icons">
@@ -550,7 +554,7 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="team-member card-effect">
-                    <img src="img/aliz.jpg" alt="">
+                    <img src="static/img/aliz.jpg" alt="">
                     <h5 class="mb-0 mt-4">Aliz Acharya</h5>
                     <p>Web Developer</p>
                     <div class="social-icons">
@@ -562,7 +566,7 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="team-member card-effect">
-                    <img src="img/ishwor.jpg" alt="">
+                    <img src="static/img/ishwor.jpg" alt="">
                     <h5 class="mb-0 mt-4">Ishwor Dhakal</h5>
                     <p>Web Developer</p>
                     <div class="social-icons">

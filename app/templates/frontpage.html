@@ -1,482 +1,126 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block main %}
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/style.css">
+{% if current_user.is_anonymous %}
+<div class="hero vh-100 d-flex align-items-center" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto text-center">
+                <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
+                <p class="text-white my-3"> welcome everyone, This is our Online Thrift Shope site, where you can get the vareity of clothes in reasonable price. Thank you!</p>
 
-
-    <title>Thriftshop</title>
-</head>
-
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
-
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img class="logo" src="/static/img/l1.png" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#About">About</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#Register" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Register
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#Register">As Seller</a></li>
-                            <li><a class="dropdown-item" href="#Register">As Buyer</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#Login" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Login
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#Login">As Seller</a></li>
-                            <li><a class="dropdown-item" href="#Login">As Buyer</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#team">Team</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
-    </nav><!-- //NAVBAR -->
+    </div>
+</div>
 
-    <!-- HERO -->
-    <div class="hero vh-100 d-flex align-items-center" id="home">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 mx-auto text-center">
-                    <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
-                    <p class="text-white my-3"> welcome everyone, This is our Online Thrift Shope site, where you can
-                        get the vareity of clothes in reasonable price. Thank you!</p>
+<!-- men's product -->
+<div>
+    <center>
+        <h1 class="text-secondary mt-3">Products</h1>
+    </center>
+</div>
+<section id="men">
+    <div class="container-fluid">
+        <center>
+            <h4 class="text-warning">Men's Wear</h4>
+        </center>
+        <div class="row mt-5">
+            {%for good in male_goods %}
+            <div class="col-lg-4 col-sm-6 pb-5 d-flex justify-content-center">
 
-                </div>
-            </div>
-        </div>
-    </div><!-- //HERO -->
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="/images/{{good.photo}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{good.name}}</h5>
+                        <h6 class="card-price">{{good.sell_price}}</h6>
+                        <p class="card-details">Condition: {{good.condition}}</p>
+                    </div>
+                    <div class="card-bodylink">
+                        <span></span>
+                        {% if good.gid in cart_goods%}
+                        <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>
+                        {%elif not current_user.is_authenticated or current_user.user_type not in ['buyer'] %}
+                        <a  href="{{url_for('login', not_allowed=True)}}" data-arg={{good.gid}} name="cart_disabled" class="btn btn-danger">Add to Cart</a>
 
-    <!-- Registration -->
-    <section id="Register">
-        <div class="container">
-            <h6 class="text-primary">Register Form</h6>
-            <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center">
-                <div class="logo">
-                    <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
-                </div>
-            </div>
-        </div>
-
-        <form class="rounded bg-white shadow p-5">
-            <h3 class="text-dark fw-bolder fs-4 mb-2">Create an Account</h3>
-            <div class="fw-normal text-muted mb-3">
-                Already have an account?<a href="#Login" class="text-primary fw-bold text-decoration-none">Sign in
-                    here</a>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingFirstname" placeholder="enter firstname">
-                <label fpr="floatingFirstname">First Name</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingLastname" placeholder="enter lastname">
-                <label fpr="floatingLastname">Last Name</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingUsername" placeholder="Enter Username">
-                <label fpr="floatingFirstname">Username</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingEmail" placeholder="enter Email address">
-                <label fpr="floatingEmail">Email Address</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="Password" class="form-control" id="floatingPassword" placeholder="enter Password">
-                <label fpr="floatingPassword">Password</label>
-                <span class="password-info mt-2">use more than 8 characters with a mix of letters, number and
-                    symobls.</span>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingCpassword" placeholder="enter firstname">
-                <label fpr="floatingCpassword">Confirm Password</label>
-            </div>
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">User Type</label>
-                <select class="form-select" id="inputGroupSelect01">
-                    <option selected>choose</option>
-                    <option value="1">As Buyer</option>
-                    <option value="2">AS seller</option>
-                </select>
-            </div>
-            <div class="captcha">
-                <label class="captcha-input">Enter Captcha</label>
-                <div class="preview"></div>
-                <div class="captcha-form">
-                    <input type="text" id="captcha-form" placeholder="Enter captcha text">
-                    <button class="captcha-refresh">
-                        <i class="fa fa-refresh" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="form-check d-flex align-items-center">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label ms-2" for="gridCheck">
-                    I Agree <a href="">Terms and conditions</a>.
-                </label>
-            </div>
-            <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Continue</button>
-        </form>
-        </div>
-        </div>
-    </section><!-- registration -->
-    <!-----login -->
-    <section id="Login">
-        <div class="container">
-            <h6 class="text-primary">login here</h6>
-            <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center">
-                <div class="logo">
-                    <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
-                </div>
-            </div>
-        </div>
-
-        <form class="rounded bg-white shadow p-5">
-            <h3 class="text-dark fw-bolder fs-4 mb-2">Have an account</h3>
-            <div class="text-center text-muted text-uppercase mb-2">or</div>
-            <a href="#" class="btn btn-light login_with w-100 mb-4">
-                <img src="/static/img/goggle-icon.png" class="/static/img-fluid me-3">login in with google</a>
-            </a>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingUsername" placeholder="Enter Username">
-                <label fpr="floatingFirstname">Username</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingEmail" placeholder="enter Email address">
-                <label fpr="floatingEmail">Email Address</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="Password" class="form-control" id="floatingPassword" placeholder="enter Password">
-                <label fpr="floatingPassword">Password</label>
-            </div>
-            <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Login</button>
-        </form>
-        </div>
-        </div>
-    </section>
-
-
-    <!-- about us -->
-    <section class="row w-100 py-0 bg-light" id="About">
-        <div class="col-lg-6 col-img"></div>
-        <div class="col-lg-6 py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <h6 class="text-primary">About Us</h6>
-                        <h1>Thrift Shop Nepal</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque
-                            fuga
-                            in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-
-                        <div class="feature d-flex mt-5">
-                            <div class="iconbox me-3">
-                                <i class='bx bxs-comment-edit'></i>
-                            </div>
-                            <div>
-                                <h5>Product</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
-                            </div>
-                        </div>
-                        <div class="feature d-flex">
-                            <div class="iconbox me-3">
-                                <i class='bx bxs-user-circle'></i>
-                            </div>
-                            <div>
-                                <h5>Seller</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
-                            </div>
-                        </div>
-                        <div class="feature d-flex">
-                            <div class="iconbox me-3">
-                                <i class='bx bxs-user-circle'></i>
-                            </div>
-                            <div>
-                                <h5>Buyer</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
-                            </div>
-                        </div>
-
+                        {%else%}
+                        <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
+                        <br>
+                        <br>
+                        {%endif%}
                     </div>
                 </div>
             </div>
+            {%endfor%}
         </div>
-    </section><!-- About us -->
+    </div>
+</section>
 
+</section><!-- women's product -->
+<section id="women">
+    <div class="container-fluid">
+        <center>
+            <h4 class="text-danger">Women's Wear</h4>
+        </center>
+        <div class="row mt-5">
+            {% for good in female_goods %}
+            <div class="col-lg-4 col-sm-6 pb-5 d-flex justify-content-center">
 
-    <!-- TEAM -->
-    <section id="team">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md-8 mx-auto text-center">
-                    <h6 class="text-primary">TEAM</h6>
-                    <h1>Meet Our Crew Members</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="images/{{good.photo}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{good.name}}</h5>
+                        <h6 class="card-price">{{good.sell_price}}</h6>
+                        <p class="card-details">Condition: {{good.condition}}</p>
+                    </div>
+                    <div class="card-bodylink">
+                        <span></span>
+                        {% if good.gid in cart_goods%}
+                        <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-outline-primary">Added to Cart</p>
+                        {%elif not current_user.is_authenticated or current_user.user_type not in ['buyer']%}
+
+                        <a  href="{{url_for('login', not_allowed=True)}}"ata-arg={{good.gid}} name="cart_disabled" class="btn btn-outline-danger">Add to Cart</a>
+                        {%else%}
+                        <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-outline-primary">Add to Cart</button>
+                        {%endif%}
+
+                    </div>
                 </div>
+
             </div>
-            <div class="row text-center g-4">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="team-member card-effect">
-                        <img src="/static/img/me.jpg" alt="">
-                        <h5 class="mb-0 mt-4">Nirajan Thapa</h5>
-                        <p>Web Developer</p>
-                        <div class="social-icons">
-                            <a href="https://www.facebook.com/profile.php?id=100055312209773"><i
-                                    class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-twitter'></i></a>
-                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="team-member card-effect">
-                        <img src="/static/img/aaju.jpg" alt="">
-                        <h5 class="mb-0 mt-4">Aaju Chandra Shrestha</h5>
-                        <p>Web Developer</p>
-                        <div class="social-icons">
-                            <a href="https://www.facebook.com/kaluaaju01"><i class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-twitter'></i></a>
-                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="team-member card-effect">
-                        <img src="/static/img/aliz.jpg" alt="">
-                        <h5 class="mb-0 mt-4">Aliz Acharya</h5>
-                        <p>Web Developer</p>
-                        <div class="social-icons">
-                            <a href="#"><i class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-twitter'></i></a>
-                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="team-member card-effect">
-                        <img src="/static/img/ishwor.jpg" alt="">
-                        <h5 class="mb-0 mt-4">Ishwor Dhakal</h5>
-                        <p>Web Developer</p>
-                        <div class="social-icons">
-                            <a href="#"><i class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-twitter'></i></a>
-                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                        </div>
-                    </div>
-                </div>
+            {%endfor%}
+        </div>
+</section><!-- women's product -->
+
+{% elif current_user.user_type == 'seller' %}
+<div class="seller vh-100 d-flex align-items-center" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto text-center">
+                <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
+                <p class="text-white my-3"> Welcome {{current_user.username}} !</p>
+
             </div>
         </div>
-    </section><!-- TEAM -->
+    </div>
+</div>
 
-    <!-- BLOG -->
-    <section id="blog" class="bg-light">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md-8 mx-auto text-center">
-                    <h6 class="text-primary">BLOG</h6>
-                    <h1>Latest News From The Blog</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="blog-post card-effect">
-                        <img src="/static/img/blog1.jpg" alt="">
-                        <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
-                        <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="blog-post card-effect">
-                        <img src="/static/img/blog2.jpg" alt="">
-                        <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
-                        <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="blog-post card-effect">
-                        <img src="/static/img/blog3.jpg" alt="">
-                        <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
-                        <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
-                    </div>
-                </div>
-            </div>
+<!--{% elif current_user.user_type == 'buyer' %}-->
+{% else %}
+<div class="buyer vh-100 d-flex align-items-center" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto text-center">
+                <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
+                <p class="text-white my-3"> Welcome {{current_user.user_type}}</p>
 
-        </div>
-    </section><!-- BLOG -->
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md-8 mx-auto text-center">
-                    <h6 class="text-primary">CONTACT</h6>
-                    <h1>Get In Touch</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-                </div>
-            </div>
-
-            <form action="" class="row g-3 justify-content-center">
-                <div class="col-md-5">
-                    <input type="text" class="form-control" placeholder="Full Name">
-                </div>
-                <div class="col-md-5">
-                    <input type="text" class="form-control" placeholder="Enter E-mail">
-                </div>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" placeholder="Enter Subject">
-                </div>
-                <div class="col-md-10">
-                    <textarea name="" id="" cols="30" rows="5" class="form-control"
-                        placeholder="Enter Message"></textarea>
-                </div>
-                <div class="col-md-10 d-grid">
-                    <button class="btn btn-primary">Contact</button>
-                </div>
-            </form>
-
-        </div>
-    </section><!-- CONTACT -->
-
-    <footer>
-        <div class="footer-top">
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="col-lg-4">
-                        <img class="logo" src="/static/img/l1.png" alt="">
-                    </div>
-                    <div class="col-lg-2">
-                        <h5 class="text-white">Brand</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#About">About</a></li>
-                            <li><a href="#Register">Register</a></li>
-                            <li><a href="#Login">Login</a></li>
-
-                        </ul>
-                    </div>
-                    <div class="col-lg-2">
-                        <h5 class="text-white">More</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#">FAQ's</a></li>
-                            <li><a href="#">Privacy & Policy</a></li>
-                            <li><a href="#">Warranty</a></li>
-                            <li><a href="#">Shipment</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <h5 class="text-white">Contact</h5>
-                        <ul class="list-unstyled">
-                            <li>Address: kathmandu</li>
-                            <li>Email: Thrift.shop@example.com</li>
-                            <li>Phone: 9812345678</li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="footer-bottom py-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="mb-0">© 2022 copyright all right reserved | Designed with <i
-                                class="bx bx-heart text-danger"></i> by<a
-                                href="https://www.youtube.com/channel/UCYMEEnLzGGGIpQQ3Nu_sBsQ"
-                                class="text-white">Thriftshop</a></p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="social-icons">
-                            <a href="#"><i class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-twitter'></i></a>
-                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script>
-        (function () {
-            const fonts = ["cursive", "sans-serif", "serif", "monospace"];
-            let captchavalue = "";
-            function generatecaptcha() {
-                let value = btoa(math.random() * 1000000000);
-                value = value.substr(0, 5 + math.random() *);
-                captchavalue = value;
-            }
-            function setcaptcha() {
-                captchavalue.split("").map((char) => {
-                    const rotate = math.trunc(math.random() * 30);
-                    const font = math.trunc(math.random() * fonts.length);
-                    return '<span style= "transform:rotate(${rotate}deg);
-                    font - family:${ fonts[foot] }
-                    "
+    </div>
+</div>
 
-                        > ${ char }</span > ';
-                }).join("");
-                document.querySelector(".captcha .preview").innerHTML = html;
-            }
-            function initcaptcha() {
-                document.querySelector(".captcha .captcha-refresh").addEventListener("click", function () {
-                    generatecaptcha();
-                    setcaptcha();
-
-                });
-                generatecaptcha();
-                setcaptcha();
-
-            }
-            initcaptcha();
-            document.querySelector(".login-form #login-btn").addEventListener("click", function () {
-                let inputcaptchavalue = document.querySelector(".login-form .captcha-form .captcha-input").value;
-                if (inputcaptchavalue === captchavalue) {
-                    swal("", "logging In!", "success");
-                }
-                else {
-                    swal("invalid captcha");
-                }
-            });
-        })();
-    </script>
+{% endif %}
 
 
-    <script src="/static/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+{%endblock%}
