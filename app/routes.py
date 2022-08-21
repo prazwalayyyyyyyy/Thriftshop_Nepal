@@ -1,9 +1,13 @@
+import json
 from crypt import methods
 from fileinput import filename
 from functools import reduce, wraps
 # from msilib.schema import Condition
 from unicodedata import category
 
+import pandas as pd
+import plotly
+import plotly.express as px
 # from turtle import pos
 from flask import request  # for next page after login
 from flask import (Blueprint, current_app, flash, jsonify, redirect,
@@ -242,9 +246,11 @@ def cart(action="s", good_id=0):
         db.session.commit()
 
     goods = db.session.query(Goods).join(Cart).filter(
-        Goods.gid == Cart.good_id, Goods.soldstatus == False, Cart.buyer_id == current_user.id, Cart.checkout_status == False)
-
-    return render_template('cart.html', goods=goods)
+        Goods.gid == Cart.good_id, Goods.soldstatus == False, Cart.buyer_id == current_user.id, Cart.checkout_status == False).all()
+    subtotal = sum([float(good.sell_price) for good in goods ])
+    # import pdb; pdb.set_trace()
+    
+    return render_template('cart.html', goods=goods, sellprice=subtotal)
 
 
 @app.route('/goods/delete/<id>')
@@ -279,7 +285,8 @@ def checkout():
     db.session.add(order)
 
     db.session.commit()
-    return render_template('#')
+    flash("Your Checkout has been completed, wait for email for payment confirmation")
+    return redirect(url_for('.index'))
 
 
 @app.route('/users/edit/<id>')
@@ -366,11 +373,11 @@ def admin_pending_approvals(action="pending"):
 @admin_permission_required
 def admin_orders(action="pending"):
     if action == "pending":
-        goods = Orders.query.filter_by(payment_status=False).all()
+        orders = Orders.query.filter_by(payment_status=False).all()
     elif action == "approved":
-        goods = Orders.query.filter_by(spayment_status=False).all()
+        orders = Orders.query.filter_by(payment_status=True).all()
     # cart_goods = db.session.query(Goods, Orders, Cart, User).join(Cart, Cart.good_id == Goods.gid).join(User.id == Orders.buyer_id).all()
-    orders = Orders.query.filter_by(payment_status=False).all()
+    # orders = Orders.query.filter_by(payment_status=False).all()
     # t_carts=[]
     # t_goods=[]
 
@@ -402,6 +409,8 @@ def admin_approve_order(id):
         goods = Goods.query.filter_by(gid=cart.good_id)
         for good in goods:
             good.soldstatus = True
+            profit = good.sell_price - good.buy_price
+            good.profit = profit
             sellers.append(good.seller)
             db.session.add(good)
             db.session.commit()
@@ -435,3 +444,54 @@ def admin_cancel_order(id):
         db.session.add(cart)
     db.session.commit()
     return redirect(url_for('admin_orders'))
+
+
+@admin.route("/admin/dashboard")
+# @admin_permission_required
+def chart1():
+
+    goods = Goods.query.filter_by().all()
+    orders = Orders.query.filter_by().all()
+
+    sold_goods=[good for good in goods if good.soldstatus==True]
+    unsold_goods=[good for good in goods if good.soldstatus==False]
+    male = Goods.query.filter_by(soldstatus=False, category="Male").all()# [good for good in unsold_goods if good.category == "Male"]
+    female = Goods.query.filter_by(soldstatus=False, category="Female").all()# [good for good in unsold_goods if good.category == "Female"]
+
+    df = pd.DataFrame({
+        "Category": ["Male", "Female"],
+        "Count": [len(male), len(female)],
+        "Category": ["Male", "Female"]
+    })
+
+    fig = px.bar(df, x="Category", y="Count", color="Category", barmode="group")
+
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    header="Unsold Products"
+    description = """
+    Product chart
+    """
+    buyer = User.query.filter_by(user_type="buyer").all()
+    seller = User.query.filter_by(user_type="seller").all()
+    user_df =  pd.DataFrame({
+        "values": [len(buyer), len(seller)],
+        "label": ["Buyer", "Seller"]
+        
+    })
+    user_figure = px.pie(user_df, values='values',names='label')
+    userJson = json.dumps(user_figure, cls=plotly.utils.PlotlyJSONEncoder)
+
+    male_profit = Goods.query.filter_by(category="Male", soldstatus=True).all()
+    female_profit=Goods.query.filter_by(category="Female", soldstatus=True).all()
+    mprofit = sum([good.profit for good in male_profit])
+    fprofit = sum([good.profit for good in female_profit])
+
+    profit_df = pd.DataFrame({
+        "values": [mprofit, fprofit],
+        "label": ["Male", "Female"]
+        
+    })
+    profit_figure = px.pie(profit_df, values='values',names='label')
+    profitJson = json.dumps(profit_figure, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template('admin_dashboard.html', graphJSON=graphJSON, header=header,description=description, userJson=userJson, profitJson=profitJson)
+

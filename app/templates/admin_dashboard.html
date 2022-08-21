@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+    <h1>{{header}}</h1>
+    <h6><a href="/">Return to index page</a></h6>
+    <div id="chart" class="chart"></div>
+    <div>{{description}}</div>
+    <hr >
+    <h1>User status</h1>
+    
+    <div id="user" class="chart"></div>
+    <div>User types</div>
+    <hr />
+    <h1>Profit status</h1>
+    
+    <div id="profit" class="chart"></div>
+    <div>Profit status based on goods category</div>
+
+<script type="text/javascript">
+    var graphs = {{graphJSON | safe}};
+    Plotly.plot('chart',graphs,{});    
+    var user_graph = {{userJson | safe}};
+    Plotly.plot('user',user_graph,{});   
+
+    var profit_graph = {{profitJson | safe}};
+    Plotly.plot('profit',profit_graph,{});  
+</script>
+{%endblock%}

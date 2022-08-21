@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    
+    <script src="/static/js/jquery-3.5.1.min.js" ></script>
+    <script src="/static/js/plotly-latest.min.js" ></script>
     <style>
         .action {
             position: fixed;
@@ -395,6 +396,22 @@
                 <li class="nav-item">
                     <a class="nav-link nav_fontsize" href="/paymentdetail">Payment</a>
                 </li>
+                {% elif current_user.user_type == 'admin' %}
+                <a class="nav-link nav_fontsize" href="/admin/dashboard">Dashboard </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/admin/goods">Goods Pending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/admin/goods/sold">Goods sold</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/admin/orders">Orders Pending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/admin/orders/approved">Orders Approved</a>
+                </li>
+                
                 {%endif%}
 
                 <!--- buyer navigation bar-->
@@ -717,7 +734,7 @@
             //copy and paste//
             var parent = e.target.parentNode;
             var clone = parent.cloneNode(true);
-            select.appendChild(clone);
+            //select.appendChild(clone);
             clone.lastElementChild.innerText = "Buy-now";
             if (clone) {
                 noti.onclick = () => {
@@ -762,7 +779,9 @@
 
 
 </script>
+
 <script type="text/javascript">
+
     add_to_cart = (event) => {
         let nameOfFunction = this[event.target.name];
         let arg1 = event.target.getAttribute('data-arg');
