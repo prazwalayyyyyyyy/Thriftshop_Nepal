@@ -33,11 +33,11 @@
                         <td>{{good.category}}</td>
                         <td>{{good.condition}}</td>
                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#additem-{{good.gid}}">
+                                data-bs-target="#additem">
                                 Edit Item
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade" id="additem-{{good.gid}}" tabindex="-1" aria-labelledby="additemLabel"
+                            <div class="modal fade" id="additem" tabindex="-1" aria-labelledby="additemLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -90,20 +90,59 @@
                                             </form>
                                         </div>
 
-                                    </div>
-                                </div>
-                            </div> <a class="btn btn-danger" href="goods/delete/{{good.gid}}">Delete</a>
-                        </td>
-                    </tr>
-                    
-                    {%endfor%}
-
-                </tbody>
-            </table>
-        </center>
+            </div>
+        </div>
     </div>
+    {%endfor%}
 </div>
-c
+
+
+
+<!--<div class="table">-->
+<!--    <div class="table_header">-->
+<!--        <p>Pending Items</p>-->
+<!--    </div>-->
+<!--    <div class="table_section">-->
+<!--        <center>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th>SNO.</th>-->
+<!--                        <th>Product image</th>-->
+<!--                        <th>Product name</th>-->
+<!--                        <th> Product Price</th>-->
+<!--                        <th>Product Category</th>-->
+<!--                        <th>Product Conditon</th>-->
+<!--                        <th>Action</th>-->
+<!--                        &lt;!&ndash; <th>Delete</th> &ndash;&gt;-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                    {%for good in goods %}-->
+<!--                    <tr>-->
+<!--                        <td>{{loop.index}}</td>-->
+<!--                        <td><img src="/images/{{good.photo}}"></td>-->
+<!--                        <td> {{good.name}}</td>-->
+<!--                        <td>{{good.buy_price}}</td>-->
+<!--                        <td>{{good.category}}</td>-->
+<!--                        <td>{{good.condition}}</td>-->
+<!--                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal"-->
+<!--                                data-bs-target="#additem">-->
+<!--                                Edit Item-->
+<!--                            </button>-->
+<!--                             Modal-->
+
+<!--                        </td>-->
+<!--                    </tr>-->
+
+<!--                    {%endfor%}-->
+
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </center>-->
+<!--    </div>-->
+<!--</div>-->
+<!--c-->
 
 
 <!---Pending Items end-->

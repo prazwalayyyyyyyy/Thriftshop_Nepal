@@ -2,35 +2,62 @@
 
 {% block main %}
 <!----Added Items-->
-<div class="table">
-    <div class="table_header">
-        <p>Payment Details</p>
-            
-    </div>
-    <div class="table_section">
-        <center>
-            <table>
-                <thead>
-                    <tr>
-                        <th>SNO.</th>
-                        <th>Product image</th>
-                        <th>Product name</th>
-                        <th>Payment Status</th>
-            
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><img src="img/lehenga.jpeg"></td>
-                        <td> Lehenga</td>
-                        <td>Done</td>
-                       
-                    </tr>
-                </tbody>
-            </table>
-        </center>
-    </div>
+
+<div class="row m-5">
+    <table class="table table-dark mt-5 text-center">
+        <tr>
+            <th>SNO.</th>
+            <th>Product image</th>
+            <th>Product name</th>
+            <th>Product Price</th>
+            <th>Product Category</th>
+            <th>Product Conditon</th>
+            <th>Action</th>
+        </tr>
+
+        {%for good in goods %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td><img src="/images/{{good.photo}}" height="50px" width="10px"></td>
+            <td>{{good.name}}</td>
+            <td>{{good.buy_price}}</td>
+            <td>{{good.category}}</td>
+            <td>{{good.condition}}</td>
+            <td><button class="btn btn-danger"> View</button> </td>
+        </tr>
+        {%endfor%}
+
+    </table>
 </div>
+<!--<div class="table">-->
+<!--    <div class="table_header">-->
+<!--        <p>Payment Details</p>-->
+<!--            -->
+<!--    </div>-->
+<!--    <div class="table_section">-->
+<!--        <center>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th>SNO.</th>-->
+<!--                        <th>Product image</th>-->
+<!--                        <th>Product name</th>-->
+<!--                        <th>Payment Status</th>-->
+<!--            -->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                    <tr>-->
+<!--                        <td>1</td>-->
+<!--                        <td><img src="img/lehenga.jpeg"></td>-->
+<!--                        <td> Lehenga</td>-->
+<!--                        <td>Done</td>-->
+<!--                       -->
+<!--                    </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </center>-->
+<!--    </div>-->
+<!--</div>-->
 
 {% endblock %}
