@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-
+    
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <style>
         .action {
@@ -718,7 +718,7 @@
             //copy and paste//
             var parent = e.target.parentNode;
             var clone = parent.cloneNode(true);
-            select.appendChild(clone);
+            //select.appendChild(clone);
             clone.lastElementChild.innerText = "Buy-now";
             if (clone) {
                 noti.onclick = () => {
@@ -763,7 +763,9 @@
 
 
 </script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript">
+
     add_to_cart = (event) => {
         let nameOfFunction = this[event.target.name];
         let arg1 = event.target.getAttribute('data-arg');
