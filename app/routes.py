@@ -2,6 +2,7 @@ import json
 from crypt import methods
 from fileinput import filename
 from functools import reduce, wraps
+import logging
 # from msilib.schema import Condition
 from unicodedata import category
 
@@ -302,9 +303,10 @@ def edit_users(id):
     return render_template('editusers.html', form=form)
 
 
-@app.route('/user/<username>')
-def get_user(username):
-    users = User.query.filter_by(id=current_user.id).first()
+@app.route('/user')
+@login_required
+def get_user():
+    users = User.query.filter_by(id=current_user.id).all()
     return render_template('user.html', users=users)
 
 
@@ -391,8 +393,13 @@ def admin_orders(action="pending"):
     return render_template("admin_orders.html", orders=orders, action=action)
 
 
-def send_email(emails, type="buyer"):
-    print(emails, type)
+def send_email_helper(emails, type="buyer"):
+    from app.email_util import send_email
+    if type == "buyer":
+        send_email(to=emails, msg="Your order has been approved ", subject="Order success")
+    elif type == "seller":
+        send_email(to=emails,msg="Your product has been sold ", subject="Product sold")
+    return True
 
 
 @admin.route('/admin/orders/approve/<id>')
@@ -405,6 +412,7 @@ def admin_approve_order(id):
     carts = Cart.query.filter_by(buyer_id=order.buyer_id)
     sellers = []
     goods = []
+
     for cart in carts:
         goods = Goods.query.filter_by(gid=cart.good_id)
         for good in goods:
@@ -416,13 +424,20 @@ def admin_approve_order(id):
             db.session.commit()
     buyer = User.query.filter_by(id=order.buyer_id).first()
     buyer_email = buyer.email
-    send_email([buyer_email], "buyer")
+    
     seller_emails = []
     for s in sellers:
         seller = User.query.filter_by(id=s).first()
 
         seller_emails.append(seller.email)
-    send_email(seller_emails, "seller")
+    try:
+        send_email_helper([buyer_email], "buyer")
+    except Exception as e:
+        logging.error("Email send failed %s"%e)
+    try:
+        send_email_helper(seller_emails, "seller")
+    except Exception as e:
+        logging.error("Email send failed %s"%e)
     # buyprice = good.buy_price
     # price_condition={"New":0.07, "Used Many times":0.03, "Good":0.05}
     # good.sell_price = buyprice + price_condition.get(good.condition,0.05)*buyprice
