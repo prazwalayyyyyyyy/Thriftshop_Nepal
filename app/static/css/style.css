@@ -67,6 +67,9 @@ input[type = select]{
 .register_padding{
     padding-left: 80px;
 }
+.registers_padding{
+    padding-left: 70px;
+}
 .image-upload>input {
     display: none;
 }

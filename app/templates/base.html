@@ -25,8 +25,8 @@
         .action .profile {
             position: relative;
             margin-top: 40px;
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             overflow: hidden;
             cursor: pointer;
@@ -45,8 +45,8 @@
             position: absolute;
             top: 80px;
             right: -10px;
-            padding: 10px 20px;
-            background: peachpuff;
+            padding: 5px 10px;
+            background: #b6effb;
             width: 200px;
             box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
@@ -376,10 +376,6 @@
 <!--                        <li><a class="dropdown-item" href="/login">As Buyer</a></li>-->
 <!--                    </ul>-->
 <!--                </li>-->
-                {%else%}
-                <li class="nav-item">
-                    <a class="nav-link nav_fontsize" href="/logout">Logout</a>
-                </li>
                 {%endif%}
 
                 <li class="nav-item">
@@ -418,16 +414,24 @@
                         href="/cart"><i class="fa fa-shopping-cart"></i></a></h4>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav_fontsize" href="order">Order</a>
+                    <a class="nav-link nav_fontsize" href="/order">Order</a>
                 </li>
                 {%endif%}
+                {% if current_user.is_anonymous %}
 
+                {% else %}
+                <li class="nav-item me-2">
+                    <a class="nav-link nav_fontsize" title="Logout" href="/logout"><img src="/static/img/logout.png" style="height: 20px; width: 20px"> </a>
+                </li>
+                {% endif %}
 
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+
+
             {% if current_user.is_authenticated %}
             <div class="action">
                 <div class="profile" onclick="menuToggle()">
@@ -435,23 +439,23 @@
                 </div>
                 <div class="menu">
                     {% if current_user.is_authenticated %}
-                    <h3>{{current_user.username}} <br></h3>
+                    <h3>  Hi {{current_user.username}} <br></h3>
                     <ul>
-                        <li><img src="//img/profile-user.png"><a href="/user/{{current_user.id}}">My profile</a></li>
-                        <li class="nav-item dropdown"><img src="//img/settings.png"><a class="nav-link dropdown-toggle"
+                        <li><img src="static/img/profile.png"><a href="/user/{{current_user.id}}">Profile</a></li>
+                        <li class="nav-item dropdown"><img src="static/img/setting.png"><a class="nav-link dropdown-toggle"
                                                                                        href="#setting" role="button"
                                                                                        data-bs-toggle="dropdown"
                                                                                        aria-expanded="false">
-                            setting
+                            Setting
                         </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="Reset_password.html"><img
                                         src="/static/img/reload.png">Reset
-                                    password</a></li>
+                                    Password</a></li>
                             </ul>
 
                         </li>
-                        <li><img src="//img/logout.png"></i><a href="/logout">Logout</a></li>
+                        <li><img src="static/img/logout.png"></i><a href="/logout">Logout</a></li>
                     </ul>
 
 
