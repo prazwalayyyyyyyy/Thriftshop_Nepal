@@ -7,7 +7,7 @@
         <div class="container">
                 <form method="POST" class="rounded hero  form-width p-5">
                     <div class="container mt-5">
-                        <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center register_padding  mb-3">
+                        <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-lg-3 col-xl-4 offset-xl-4 text-center registers_padding  mb-3">
                             <div class="logo">
                                 <img src="/static/img/l1.png" class="/static/img-fluid" alt="logo">
                             </div>
@@ -92,9 +92,9 @@
                             <div class="input-group mb-3">
                                 <label class="input-group-text" for="inputGroupSelect01">{{ form.user_type.label }}</label>
                                 <select class="form-select" id="user_type" name="user_type">
-                                    <option selected>choose</option>
-                                    <option value="buyer">As Buyer</option>
-                                    <option value="seller">AS seller</option>
+                                    <option selected disabled>Choose</option>
+                                    <option value="buyer">Buyer</option>
+                                    <option value="seller">Seller</option>
                                 </select>
                                 {% for error in form.user_type.errors %}
                                 <span style="color: red;">[{{ error }}]</span>

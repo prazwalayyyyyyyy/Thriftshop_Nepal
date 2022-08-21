@@ -8,13 +8,42 @@
         <div class="row">
             <div class="col-lg-7 mx-auto text-center">
                 <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
-                <p class="text-white my-3"> welcome everyone, This is our Online Thrift Shope site, where you can get the vareity of clothes in reasonable price. Thank you!</p>
+                <p class="text-white my-3"> welcome everyone, This is our Online Thrift Shop site, where you can get the vareity of clothes in reasonable price. Thank you!</p>
 
             </div>
         </div>
     </div>
 </div>
 
+
+{% elif current_user.user_type == 'seller' %}
+<div class="seller vh-100 d-flex align-items-center" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto text-center">
+                <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
+                <h5 class="text-white my-3"> A Bag Full of Second Chances</h5>
+                <p class="text-white my-3"> Welcome {{current_user.username}} !</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% elif current_user.user_type == 'buyer' %}
+<div class="buyer vh-100 d-flex align-items-center" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto text-center">
+                <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
+                <h5 class="text-white my-3"> Where pennies still hold value</h5>
+                <p class="text-white my-3"> Welcome {{current_user.username}}</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
 <!-- men's product -->
 <div>
     <center>
@@ -93,34 +122,6 @@
         </div>
 </section><!-- women's product -->
 
-{% elif current_user.user_type == 'seller' %}
-<div class="seller vh-100 d-flex align-items-center" id="home">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 mx-auto text-center">
-                <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
-                <p class="text-white my-3"> Welcome {{current_user.username}} !</p>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--{% elif current_user.user_type == 'buyer' %}-->
-{% else %}
-<div class="buyer vh-100 d-flex align-items-center" id="home">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 mx-auto text-center">
-                <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
-                <p class="text-white my-3"> Welcome {{current_user.user_type}}</p>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-{% endif %}
 
 
 {%endblock%}
