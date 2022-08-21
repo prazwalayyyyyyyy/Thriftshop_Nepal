@@ -69,7 +69,7 @@ def index():
     if current_user.is_authenticated and current_user.user_type == "admin":
 
         return redirect(url_for(redirect_maps.get(current_user.user_type)))
-    return render_template('products.html', title='Home', male_goods=male_goods.all(), female_goods=female_goods.all(), cart_goods=cart_goods)
+    return render_template('frontpage.html', title='Home', male_goods=male_goods.all(), female_goods=female_goods.all(), cart_goods=cart_goods)
 
 
 @app.route('/login', methods=['GET', 'POST'])
