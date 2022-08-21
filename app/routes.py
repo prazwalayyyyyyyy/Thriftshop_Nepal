@@ -303,9 +303,10 @@ def edit_users(id):
     return render_template('editusers.html', form=form)
 
 
-@app.route('/user/<username>')
-def get_user(username):
-    users = User.query.filter_by(id=current_user.id).first()
+@app.route('/user')
+@login_required
+def get_user():
+    users = User.query.filter_by(id=current_user.id).all()
     return render_template('user.html', users=users)
 
 
