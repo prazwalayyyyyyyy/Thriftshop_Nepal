@@ -333,6 +333,22 @@ def verify_goods():
     goods = Goods.query.all()
     return render_template('verify_goods.html', goods=goods)
 
+@app.route('/search', methods=['GET', 'POST'])
+@login_required
+def search_goods():
+    query = request.args.get('q')
+    if request.method == "POST":
+        query = request.form.get('query')
+
+    if query:
+        query = "%{}%".format(query)
+        goods = Goods.query.filter(Goods.name.like(query), Goods.soldstatus==False).all()
+    else:
+        goods = Goods.query.filter_by(soldstatus=False).all()
+    male_goods = [good for good in goods if good.category=="Male"]
+    female_goods = [good for good in goods if good.category=="Female"]
+    # import pdb; pdb.set_trace()
+    return render_template('frontpage.html', title='Home', male_goods=male_goods, female_goods=female_goods, cart_goods=[])
 
 @admin.route('/admin/goods/delete/<id>')
 def admin_delete_goods(id):
