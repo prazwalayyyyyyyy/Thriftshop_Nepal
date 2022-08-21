@@ -373,11 +373,11 @@ def admin_pending_approvals(action="pending"):
 @admin_permission_required
 def admin_orders(action="pending"):
     if action == "pending":
-        goods = Orders.query.filter_by(payment_status=False).all()
+        orders = Orders.query.filter_by(payment_status=False).all()
     elif action == "approved":
-        goods = Orders.query.filter_by(payment_status=True).all()
+        orders = Orders.query.filter_by(payment_status=True).all()
     # cart_goods = db.session.query(Goods, Orders, Cart, User).join(Cart, Cart.good_id == Goods.gid).join(User.id == Orders.buyer_id).all()
-    orders = Orders.query.filter_by(payment_status=False).all()
+    # orders = Orders.query.filter_by(payment_status=False).all()
     # t_carts=[]
     # t_goods=[]
 
