@@ -334,7 +334,6 @@ def verify_goods():
     return render_template('verify_goods.html', goods=goods)
 
 @app.route('/search', methods=['GET', 'POST'])
-@login_required
 def search_goods():
     query = request.args.get('q')
     if request.method == "POST":
