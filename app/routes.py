@@ -482,7 +482,7 @@ def chart1():
     userJson = json.dumps(user_figure, cls=plotly.utils.PlotlyJSONEncoder)
 
     male_profit = Goods.query.filter_by(category="Male", soldstatus=True).all()
-    female_profit=Goods.query.filter_by(category="Feale", soldstatus=True).all()
+    female_profit=Goods.query.filter_by(category="Female", soldstatus=True).all()
     mprofit = sum([good.profit for good in male_profit])
     fprofit = sum([good.profit for good in female_profit])
 
