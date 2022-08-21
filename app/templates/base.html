@@ -339,8 +339,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/index">Home</a>
                 </li>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
+                    <a class="nav-link" href="#About">About</a>
                 </li>
                 {% if current_user.is_anonymous %}
                 <li class="nav-item">
@@ -376,7 +377,7 @@
                 {%endif%}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Team</a>
+                    <a class="nav-link" href="#team">Team</a>
                 </li>
                 <!--- seller navigation bar-->
                 {% if current_user.user_type == 'seller' %}
@@ -463,7 +464,151 @@
 {% endfor %}
 {% block main %}
 {% endblock %}
+<!-- about us -->
+<section class="row w-100 py-0 bg-light" id="About">
+    <div class="col-lg-6 col-img"></div>
+    <div class="col-lg-6 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <h6 class="text-primary">About Us</h6>
+                    <h1>Thrift Shop Nepal</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque
+                        fuga
+                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
 
+                    <div class="feature d-flex mt-5">
+                        <div class="iconbox me-3">
+                            <i class='bx bxs-comment-edit'></i>
+                        </div>
+                        <div>
+                            <h5>Product</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                        </div>
+                    </div>
+                    <div class="feature d-flex">
+                        <div class="iconbox me-3">
+                            <i class='bx bxs-user-circle'></i>
+                        </div>
+                        <div>
+                            <h5>Seller</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                        </div>
+                    </div>
+                    <div class="feature d-flex">
+                        <div class="iconbox me-3">
+                            <i class='bx bxs-user-circle'></i>
+                        </div>
+                        <div>
+                            <h5>Buyer</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- About us -->
+
+
+<!-- TEAM -->
+<section id="team">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8 mx-auto text-center">
+                <h6 class="text-primary">TEAM</h6>
+                <h1>Meet Our Crew Members</h1>
+                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
+                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+            </div>
+        </div>
+        <div class="row text-center g-4">
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="img/me.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Nirajan Thapa</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=100055312209773"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="img/aaju.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Aaju Chandra Shrestha</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/kaluaaju01"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="img/aliz.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Aliz Acharya</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="team-member card-effect">
+                    <img src="img/ishwor.jpg" alt="">
+                    <h5 class="mb-0 mt-4">Ishwor Dhakal</h5>
+                    <p>Web Developer</p>
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- TEAM -->
+
+<!-- CONTACT -->
+<!--<section id="contact">-->
+<!--    <div class="container">-->
+<!--        <div class="row mb-5">-->
+<!--            <div class="col-md-8 mx-auto text-center">-->
+<!--                <h6 class="text-primary">CONTACT</h6>-->
+<!--                <h1>Get In Touch</h1>-->
+<!--                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga-->
+<!--                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <form action="" class="row g-3 justify-content-center">-->
+<!--            <div class="col-md-5">-->
+<!--                <input type="text" class="form-control" placeholder="Full Name">-->
+<!--            </div>-->
+<!--            <div class="col-md-5">-->
+<!--                <input type="text" class="form-control" placeholder="Enter E-mail">-->
+<!--            </div>-->
+<!--            <div class="col-md-10">-->
+<!--                <input type="text" class="form-control" placeholder="Enter Subject">-->
+<!--            </div>-->
+<!--            <div class="col-md-10">-->
+<!--                    <textarea name="" id="" cols="30" rows="5" class="form-control"-->
+<!--                              placeholder="Enter Message"></textarea>-->
+<!--            </div>-->
+<!--            <div class="col-md-10 d-grid">-->
+<!--                <button class="btn btn-primary">Contact</button>-->
+<!--            </div>-->
+<!--        </form>-->
+
+<!--    </div>-->
+<!--</section>&lt;!&ndash; CONTACT &ndash;&gt;-->
 <!----footer-->
 <footer>
     <div class="footer-top">
@@ -475,7 +620,7 @@
                 <div class="col-lg-2">
                     <h5 class="text-white">Brand</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#">About</a></li>
+                        <li><a href="#about">About</a></li>
                         <li><a href="#product">product</a></li>
                         <li><a href="#team"></a></li>
 

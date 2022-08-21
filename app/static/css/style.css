@@ -54,8 +54,22 @@ input[type = select]{
     width: 10% !important;
 }
 
+.modal-color{
+    background-color: #5c636a;
+}
+
 .register_padding{
     padding-left: 80px;
+}
+.image-upload>input {
+    display: none;
+}
+.icon-size{
+    size: 100px !important;
+}
+
+.modal-input{
+    width: 85%!important;
 }
 .font-size-head{
     font-size: medium !important;
