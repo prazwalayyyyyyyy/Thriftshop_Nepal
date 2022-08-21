@@ -3,6 +3,7 @@ from crypt import methods
 from fileinput import filename
 from functools import reduce, wraps
 import logging
+from nis import cat
 # from msilib.schema import Condition
 from unicodedata import category
 
@@ -463,6 +464,20 @@ def admin_approve_order(id):
     # db.session.commit()
     return redirect(url_for('index'))
 
+@app.route('/order')
+@login_required
+def order_list():
+
+    carts = Cart.query.filter_by(checkout_status=True, buyer_id=current_user.id).all()
+    for cart in carts:
+        gds = Goods.query.filter_by(gid=cart.good_id).first()
+        setattr(cart, "photo", gds.photo)
+        setattr(cart, "name", gds.name)
+        setattr(cart, "price", gds.sell_price)
+        setattr(cart, "category", gds.category)
+        setattr(cart, "success", gds.soldstatus)
+    return render_template("order.html", goods=carts)
+        
 
 @admin.route('/admin/orders/cancel/<id>')
 @admin_permission_required
@@ -479,7 +494,7 @@ def admin_cancel_order(id):
 
 
 @admin.route("/admin/dashboard")
-# @admin_permission_required
+@admin_permission_required
 def chart1():
 
     goods = Goods.query.filter_by().all()
