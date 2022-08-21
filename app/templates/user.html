@@ -2,12 +2,69 @@
 
 {% block main %}
 
+<div class="row">
     {% for user in users %}
-        <h1>Username: {{ user.username }}</h1>
-        <hr>
-        <p>
-            {{ user.username }} has: <b>{{ user.firstname }}</b>
-        </p>
+    {% if current_user.user_type == 'admin' %}
+    <div class="hero vh-100 d-flex align-items-center" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mx-auto text-center">
+                    <h1 class="display-4 text-white">User Profile</h1>
+                    <p class="text-warning my-3">Username:{{ user.username }}</p>
+                    <p class="text-warning my-3">Firstname:   {{ user.firstname }}</p>
+                    <p class="text-warning my-3">Lastname: {{ user.lastname }}</p>
+                    <p class="text-warning my-3">Email: {{ user.email }}</p>
+                    <p class="text-warning my-3">Type: {{ user.user_type }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% elif current_user.user_type == 'seller' %}
+    <div class="seller vh-100 d-flex align-items-center" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mx-auto text-center">
+                    <h1 class="display-4 text-white">User Profile</h1>
+                    <p class="text-warning my-3">Username:{{ user.username }}</p>
+                    <p class="text-warning my-3">Firstname:   {{ user.firstname }}</p>
+                    <p class="text-warning my-3">Lastname: {{ user.lastname }}</p>
+                    <p class="text-warning my-3">Email: {{ user.email }}</p>
+                    <p class="text-warning my-3">Type: {{ user.user_type }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% elif current_user.user_type == 'buyer' %}
+    <div class="buyer vh-100 d-flex align-items-center" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mx-auto text-center">
+                    <h1 class="display-4 text-white">User Profile</h1>
+                    <p class="text-warning my-3">Username:{{ user.username }}</p>
+                    <p class="text-warning my-3">Firstname:   {{ user.firstname }}</p>
+                    <p class="text-warning my-3">Lastname: {{ user.lastname }}</p>
+                    <p class="text-warning my-3">Email: {{ user.email }}</p>
+                    <p class="text-warning my-3">Type: {{ user.user_type }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
     {% endfor %}
+
+</div>
+
+</div>
+<!--    {% for user in users %}-->
+<!--        <h1>Username: {{ user.username }}</h1>-->
+<!--        <hr>-->
+<!--        <p>-->
+<!--            {{ user.username }} has: <b>{{ user.firstname }}</b>-->
+<!--        </p>-->
+<!--    {% endfor %}-->
 
 {% endblock %}
