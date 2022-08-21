@@ -344,9 +344,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                {% if current_user.user_type == 'admin' %}
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/admin/dashboard">Dashboard </a>
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link nav_fontsize" href="/index">Home</a>
                 </li>
+                {% endif %}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav_fontsize" href="#About">About</a>
@@ -397,8 +403,9 @@
                     <a class="nav-link nav_fontsize" href="/paymentdetail">Payment</a>
                 </li>
                 {% elif current_user.user_type == 'admin' %}
-                <a class="nav-link nav_fontsize" href="/admin/dashboard">Dashboard </a>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                <a class="nav-link nav_fontsize" href="/admin/dashboard">Dashboard </a>-->
+<!--                </li>-->
                 <li class="nav-item">
                     <a class="nav-link nav_fontsize" href="/admin/goods">Goods Pending</a>
                 </li>
@@ -406,10 +413,10 @@
                     <a class="nav-link nav_fontsize" href="/admin/goods/sold">Goods sold</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav_fontsize" href="/admin/orders">Orders Pending</a>
+                    <a class="nav-link nav_fontsize" href="/admin/orders">Orders</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav_fontsize" href="/admin/orders/approved">Orders Approved</a>
+                    <a class="nav-link nav_fontsize" href="/admin/orders/approved">All History</a>
                 </li>
                 
                 {%endif%}
