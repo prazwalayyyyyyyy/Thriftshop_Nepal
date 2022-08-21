@@ -375,7 +375,7 @@ def admin_orders(action="pending"):
     if action == "pending":
         goods = Orders.query.filter_by(payment_status=False).all()
     elif action == "approved":
-        goods = Orders.query.filter_by(spayment_status=False).all()
+        goods = Orders.query.filter_by(payment_status=False).all()
     # cart_goods = db.session.query(Goods, Orders, Cart, User).join(Cart, Cart.good_id == Goods.gid).join(User.id == Orders.buyer_id).all()
     orders = Orders.query.filter_by(payment_status=False).all()
     # t_carts=[]
