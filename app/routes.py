@@ -409,6 +409,8 @@ def admin_approve_order(id):
         goods = Goods.query.filter_by(gid=cart.good_id)
         for good in goods:
             good.soldstatus = True
+            profit = good.sell_price - good.buy_price
+            good.profit = profit
             sellers.append(good.seller)
             db.session.add(good)
             db.session.commit()
@@ -476,7 +478,7 @@ def chart1():
         "label": ["Buyer", "Seller"]
         
     })
-    user_figure = px.pie(user_df, values='values',labels='label')
+    user_figure = px.pie(user_df, values='values',names='label')
     userJson = json.dumps(user_figure, cls=plotly.utils.PlotlyJSONEncoder)
 
     male_profit = Goods.query.filter_by(category="Male", soldstatus=True).all()
@@ -489,7 +491,7 @@ def chart1():
         "label": ["Male", "Female"]
         
     })
-    profit_figure = px.pie(profit_df, values='values',labels='label')
+    profit_figure = px.pie(profit_df, values='values',names='label')
     profitJson = json.dumps(profit_figure, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('admin_dashboard.html', graphJSON=graphJSON, header=header,description=description, userJson=userJson, profitJson=profitJson)
 

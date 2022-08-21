@@ -27,9 +27,9 @@
                     <tr>
                         <td>{{loop.index}}</td>
                         <td>{{order.buyer_id}}</td>
-                        <td> {{order.totalbuyprice}}</td>
-                        <td>{{order.totalsellprice}}</td>
-                        <td>{{order.totalsellprice - order.totalbuyprice}}</td>
+                        <td> {{order.totalbuyprice | round(2, 'floor')}}</td>
+                        <td>{{order.totalsellprice  | round(2, 'floor')}}</td>
+                        <td>{{order.totalsellprice | round(2, 'floor') - order.totalbuyprice| round(2, 'floor')}}</td>
                        
                         <td>{%if not order.payment_status%}<a href='/admin/orders/approve/{{order.oid}}' class="btn btn-primary">Approve</a> {%endif%}
                             <a class="btn btn-danger" href="/admin/cancel/order/{{order.oid}}">Cancel</a></td>

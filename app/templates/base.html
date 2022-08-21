@@ -395,6 +395,16 @@
                 <li class="nav-item">
                     <a class="nav-link nav_fontsize" href="/paymentdetail">Payment</a>
                 </li>
+                {% elif current_user.user_type == 'admin' %}
+                <a class="nav-link nav_fontsize" href="/admin/dashboard">Dashboard </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/admin/goods">Goods Pending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_fontsize" href="/admin/orders">Orders Pending</a>
+                </li>
+                
                 {%endif%}
 
                 <!--- buyer navigation bar-->
