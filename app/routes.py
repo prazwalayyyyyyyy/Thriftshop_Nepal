@@ -389,7 +389,9 @@ def admin_orders(action="pending"):
     #     for cart in carts:
     #         goods= Goods.query.filter_by(gid=cart.good_id).all()
     #         t_goods.extend(goods)
-
+    for order in orders:
+        setattr(order, 'buyer_name', User.query.filter_by(id=order.buyer_id).first().username)
+        setattr(order, 'buyer_email', User.query.filter_by(id=order.buyer_id).first().email)
     return render_template("admin_orders.html", orders=orders, action=action)
 
 
