@@ -43,11 +43,13 @@
                 <td>{{good.category}}</td>
                 <td>{{good.condition}}</td>
                 <td><button type="button" class="btn btn-outline-success addButton" data-bs-toggle="modal"
-                            data-bs-target="#viewItem-{{good.gid}}">
+                            data-bs-target="#viewItem-{{good.gid}}"> View </button>
 
-<!--                    <a href="/view/{{good.gid}}"> <button class="btn btn-danger" > View</button></a>-->
                 </td>
+<!--                    <a href="/view/{{good.gid}}"> <button class="btn btn-danger" > View</button></a>-->
+
             </tr>
+
             {%endfor%}
 
         </table>
@@ -112,26 +114,26 @@
         </div>
     </div>
 </div>
+<!--{% for good in good %}-->
+<!--        <div class="modal fade modal-color" id="viewItem-{{good.gid}}" tabindex="-1" aria-labelledby="viewItemLabel" aria-hidden="true">-->
+<!--            <div class="modal-dialog">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h5 class="modal-title text-secondary" id="viewItemLabel">View Items </h5>-->
+<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body-add">-->
+<!--                                                {% for good in good %}-->
+<!--                                                    {{good.name}}-->
+<!--                                                {% endfor %}-->
 
-<div class="table">
-    <div class="table_header">
-        <div class="modal fade modal-color" id="viewItem-{{good.gid}}" tabindex="-1" aria-labelledby="viewitemLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-secondary" id="viewitemLabel">View Items </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body-add">
-<!--                        {% for good in good %}-->
-<!--                            {{good.name}}-->
-<!--                        {%endfor%}-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{% endfor %}-->
 
-                    </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}

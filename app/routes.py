@@ -179,11 +179,16 @@ def edit_goods_modal(id):
     goods = Goods.query.filter_by(gid=id).first()
     return render_template('editItemModal.html', goods=goods)
 
-@app.route('/view/editModal/<id>', methods=['GET', 'POST'])
-@login_required
-def view_goods_modal(id):
-    good = Goods.query.filter_by(gid=id).all()
-    return render_template('viewItem.html', good=good)
+    # do view item for seller
+
+
+
+#
+# @app.route('/view/editModal/<id>', methods=['GET', 'POST'])
+# @login_required
+# def view_goods_modal(id):
+#     good = Goods.query.filter_by(gid=id).all()
+#     return render_template('viewItem.html', good=good)
 
 @app.route('/goods/edit/<id>', methods=['GET', 'POST'])
 @login_required
