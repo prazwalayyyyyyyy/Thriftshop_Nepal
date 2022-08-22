@@ -1,9 +1,11 @@
+from email.message import Message
 import json
 from crypt import methods
 from fileinput import filename
 from functools import reduce, wraps
 import logging
 from nis import cat
+from random import randint
 # from msilib.schema import Condition
 from unicodedata import category
 
@@ -24,9 +26,21 @@ from app import app, db
 from app.forms import EditUserForm, GoodsForm, LoginForm, RegistrationForm
 from app.models import Cart, Goods, Orders, User
 
-admin = app
-redirect_maps = {"seller": "create_goods",
-                 "admin": "admin_pending_approvals", "buyer": "index"}
+# from flask_mail import *  
+#  from random import *  
+#  app = Flask(__name__)  
+#  mail = Mail(app)  
+#  app.config["MAIL_SERVER"]='smtp.gmail.com'  
+#  app.config["MAIL_PORT"] = 465      
+#  app.config["MAIL_USERNAME"] = 'username@gmail.com'  
+#  app.config['MAIL_PASSWORD'] = '*************'  
+#  app.config['MAIL_USE_TLS'] = False  
+#  app.config['MAIL_USE_SSL'] = True  
+# mail = Mail(app)
+# otp = randint(0000,9999)
+# admin = app
+# redirect_maps = {"seller": "create_goods",
+#                  "admin": "admin_pending_approvals", "buyer": "index"}
 
 
 @app.route('/')
@@ -43,6 +57,10 @@ def frontpage2():
 @app.route('/load1')
 def frontpage1():
     return render_template('create_goods')
+
+admin = app
+redirect_maps = {"seller": "create_goods",
+                 "admin": "admin_pending_approvals", "buyer": "index"}
 
 
 @app.before_request
@@ -542,3 +560,23 @@ def chart1():
     profitJson = json.dumps(profit_figure, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('admin_dashboard.html', graphJSON=graphJSON, header=header,description=description, userJson=userJson, profitJson=profitJson)
 
+# @app.route("/sendemail")
+# def sendemail():
+#     render_template("email.html", msg="")
+
+# @app.route("/verify", methods=["POST"])
+# def verify():
+#     gmail = request.form['email']
+#     msg = Message('OTP', sender='prajwal1234acharya@gmail.com', recipents=[gmail])
+#     msg.body = str(otp)
+#     mail.send(msg)
+#     return render_template("verify.html")
+
+# @app.route('/validate',methods=["POST"])   
+# def validate():  
+#    user_otp = request.form['otp']  
+#    if otp == int(user_otp):  
+#         return "<h3> Email  verification is  successful </h3>"  
+#    return "<h3>failure, OTP does not match</h3>"   
+# if __name__ == '__main__':  
+#     app.run(debug = True) 
