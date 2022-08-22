@@ -40,7 +40,7 @@
 
                 <tr>
                     <td>{{loop.index}}</td>
-                    <td><img src="/images/{{good.photo}}" height="50px" width="10px"></td>
+                    <td><img src="/images/{{good.photo}}" height="100px" width="100px"></td>
                     <td>{{good.name}}</td>
                     <td>{{good.buy_price}}</td>
                     <td>{{good.category}}</td>
@@ -74,7 +74,7 @@
                                     <i class="text-danger fa-solid fa-up-from-bracket"></i>
                                     {{ form.hidden_tag() }}
                                     <div class="image-upload">
-                                        <img src="/images/{{good.photo}}" height="50px" width="10px"></td>
+                                        <img src="/images/{{good.photo}}" height="100px" width="100px"></td>
                                     </div>
                                     <!--                                <input type="file" class="form-control modal-input" name="photo" class="photo">-->
                                     {% for error in form.photo.errors %}
@@ -134,7 +134,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-secondary" id="additemLabel">Add Items </h5>
+                        <h5 class="modal-title text-success" id="additemLabel">Add Items </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body-add">
@@ -149,6 +149,7 @@
                                         <i class="fa-solid fa-circle-arrow-up icon-size"></i>
                                         <input type="file" id="file-input" class="form-control modal-input"
                                             style="display: none" name="photo" class="photo">
+                                        <label class="text-warning">File Upload</label>
                                     </label>
                                 </div>
                                 <!--                                <input type="file" class="form-control modal-input" name="photo" class="photo">-->
@@ -173,10 +174,10 @@
                                     {{form.label}}
                                     {{form.condition(class='form-control modal-input')}}
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-close"></i>
                                     </button>
-                                    <button type="submit" name="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" name="submit" class="btn btn-success"><i class="fa fa-file"></i> Add </button>
                                 </div>
                             </div>
                         </form>
