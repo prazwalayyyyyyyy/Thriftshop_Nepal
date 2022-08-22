@@ -16,10 +16,10 @@
             </div>
             <div class="card-bodylink">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#edititem-{{good.gid}}">
-                    Edit Item
+                    data-bs-target="#edititem-{{good.gid}}"><i class="fa fa-file"></i>
+                    Edit
                 </button>
-                <a class="btn btn-danger" href="goods/delete/{{good.gid}}">Delete</a>
+                <a class="btn btn-danger" href="goods/delete/{{good.gid}}"><i class="fa fa-trash"></i></a>
                 <span></span>
                 <!--                {% if good.gid in cart_goods%}-->
                 <!--                <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>-->
@@ -45,6 +45,7 @@
                     {#{{form.populate_obj(good) }}#}
                     <form class="rounded bg-white shadow p-5 text-center" action="/goods/edit/{{good.gid}}" method="POST"
                         enctype="multipart/form-data" f;>
+                        <center>
                         {{ form.hidden_tag() }}
                         Product Image
                         <input type="file" class="form-control modal-input" name="photo" class="photo">
@@ -62,9 +63,10 @@
                             <label for="floatingproduct_price">{{ form.buy_price.label
                                 }}</label>
                         </div>
+
                         <div class="form-floating mb-3  modal-input">
                             <label>{{form.label}}</label>
-                            <select id="category" name="category" required="">
+                            <select class=" form-control modal-input" id="category" name="category" required="">
                                 <option value="Male">Male</option>
                                 <option value="Female" {% if good.category == "Female" %} selected {%endif%}>Female
                                 </option>
@@ -72,12 +74,13 @@
                         </div>
                         <div class="form-floating mb-3 modal-input">
                             {{form.label}}
-                            {{form.condition}}
+                            {{form.condition(class=' form-control modal-input')}}
                         </div>
                         <div class="modal-footerd-flex justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-close"></i></button>
                             <button type="submit" name="submit" class="btn btn-primary">Save</button>
                         </div>
+                        </center>
                     </form>
                 </div>
 
