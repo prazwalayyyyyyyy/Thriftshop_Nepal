@@ -248,7 +248,7 @@ def cart(action="s", good_id=0):
     if not current_user.is_authenticated:
         return redirect(url_for('login')), 302
     if current_user.user_type in ['admin', 'seller']:
-        flash("User not registered as buyer")
+#         flash("User not registered as buyer")
         return redirect(url_for('index'))
     if request.method == "POST":
         if action == "add":
