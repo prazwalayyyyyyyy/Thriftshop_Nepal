@@ -1,0 +1,7 @@
+id,username,firstname,lastname,email,password,user_type
+1,admin,susan,susan,susan@example.com,admin,admin
+2,aliz,Aliz,Acharya,alizacharya.1234@gmail.com,changeme,seller
+3,aaju,Aaju,Shrestha,kaluaaju@gmail.com,changeme,buyer
+4,nirajan,Nirajan,Thapa,nnirajanthapaa@gmail.com,changeme,buyer
+5,prajwal,Prajwal,Acharya,test@test.com,changeme,seller
+6,ishwor,Ishwor,Dhakal,ishwordhakal96@gmail.com,changeme,seller

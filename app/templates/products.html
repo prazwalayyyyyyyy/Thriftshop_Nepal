@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+
+<!-- men's product -->
+<div>
+    <center>
+        <h1 class="text-secondary mt-3">Products</h1>
+    </center>
+</div>
+<section id="men">
+    <div class="container-fluid">
+        <center>
+            <h4 class="text-warning">Men's Wear</h4>
+        </center>
+        <div class="row mt-5">
+            {%for good in male_goods %}
+            <div class="col-lg-4 col-sm-6 pb-5 d-flex justify-content-center">
+                
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="/images/{{good.photo}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{good.name}}</h5>
+                        <h6 class="card-price">{{good.sell_price}}</h6>
+                        <p class="card-details">Condition: {{good.condition}}</p>
+                    </div>
+                    <div class="card-bodylink">
+                        <span></span>
+                        {% if good.gid in cart_goods%}
+                        <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>
+                        {%elif not current_user.is_authenticated or current_user.user_type not in ['buyer'] %}
+                        <a  href="{{url_for('login', not_allowed=True)}}" data-arg={{good.gid}} name="cart_disabled" class="btn btn-danger">Add to Cart</a>
+                        
+                        {%else%}
+                        <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>
+                        <br>
+                        <br>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</section>
+
+</section><!-- women's product -->
+<section id="women">
+    <div class="container-fluid">
+        <center>
+            <h4 class="text-danger">Women's Wear</h4>
+        </center>
+        <div class="row mt-5">
+            {% for good in female_goods %}
+            <div class="col-lg-4 col-sm-6 pb-5 d-flex justify-content-center">
+                
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="images/{{good.photo}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{good.name}}</h5>
+                        <h6 class="card-price">{{good.sell_price}}</h6>
+                        <p class="card-details">Condition: {{good.condition}}</p>
+                    </div>
+                    <div class="card-bodylink">
+                        <span></span>
+                        {% if good.gid in cart_goods%}
+                        <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-outline-primary">Added to Cart</p>
+                        {%elif not current_user.is_authenticated or current_user.user_type not in ['buyer']%}
+                        
+                        <a  href="{{url_for('login', not_allowed=True)}}"ata-arg={{good.gid}} name="cart_disabled" class="btn btn-outline-danger">Add to Cart</a>
+                        {%else%}
+                        <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-outline-primary">Add to Cart</button>
+                        {%endif%}
+
+                    </div>
+                </div>
+                
+            </div>
+        {%endfor%}
+    </div>
+</section><!-- women's product -->
+
+
+
+
+
+
+
+{%endblock%}

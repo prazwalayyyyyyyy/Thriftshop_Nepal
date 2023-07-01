@@ -1,0 +1,380 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #0d6efd;
+    --dark: #21252f;
+    --body: #888;
+    --white: #ffffff;
+    --box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: "Sora", sans-serif;
+    line-height: 1.7;
+    color: var(--body);
+    
+}
+
+h1,h2,h3,h4,h5,h6,
+.display-4 {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+}
+
+.navbar {
+    box-shadow: var(--box-shadow);
+}
+
+.logo {
+    width: 160px;
+}
+input{
+    width: 150% !important;
+}
+input[type = password]{
+    width: 150% !important;
+}
+input[type = select]{
+    width: 10% !important;
+}
+.form-opacity{
+    opacity: 20%;
+}
+.form-width{
+    min-width: 100px !important;
+
+}
+.modal-color{
+    background-color: #5c636a;
+}
+
+.register_padding{
+    padding-left: 80px;
+}
+.registers_padding{
+    padding-left: 70px;
+}
+.image-upload>input {
+    display: none;
+}
+.icon-size{
+    size: 100px !important;
+}
+
+.modal-input{
+    width: 85%!important;
+}
+.font-size-head{
+    font-size: medium !important;
+}
+.font-size-mid{
+    font-size: small !important;
+}
+
+.navbar .nav-link {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.navbar .nav-link.active {
+    color: var(--primary) !important;
+}
+
+.btn {
+    padding: 8px 8px;
+    border-width: 2px;
+    border-radius: 10px;
+}
+
+.hero {
+    background-image: url(../img/thrift.webp) !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.hero::after {
+    content: "";
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    background-color: rgba(21, 20, 51, 0.8) !important;
+    z-index: -1 !important;
+}
+.seller {
+    background-image: url(../img/thrift-seller.png) !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.seller::after {
+    content: "";
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    background-color: rgba(21, 20, 51, 0.8) !important;
+    z-index: -1 !important;
+}
+.buyer {
+    background-image: url(../img/thrift-seller.png);
+    background-position: center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.buyer::after {
+    content: "";
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    background-color: rgba(21, 20, 51, 0.8) !important;
+    z-index: -1 !important;
+}
+
+
+section{
+    padding:0 0 100px;
+    background-position: bottom center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    min-height:100%;
+    
+
+
+}
+section h3{
+    text-align: center;
+}
+section .fw-normal{
+    text-align:center;
+}
+section .logo img{
+    max-width: 60%;
+    justify-content: center;
+    margin-left: 80%;
+    padding-top: 20px;
+}
+.container h6{
+    text-align: center;
+    padding:10px;
+    text-decoration: underline;
+    
+}
+section input:focus{
+    box-shadow:none;
+}
+section .password-info{
+   font-size: 13px;
+}
+section .submit_btn{
+    padding:10px 15px;
+    font-weight: 500;
+}
+section .login_with{
+    padding:8px 15px;
+    font-size: 13px;
+    font-weight: 500;
+    transition:0.3s ease-in-out;
+}
+section .submit_btn:focus,
+section .login_with:focus{
+    box-shadow:none;
+}
+section .login_with:hover{
+    background-color:var(gray);
+    border-color:var(gray);
+}
+section .login_with img{
+    max-width:2%;
+}
+.captcha .preview{
+    color:#555;
+    width: 100%;
+    text-align:center;
+    height:40px;
+    line-height: 40px;
+    letter-spacing: 8px;
+    border:1px dashed #888;
+    font-family: "monospace";
+}
+.captcha .preview span{
+    display:inline-block;
+    user-select:none;
+}
+.captcha .captcha-form{
+    display:flex;
+
+}
+.captcha .captcha-form input{
+    width:100%;
+    padding:8px;
+    border:1px solid #888;
+}
+.captcha .captcha-form .captchar-refresh{
+    width:80px;
+    border:none;
+    outline:none;
+    background: #888;
+    color:#eee;
+    cursor:pointer;
+
+
+}
+
+.card-effect {
+    box-shadow: var(--box-shadow);
+    background-color: var(--white);
+    padding: 25px;
+    transition: all 0.35s ease;
+}
+
+.card-effect:hover {
+    box-shadow: none;
+    transform: translateY(5px);
+}
+
+.iconbox {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: var(--white);
+    font-size: 32px;
+    border-radius: 100px;
+    flex: none;
+}
+
+
+
+.col-img {
+    background-image: url(../img/thriftimg.jpg);
+    background-position: center;
+    background-size: cover;
+    min-height: 500px;
+}
+
+.project {
+    position: relative;
+    overflow: hidden;
+}
+
+.project .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(21, 20, 51, 0.8);
+    padding: 30px;
+    display: flex;
+    align-items: flex-end;
+    transition: all 0.4s ease;
+    opacity: 0;
+}
+
+.project img {
+    transition: all 0.4s ease;   
+}
+
+.project:hover .overlay{
+    opacity: 1;
+}
+
+.project:hover img {
+    transform: scale(1.1);
+}
+
+
+.team-member img {
+    width: 125px;
+    height: 125px;
+    border-radius: 100px;
+}
+.container h6{
+    margin-bottom: 20px;
+}
+
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+}
+.social-icons a {
+    width: 34px;
+    height: 34px;
+    background-color: var(--primary);
+    border-radius: 2px solid var(--primary);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    margin-left: 5px;
+    transition: all 0.4s ease;
+    border: 2px solid var(--primary);
+}
+
+.social-icons a:hover {
+    color: var(--primary);
+    background-color: transparent;
+    border-color: var(--primarys);
+}
+
+
+
+
+
+
+
+
+
+
+.footer-top {
+    padding-top: 90px;
+    padding-bottom: 90px;
+    background-color: var(--dark);
+}
+
+.footer-top a {
+    color: var(--body);
+}
+
+.footer-top a:hover {
+    color: var(--white);
+}
+
+.footer-bottom {
+    background-color: #242933;
+}

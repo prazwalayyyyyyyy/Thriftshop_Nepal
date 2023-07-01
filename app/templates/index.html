@@ -25,6 +25,17 @@
     top:1px;
 }
 </style>
+<div class="hero vh-100 d-flex align-items-center" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto text-center">
+                <h1 class="display-4 text-white">Thrift Shop Nepal</h1>
+                <p class="text-white my-3"> welcome everyone, This is our Online Thrift Shope site, where you can get the vareity of clothes in reasonable price. Thank you!</p>
+
+            </div>
+        </div>
+    </div>
+</div>
 <center>
     <h1>Hello, {{ current_user.username }}!</h1>
     <!--{% for post in posts %} post is the variable name randomly used for posts contents
@@ -46,8 +57,8 @@
         <td>
     <img src="/images/{{good.photo}}" height="100rem", width="100rem"> </td>
     <td>{% if good.creater.username==current_user.username or current_user.user_type=='admin'%}
-    <a href="/goods/edit/{{good.id}}" ><button class="myButton" value="edit">Edit</button></a>
-    <a href="/goods/delete/{{good.id}}" ><button class="myButton" value="Delete">Delete</button></a></td>
+    <a href="/goods/edit/{{good.gid}}" ><button class="myButton" value="edit">Edit</button></a>
+    <a href="/goods/delete/{{good.gid}}" ><button class="myButton" value="Delete">Delete</button></a></td>
     {%endif%}
     <td>{{good.name}}<br></td>
     <td>{{good.price}}</td>

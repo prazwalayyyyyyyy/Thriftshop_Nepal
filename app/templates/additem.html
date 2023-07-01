@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<style>
+    .addButton {
+        border-radius: 15px;
+    }
+</style>
+<!----add item-->
+<div class="row pt-5">
+    <div class="col-md-10 text-center">
+        <h1 class="text-success">Add Items</h1>
+    </div>
+    <!-- Button trigger modal -->
+    <div class="col-md-2 d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-success addButton" data-bs-toggle="modal"
+            data-bs-target="#additem">
+            <i class="fa fa-plus"></i>
+        </button>
+    </div>
+</div>
+<!-- Modal -->
+<div class="row">
+    <div class="col-md-12 m-3">
+        <table id="product-table" class="table table-dark mt-5 text-center">
+            <thead>
+                <tr>
+                    <th>SNO.</th>
+                    <th>Product image</th>
+                    <th>Product name</th>
+                    <th>Product Price</th>
+                    <th>Product Category</th>
+                    <th>Product Conditon</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for good in goods %}
+
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td><img src="/images/{{good.photo}}" height="100px" width="100px"></td>
+                    <td>{{good.name}}</td>
+                    <td>{{good.buy_price}}</td>
+                    <td>{{good.category}}</td>
+                    <td>{{good.condition}}</td>
+                    <td><button type="button" class="btn btn-outline-success addButton" data-bs-toggle="modal"
+                            data-bs-target="#viewItem-{{good.gid}}"> View </button>
+
+                    </td>
+                    <!--                    <a href="/view/{{good.gid}}"> <button class="btn btn-danger" > View</button></a>-->
+
+                </tr>
+
+                {%endfor%}
+            </tbody>
+        </table>
+            {% for good in goods %}
+
+            <div class="modal fade modal-color" id="viewItem-{{good.gid}}" tabindex="-1" aria-labelledby="additemLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-secondary" id="additemLabel">View Items </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body-add">
+
+                            <form class="rounded bg-white shadow p-5 text-center" method="POST"
+                                enctype="multipart/form-data" f;>
+                                <div class=" register_padding">
+                                    <i class="text-danger fa-solid fa-up-from-bracket"></i>
+                                    {{ form.hidden_tag() }}
+                                    <div class="image-upload">
+                                        <img src="/images/{{good.photo}}" height="100px" width="100px"></td>
+                                    </div>
+                                    <!--                                <input type="file" class="form-control modal-input" name="photo" class="photo">-->
+                                    {% for error in form.photo.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control modal-input" name="name" id="name"
+                                            placeholder="Enter Product name" value={{good.name}} disabled>
+                                        <label for="floatingproduct_name">{{ form.name.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control modal-input" name="buy_price"
+                                            id="buy_price" placeholder="Enter Product Price" value="{{good.buy_price}}"
+                                            disabled>
+                                        <label for="floatingproduct_price">{{ form.buy_price.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+
+                                        {# {{form.category(class=' form-control modal-input', value=good.category)}} #}
+                                        <input type="text" class="form-control modal-input" name="category"
+                                            id="category" placeholder="Enter Product Price" value="{{good.category}}"
+                                            disabled>
+                                        <label for="floatingproduct_category">{{ form.category.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+
+
+                                        <input type="text" class="form-control modal-input" name="condition"
+                                            id="condition" placeholder="Enter Product Price" value="{{good.condition}}"
+                                            disabled>
+                                        <label for="floatingproduct_category">{{ form.condition.label }}</label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                        {# <button type="submit" name="submit" class="btn btn-primary">Save</button> #}
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {%endfor%}
+
+
+    </div>
+</div>
+
+<div class="table">
+    <div class="table_header">
+        <div class="modal fade modal-color" id="additem" tabindex="-1" aria-labelledby="additemLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-success" id="additemLabel">Add Items </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body-add">
+
+                        <form class="rounded bg-white shadow p-5 text-center" method="POST"
+                            enctype="multipart/form-data" f;>
+                            <div class=" register_padding">
+                                <i class="text-danger fa-solid fa-up-from-bracket"></i>
+                                {{ form.hidden_tag() }}
+                                <div class="image-upload">
+                                    <label for="file-input">
+                                        <i class="fa-solid fa-circle-arrow-up icon-size"></i>
+                                        <input type="file" id="file-input" class="form-control modal-input"
+                                            style="display: none" name="photo" class="photo">
+                                        <label class="text-warning">File Upload</label>
+                                    </label>
+                                </div>
+                                <!--                                <input type="file" class="form-control modal-input" name="photo" class="photo">-->
+                                {% for error in form.photo.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control modal-input" name="name" id="name"
+                                        placeholder="Enter Product name">
+                                    <label for="floatingproduct_name">{{ form.name.label }}</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control modal-input" name="buy_price" id="buy_price"
+                                        placeholder="Enter Product Price">
+                                    <label for="floatingproduct_price">{{ form.buy_price.label }}</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    {{form.label}}
+                                    {{form.category(class=' form-control modal-input')}}
+                                </div>
+                                <div class="form-floating mb-3">
+                                    {{form.label}}
+                                    {{form.condition(class='form-control modal-input')}}
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-close"></i>
+                                    </button>
+                                    <button type="submit" name="submit" class="btn btn-success"><i class="fa fa-file"></i> Add </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--{% for good in good %}-->
+<!--        <div class="modal fade modal-color" id="viewItem-{{good.gid}}" tabindex="-1" aria-labelledby="viewItemLabel" aria-hidden="true">-->
+<!--            <div class="modal-dialog">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h5 class="modal-title text-secondary" id="viewItemLabel">View Items </h5>-->
+<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body-add">-->
+<!--                                                {% for good in good %}-->
+<!--                                                    {{good.name}}-->
+<!--                                                {% endfor %}-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{% endfor %}-->
+
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"> </script>
+<script>
+    $(document).ready(function () {
+        var table = $('#product-table').dataTable({
+            searching: false,
+            colReorder: true,
+            responsive: true
+        });
+    });
+</script>
+
+{% endblock %}

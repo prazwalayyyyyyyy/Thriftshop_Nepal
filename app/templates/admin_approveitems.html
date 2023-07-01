@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block main %}
+<style>
+    .head-color{
+        color:#000066;
+    }
+    .sub-head{
+        color:#3dd5f3;
+    }
+    .page-background{
+        background-color: aliceblue;
+    }
+</style>
+<!----Approved Items-->
+{% if action == 'pending' %}
+<h3 class="head-color text-center mt-4 mb-4">Pending Items</h3>
+<h5 class="sub-head text-center">Waiting for your approval !</h5>
+{% endif %}
+<div class="row mt-5 page-background">
+    {%for good in goods %}
+    <div class="col-lg-4 col-sm-6 pb-5 pt-5 d-flex justify-content-center">
+
+        <div class="card text-center" style="width: 18rem;">
+            <img src="/images/{{good.photo}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Name: {{good.name}}</h5>
+                <h6 class="card-price">Price: {{good.buy_price}}</h6>
+                <h6 class="card-price">For: {{good.category}}</h6>
+                <p class="card-details">Condition: {{good.condition}}</p>
+                {%if not good.verifycheck%}<a href='/admin/goods/approve/{{good.gid}}' class="btn btn-primary" title="Approve"><i class="fa fa-thumbs-up"></i></a> {%endif%} &nbsp;&nbsp;
+                <a class="btn btn-danger" href="/good/delete/{{good.gid}}" title="Delete"><i class="fa fa-trash"></i></a></a>
+            </div>
+            <div class="card-bodylink">
+                <!--                <button type="button" class="btn btn-primary" data-bs-toggle="modal"-->
+                <!--                        data-bs-target="#additem-{{good.gid}}">-->
+                <!--                    Edit Item-->
+                <!--                </button>-->
+                <!--                <a class="btn btn-danger" href="goods/delete/{{good.gid}}">Delete</a>-->
+                <!--                <span></span>-->
+                <!--                {% if good.gid in cart_goods%}-->
+                <!--                <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>-->
+                <!--                {%elif not current_user.is_authenticated or current_user.user_type not in ['buyer'] %}-->
+                <!--                <a  href="{{url_for('login', not_allowed=True)}}" data-arg={{good.gid}} name="cart_disabled" class="btn btn-danger">Add to Cart</a>-->
+
+                <!--                {%else%}-->
+                <!--                <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>-->
+                <!--                <br>-->
+                <!--                <br>-->
+                <!--                {%endif%}-->
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+<!--<div class="table">-->
+<!--    <div class="table_header">-->
+<!--        <p>{{action}} Items</p>-->
+<!--            -->
+<!--    </div>-->
+<!--    <div class="table_section">-->
+<!--        <center>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th>SNO.</th>-->
+<!--                        <th>Product image</th>-->
+<!--                        <th>Product name</th>-->
+<!--                        <th>Procuct Price</th>-->
+<!--                        <th>Procuct Category</th>-->
+<!--                        <th>Product Conditon</th>-->
+<!--                        <th>Seller</th>-->
+<!--                        <th>Actions</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                    {%for good in goods %}-->
+<!--                    <tr>-->
+<!--                        <td>{{loop.index}}</td>-->
+<!--                        <td><img src="/images/{{good.photo}}"></td>-->
+<!--                        <td> {{good.name}}</td>-->
+<!--                        <td>{{good.buy_price}}</td>-->
+<!--                        <td>{{good.category}}</td>-->
+<!--                        <td>{{good.condition}}</td>-->
+<!--                        <td>{{good.seller}}</td>-->
+<!--                        -->
+<!--                        <td>{%if not good.verifycheck%}<a href='/admin/goods/approve/{{good.gid}}' class="btn btn-primary">Approve</a> {%endif%}-->
+<!--                            <a class="btn btn-danger" href="/good/delete/{{good.gid}}">Delete</a></td>-->
+
+<!--                    </tr>-->
+<!--                    {%endfor%}-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </center>-->
+<!--    </div>-->
+<!--</div>-->
+
+{% endblock %}

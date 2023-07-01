@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center>
+    <table name="items" border="1">
+        <tr>
+            <th>Images</th>
+            <th>Action</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Seller</th>
+        </tr>
+        
+    {%for good in goods%}
+
+
+    <p>
+        <td>
+    <img src="/images/{{good.photo}}" height="100rem", width="100rem"> </td>
+    <td>{% if current_user.user_type=='admin'%}
+    <a href="/goods/goodsverify/{{good.gid}}" ><button class="myButton" value="edit">Verify</button></a>
+    <a href="/goods/delete/{{good.gid}}" ><button class="myButton" value="Delete">Delete</button></a></td>
+    {%endif%}
+    <td>{{good.name}}<br></td>
+    <td>{{good.price}}</td>
+    <td>{{good.descripton}}</td>
+    <td>{{good.creater.username}}</td>
+    </tr>
+    </p>
+    {%endfor%}
+</center>
+{% endblock %}

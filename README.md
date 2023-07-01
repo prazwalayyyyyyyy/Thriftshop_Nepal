@@ -1,9 +1,3 @@
-from msilib.schema import Environment
-from urllib.request import BaseHandler
-
-import app
-
-
 ThriftSHop Nepal
 
 # Setup
@@ -31,3 +25,14 @@ ThriftSHop Nepal
 ```bash 
 flask run
 ```
+
+# Setup using docker
+
+1. `docker-compose build`
+2. `docker-compose up`
+
+# Populate data to db 
+
+1. Populate User `python3 utils/populate_user.py`
+2. Populate Goods or Products `python3 utils/populate_product.py`
+

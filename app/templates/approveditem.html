@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<!----Approved Items-->
+<div class="row mt-5">
+    {%for good in goods %}
+    <div class="col-lg-4 col-sm-6 pb-5 d-flex justify-content-center">
+
+        <div class="card text-center" style="width: 18rem;">
+            <img src="/images/{{good.photo}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Name: {{good.name}}</h5>
+                <h6 class="card-price">Price: {{good.sell_price}}</h6>
+                <h6 class="card-price">For: {{good.category}}</h6>
+                <p class="card-details">Condition: {{good.condition}}</p>
+                <h6 class="card-details text-danger">
+                    {% if good.soldstatus == 1 %}
+                    Sold
+                    {% endif %}
+                    {% if good.soldstatus == 0 %}
+                    For Sale
+                    {% endif %}
+                </h6>
+            </div>
+            <div class="card-bodylink">
+<!--                <button type="button" class="btn btn-primary" data-bs-toggle="modal"-->
+<!--                        data-bs-target="#additem-{{good.gid}}">-->
+<!--                    Edit Item-->
+<!--                </button>-->
+<!--                <a class="btn btn-danger" href="goods/delete/{{good.gid}}">Delete</a>-->
+<!--                <span></span>-->
+                <!--                {% if good.gid in cart_goods%}-->
+                <!--                <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>-->
+                <!--                {%elif not current_user.is_authenticated or current_user.user_type not in ['buyer'] %}-->
+                <!--                <a  href="{{url_for('login', not_allowed=True)}}" data-arg={{good.gid}} name="cart_disabled" class="btn btn-danger">Add to Cart</a>-->
+
+                <!--                {%else%}-->
+                <!--                <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>-->
+                <!--                <br>-->
+                <!--                <br>-->
+                <!--                {%endif%}-->
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+<!--<div class="table">-->
+<!--    <div class="table_header">-->
+<!--        <p>Approved Items</p>-->
+<!--            -->
+<!--    </div>-->
+<!--    <div class="table_section">-->
+<!--        <center>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th>SNO.</th>-->
+<!--                        <th>Product image</th>-->
+<!--                        <th>Product name</th>-->
+<!--                        <th> Procuct Price</th>-->
+<!--                        <th> Procuct Category</th>-->
+<!--                        <th>Product Conditon</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                    {%for good in goods %}-->
+<!--                    <tr>-->
+<!--                        <td>{{loop.index}}</td>-->
+<!--                        <td><img src="/images/{{good.photo}}"></td>-->
+<!--                        <td> {{good.name}}</td>-->
+<!--                        <td>{{good.buy_price}}</td>-->
+<!--                        <td>{{good.category}}</td>-->
+<!--                        <td>{{good.condition}}</td>-->
+<!--                    </tr>-->
+<!--                    {%endfor%}-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </center>-->
+<!--    </div>-->
+<!--</div>-->
+
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block main %}
+<!----pending Items-->
+
+<div class="row mt-5">
+    {%for good in goods %}
+    <div class="col-lg-4 col-sm-6 pb-5 d-flex justify-content-center">
+
+        <div class="card text-center" style="width: 18rem;">
+            <img src="/images/{{good.photo}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{good.name}}</h5>
+                <h6 class="card-price">{{good.buy_price}}</h6>
+                <p class="card-details">Condition: {{good.condition}}</p>
+            </div>
+            <div class="card-bodylink">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#edititem-{{good.gid}}"><i class="fa fa-file"></i>
+                    Edit
+                </button>
+                <a class="btn btn-danger" href="goods/delete/{{good.gid}}"><i class="fa fa-trash"></i></a>
+                <span></span>
+                <!--                {% if good.gid in cart_goods%}-->
+                <!--                <p disabled type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_disabled" class="btn btn-primary">Added to Cart</p>-->
+                <!--                {%elif not current_user.is_authenticated or current_user.user_type not in ['buyer'] %}-->
+                <!--                <a  href="{{url_for('login', not_allowed=True)}}" data-arg={{good.gid}} name="cart_disabled" class="btn btn-danger">Add to Cart</a>-->
+
+                <!--                {%else%}-->
+                <!--                <button  type="submit" onClick="add_to_cart" data-arg={{good.gid}} name="cart_btn" class="btn btn-primary">Add to Cart</button>-->
+                <!--                <br>-->
+                <!--                <br>-->
+                <!--                {%endif%}-->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="edititem-{{good.gid}}" tabindex="-1" aria-labelledby="additemLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="additemLabel">Edit Items</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body-add">
+                    {#{{form.populate_obj(good) }}#}
+                    <form class="rounded bg-white shadow p-5 text-center" action="/goods/edit/{{good.gid}}" method="POST"
+                        enctype="multipart/form-data" f;>
+                        <center>
+                        {{ form.hidden_tag() }}
+                        Product Image
+                        <input type="file" class="form-control modal-input" name="photo" class="photo">
+                        {% for error in form.photo.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control modal-input" name="name" value={{good.name}} id="name"
+                                placeholder="Enter Product name">
+                            <label for="floatingproduct_name">{{ form.name.label }}</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control modal-input" name="buy_price" value={{good.buy_price}}
+                                id="buy_price" placeholder="Enter Product Price">
+                            <label for="floatingproduct_price">{{ form.buy_price.label
+                                }}</label>
+                        </div>
+
+                        <div class="form-floating mb-3  modal-input">
+                            <label>{{form.label}}</label>
+                            <select class=" form-control modal-input" id="category" name="category" required="">
+                                <option value="Male">Male</option>
+                                <option value="Female" {% if good.category == "Female" %} selected {%endif%}>Female
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3 modal-input">
+                            {{form.label}}
+                            {{form.condition(class=' form-control modal-input')}}
+                        </div>
+                        <div class="modal-footerd-flex justify-content-center">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-close"></i></button>
+                            <button type="submit" name="submit" class="btn btn-primary">Save</button>
+                        </div>
+                        </center>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+
+
+<!--<div class="table">-->
+<!--    <div class="table_header">-->
+<!--        <p>Pending Items</p>-->
+<!--    </div>-->
+<!--    <div class="table_section">-->
+<!--        <center>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th>SNO.</th>-->
+<!--                        <th>Product image</th>-->
+<!--                        <th>Product name</th>-->
+<!--                        <th> Product Price</th>-->
+<!--                        <th>Product Category</th>-->
+<!--                        <th>Product Conditon</th>-->
+<!--                        <th>Action</th>-->
+<!--                        &lt;!&ndash; <th>Delete</th> &ndash;&gt;-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                    {%for good in goods %}-->
+<!--                    <tr>-->
+<!--                        <td>{{loop.index}}</td>-->
+<!--                        <td><img src="/images/{{good.photo}}"></td>-->
+<!--                        <td> {{good.name}}</td>-->
+<!--                        <td>{{good.buy_price}}</td>-->
+<!--                        <td>{{good.category}}</td>-->
+<!--                        <td>{{good.condition}}</td>-->
+<!--                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal"-->
+<!--                                data-bs-target="#additem">-->
+<!--                                Edit Item-->
+<!--                            </button>-->
+<!--                             Modal-->
+
+<!--                        </td>-->
+<!--                    </tr>-->
+
+<!--                    {%endfor%}-->
+
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </center>-->
+<!--    </div>-->
+<!--</div>-->
+<!--c-->
+
+
+<!---Pending Items end-->
+{% endblock %}
